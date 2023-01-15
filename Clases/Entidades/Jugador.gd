@@ -1,9 +1,11 @@
 extends Entidad
+class_name Jugador
 
 
+
+
+# Movimiento
 var dash_velocity = 2000
-
-# The time remaining before the dash can be used again (in seconds)
 var dash_cooldown = 0
 var speed:float = 200
 var jump_force:float = 340
@@ -25,7 +27,13 @@ export var  isAttacking = false
 # The time remaining before the double jump can be used again (in seconds)
 var double_jump_cooldown = 0
 
+#Misc
+var activo:bool = true
+
 func _ready() -> void:
+	assert(anim is AnimationPlayer, "anim no se inicio correctamente!")
+	assert(spritePlayer is Sprite or spritePlayer is AnimatedSprite, "spritePlayer no se inicio correctamente!")
+	
 	Ref.jugador = self#Crear una referencia a si mismo
 	initial_count  = count
 	anim.play("Idle")
@@ -39,17 +47,19 @@ func _process(delta):
 
 	
 func _physics_process(delta):
-	# Decrement the dash cooldown
-	dash_cooldown = max(0, dash_cooldown - delta)
-	# Decrement the Double jump cooldown
-	double_jump_cooldown = max(0, double_jump_cooldown - delta)
-	get_direction()
+	if activo:
+		# Decrement the dash cooldown
+		dash_cooldown = max(0, dash_cooldown - delta)
+		# Decrement the Double jump cooldown
+		double_jump_cooldown = max(0, double_jump_cooldown - delta)
+		get_direction()
+		_jump()
+		Dash()
+		Animations()
+		Attack()
+	
 	Motion.y += gravity
-	_jump()
 	Motion = move_and_slide(Motion, Vector2.UP)
-	Dash()
-	Animations()
-	Attack()
 	pass
 
 func get_direction():
@@ -95,9 +105,6 @@ func _on_floor_body_entered():
 
 
 func Dash():
-
-	
-
 	# Check for dash input
 	if Input.is_action_pressed("dash") and dash_cooldown == 0 and dash_count > 0:
 		# Determine the direction of the dash
