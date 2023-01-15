@@ -1,7 +1,7 @@
 extends Herramienta
 class_name HerramientaTaladro
 
-export (float) var alcanze = 1
+export (float) var alcanze = 50
 export (int) var poder = 1
 
 
@@ -18,16 +18,19 @@ func _ready() -> void:
 	sprite.texture = textura#Darle la imagen
 	add_child(sprite)
 	
-
+func equip(user:Node):
+	rayCast.add_exception(user)
+	pass
 	
-func use():#Cuando el usuario usa el boton de ataque/usar esto deberia ser llamado
+func use(parametro):#Cuando el usuario usa el boton de ataque/usar esto deberia ser llamado
+	#parametro puede ser cualquier cosa, en este caso es un diccionario
 	rayCast.force_raycast_update()
 	var objeto = rayCast.get_collider()
-	if objeto:#Primero confirma que no es null
+	if objeto:#Primero condfirma que no es null
 		if objeto is ParedDestruible:#Revisa su clase
-			objeto.damage(poder)#Dañar la pared
+			objeto.damage(poder * parametro["delta"])#Dañar la pared
 		elif objeto is Entidad:#Dañar la entidad
-			objeto.hurt(poder)
+			objeto.hurt(poder * parametro["delta"])
 
 #func enable(activado):
 #	.enable(activado) #Usar el enable() definido en Herramienta antes de seguir
