@@ -3,12 +3,11 @@ class_name Jugador
 
 
 func _ready() -> void:
-	#assert(anim is AnimationPlayer, "anim no se inicio correctamente!")
-	assert(spritePlayer is Sprite or spritePlayer is AnimatedSprite, "spritePlayer no se inicio correctamente!")
-	
+#	assert(anim is AnimationPlayer, "anim no se inicio correctamente!")
+#	assert(spritePlayer is Sprite or spritePlayer is AnimatedSprite, "spritePlayer no se inicio correctamente!")
+	add_child(herramientaEquipada)
 	Ref.jugador = self#Crear una referencia a si mismo
 	initial_count  = count
-	anim.play("Idle")
 	isAttacking = false
 
 
@@ -50,6 +49,11 @@ func _physics_process(delta):
 		Dash()
 		Animations()
 #		Attack()
+
+		#TEMPORAL
+		if Input.is_action_pressed("usar") and herramientaEquipada.has_method("use"):
+			var parametro:Dictionary = { "delta":delta }
+			herramientaEquipada.use( parametro )
 	
 	Motion.y += gravity
 	Motion = move_and_slide(Motion, Vector2.UP)
@@ -147,14 +151,20 @@ func Animations():
 
 #Jugabilidad
 func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action_released("herramienta1"):
+	if event is InputEventMouseMotion:
+		herramientaEquipada.follow_mouse()
+		
+	elif event.is_action_released("herramienta1"):
 		cambiar_arma(1)
+		
 	elif event.is_action_released("herramienta2"):
 		cambiar_arma(2)
+		
 	elif event.is_action_released("herramienta3"):
 		cambiar_arma(3)
-	elif event.is_action_released("usar"):
-		herramientaEquipada.use()
+		
+#	elif event.is_action_pressed("usar") and herramientaEquipada.has_method("use"):
+#		herramientaEquipada.use()
 	
 
 
@@ -164,9 +174,16 @@ var herramientas:Dictionary = {
 	1:HerramientaTaladro.new()
 }
 func cambiar_arma(slot:int):
-	if herramientas.has(slot):
-		herramientaEquipada.replace_by(herramientas[slot]) 
-	assert(herramientaEquipada)#Asegurarse que aun existe una
+	
+	if herramientas.has(slot):#Asegurarse que el slot seleccionado tengo una herramienta
+		remove_child(herramientaEquipada)#Remover la herramienta actualmente equipada de la escena
+		herramientaEquipada = herramientas[slot]#Cambiar la herramienta equipada
+		
+	assert(herramientaEquipada is Herramienta)#Asegurarse que aun existe una en la variable
+	
+	add_child(herramientaEquipada)#Añadira la nueva herramienta
+	
+	herramientaEquipada.equip(self)#Ajustes varios
 	
 
 #Misc
