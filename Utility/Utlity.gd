@@ -3,7 +3,7 @@ class_name Utility
 
 class NodeManipulation extends Node:
 	
-	static func get_all_children(node:Node,typeFilter:String=""):
+	static func get_all_children(node:Node,typeFilter:String="") -> Array:#Obtiene todos los nodos hijos y nietos en un array
 		
 		var nodes : Array = []
 
@@ -11,20 +11,19 @@ class NodeManipulation extends Node:
 
 			if child.get_child_count() > 0:
 					nodes.append(child)
-
-					nodes.append_array(get_all_children(child))
+					nodes.append_array( get_all_children(child) )
 
 			else:
-
 				nodes.append(child)
 
 		return nodes
+		
 	static func remove_all_children(node:Node):
 		for child in node.get_children():
 			node.remove_child(child)
 	
 class FileManipulation extends Node:
-	static func get_files_in_folder(path:String)->Array:
+	static func get_files_in_folder(path:String) -> Array:#Obtiene todos los archivos en una carpeta
 		var returnedFiles:Array
 		var loadingDir = Directory.new()
 		loadingDir.open(path)#Start loading abilities
@@ -39,7 +38,7 @@ class FileManipulation extends Node:
 			fileName = loadingDir.get_next()#Get next file
 		return returnedFiles
 		
-	static func get_file_paths_in_folder(path:String)->Array:
+	static func get_file_paths_in_folder(path:String) -> Array:#Obtiene todos los file paths de los archivos en una carpeta
 			var returnedPaths:Array
 			var loadingDir = Directory.new()
 			loadingDir.open(path)#Start loading abilities
@@ -53,7 +52,7 @@ class FileManipulation extends Node:
 				fileName = loadingDir.get_next()#Get next file
 			return returnedPaths
 
-	static func get_folders_in_folder(path:String)->Array:
+	static func get_folders_in_folder(path:String)->#Me perdi
 			var returnedPaths:Array
 			var loadingDir = Directory.new()
 			loadingDir.open(path)#Start loading abilities
