@@ -9,12 +9,42 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Node2D",
+"class": "Entidad",
+"language": "GDScript",
+"path": "res://Clases/Entidades/Entidad.gd"
+}, {
+"base": "Node2D",
+"class": "Herramienta",
+"language": "GDScript",
+"path": "res://Clases/Herramientas/Herramientas.gd"
+}, {
+"base": "Herramienta",
+"class": "HerramientaTaladro",
+"language": "GDScript",
+"path": "res://Clases/Herramientas/Taladro.gd"
+}, {
+"base": "StaticBody2D",
+"class": "Pared",
+"language": "GDScript",
+"path": "res://Clases/Obstaculos/Pared.gd"
+}, {
+"base": "Pared",
+"class": "ParedDestruible",
+"language": "GDScript",
+"path": "res://Clases/Obstaculos/ParedDestruible.gd"
+}, {
 "base": "Node",
 "class": "Utility",
 "language": "GDScript",
 "path": "res://Utility/Utlity.gd"
 } ]
 _global_script_class_icons={
+"Entidad": "",
+"Herramienta": "",
+"HerramientaTaladro": "",
+"Pared": "",
+"ParedDestruible": "",
 "Utility": ""
 }
 
