@@ -15,6 +15,8 @@ func _ready() -> void:
 	FG.bg_color = Color(255,255,255)
 	var BG = StyleBoxEmpty.new()
 	
+	percent_visible = false
+	
 	add_stylebox_override("fg",FG)
 	add_stylebox_override("bg",BG)
 	
