@@ -8,7 +8,6 @@ export (int) var poder = 1
 var rayCast = RayCast2D.new()
 var sprite = Sprite.new()
 
-var seguirMouse:bool = false
 
 
 func _ready() -> void:
@@ -19,6 +18,8 @@ func _ready() -> void:
 	sprite.texture = textura#Darle la imagen
 	add_child(sprite)
 	
+	
+	
 func use():#Cuando el usuario usa el boton de ataque/usar esto deberia ser llamado
 	rayCast.force_raycast_update()
 	var objeto = rayCast.get_collider()
@@ -28,5 +29,9 @@ func use():#Cuando el usuario usa el boton de ataque/usar esto deberia ser llama
 		elif objeto is Entidad:#Dañar la entidad
 			objeto.hurt(poder)
 
-func enable(activado):
-	.enable(activado) #Usar el enable() definido en Herramienta antes de seguir
+#func enable(activado):
+#	.enable(activado) #Usar el enable() definido en Herramienta antes de seguir
+
+func _unhandled_input(event: InputEvent) -> void:
+	if event is InputEventMouseMotion:
+		rotation = get_global_mouse_position().angle()
