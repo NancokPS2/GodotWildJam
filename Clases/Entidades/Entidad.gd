@@ -1,8 +1,18 @@
 extends KinematicBody2D
 class_name Entidad
 
+var temperatura:int 
 var inmortal:bool = false
-export (int) var salud
+export (float) var salud
+
+var temperaturaFusion = 50
+
+func check_temperatura(delta):
+	if temperatura > temperaturaFusion:
+		hurt( (temperaturaFusion - temperatura) * delta )
+
+func _physics_process(delta: float) -> void:
+	check_temperatura(delta)
 
 func hurt(cantidad):
 	if not inmortal:

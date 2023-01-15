@@ -18,7 +18,7 @@ func _ready() -> void:
 	sprite.texture = textura#Darle la imagen
 	add_child(sprite)
 	
-	
+
 	
 func use():#Cuando el usuario usa el boton de ataque/usar esto deberia ser llamado
 	rayCast.force_raycast_update()
@@ -33,5 +33,6 @@ func use():#Cuando el usuario usa el boton de ataque/usar esto deberia ser llama
 #	.enable(activado) #Usar el enable() definido en Herramienta antes de seguir
 
 func _unhandled_input(event: InputEvent) -> void:
-	if event is InputEventMouseMotion:
-		rotation = get_global_mouse_position().angle()
+	if event is InputEventMouseMotion:#Si es un movimiento de mouse
+		follow_mouse()
+		
