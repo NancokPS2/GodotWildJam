@@ -14,11 +14,17 @@ extents = Vector2( 200.5, 22 )
 
 [node name="Interfaz" type="CanvasLayer" parent="."]
 
-[node name="Termometro" type="ProgressBar" parent="Interfaz"]
-margin_right = 4.0
-margin_bottom = 14.0
-rect_scale = Vector2( 40.4, 1 )
-value = 50.0
+[node name="Control" type="Control" parent="Interfaz"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Termometro" type="ProgressBar" parent="Interfaz/Control"]
+anchor_right = 1.0
+anchor_bottom = 0.108
+size_flags_horizontal = 3
+step = 1.0
+value = 30.0
+percent_visible = false
 script = ExtResource( 5 )
 
 [node name="HerramientaTalado" type="Node2D" parent="."]
