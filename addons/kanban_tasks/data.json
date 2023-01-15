@@ -38,7 +38,8 @@
     {
       "title": "Todo",
       "tasks": [
-
+        1,
+        2
       ]
     },
     {
@@ -59,6 +60,16 @@
       "category": 0,
       "title": "Implement security measures for loaded resources",
       "details": "check the methods within it before loading it"
+    },
+    {
+      "category": 1,
+      "title": "Personaje: Engi Nier",
+      "details": ""
+    },
+    {
+      "category": 1,
+      "title": "El calor aumenta la velocidad del taladro o alguna herramienta",
+      "details": ""
     }
   ]
 }
