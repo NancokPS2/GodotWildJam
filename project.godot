@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Area2D",
+"class": "AreaTemperatura",
+"language": "GDScript",
+"path": "res://Clases/Areas/AreaTemperatura.gd"
+}, {
 "base": "KinematicBody2D",
 "class": "Entidad",
 "language": "GDScript",
@@ -39,18 +44,25 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Clases/Obstaculos/ParedDestruible.gd"
 }, {
+"base": "ProgressBar",
+"class": "Termometro",
+"language": "GDScript",
+"path": "res://Clases/Misc/Termometro.gd"
+}, {
 "base": "Node",
 "class": "Utility",
 "language": "GDScript",
 "path": "res://Utility/Utlity.gd"
 } ]
 _global_script_class_icons={
+"AreaTemperatura": "",
 "Entidad": "",
 "Herramienta": "",
 "HerramientaTaladro": "",
 "Jugador": "",
 "Pared": "",
 "ParedDestruible": "",
+"Termometro": "",
 "Utility": ""
 }
 
@@ -63,6 +75,7 @@ config/icon="res://icon.png"
 
 Eventos="*res://Singleton/Eventos.gd"
 Ref="*res://Singleton/Referencias.gd"
+Const="*res://Singleton/Constantes.gd"
 
 [editor_plugins]
 
@@ -71,6 +84,44 @@ enabled=PoolStringArray( "res://addons/kanban_tasks/plugin.cfg" )
 [gui]
 
 common/drop_mouse_on_gui_input_disabled=true
+
+[input]
+
+move_left={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":65,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+ ]
+}
+move_right={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":68,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+ ]
+}
+jump={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":87,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+ ]
+}
+herramienta1={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":49,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+ ]
+}
+herramienta2={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":50,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+ ]
+}
+herramienta3={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":51,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+ ]
+}
+usar={
+"deadzone": 0.5,
+"events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":1,"pressed":false,"doubleclick":false,"script":null)
+ ]
+}
 
 [physics]
 
