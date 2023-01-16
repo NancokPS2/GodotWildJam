@@ -21,14 +21,14 @@ func _ready() -> void:
 	add_stylebox_override("bg",BG)
 	
 	
-	var timer = Timer.new()
-	add_child(timer)
-	timer.wait_time = float(1)
-	timer.start()
-	timer.connect("timeout",self,"crazy_vals")
+#	var timer = Timer.new()
+#	add_child(timer)
+#	timer.wait_time = float(1)
+#	timer.start()
+#	timer.connect("timeout",self,"crazy_vals")
 
 
-func crazy_vals():
+func crazy_vals(): #Testing the colors
 	value = rand_range(0,100)
 
 func thermometer_visuals(ass):

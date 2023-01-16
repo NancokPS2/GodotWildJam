@@ -2,3 +2,4 @@
 -Garra que mueve cosas?
 -Herramienta de soldar
 -Capacidad de remover y obtener nuevas herramientas
+-Caja de texto
