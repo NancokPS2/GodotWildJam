@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Layer 7.png-398d9288bf8b0af8e7baaf4c0d2eda8f.stex"
+path="res://.import/Pinza_L.png-3a452927f3279659c73fd297eb1448ed.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Layer 7.png"
-dest_files=[ "res://.import/Layer 7.png-398d9288bf8b0af8e7baaf4c0d2eda8f.stex" ]
+source_file="res://Assets/Grua/Pinza_Hand/Pinza_L.png"
+dest_files=[ "res://.import/Pinza_L.png-3a452927f3279659c73fd297eb1448ed.stex" ]
 
 [params]
 
