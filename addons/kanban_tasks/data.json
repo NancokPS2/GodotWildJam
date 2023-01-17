@@ -39,7 +39,9 @@
       "title": "Todo",
       "tasks": [
         1,
-        2
+        2,
+        3,
+        4
       ]
     },
     {
@@ -70,6 +72,16 @@
       "category": 1,
       "title": "El calor aumenta la velocidad del taladro o alguna herramienta",
       "details": ""
+    },
+    {
+      "category": 1,
+      "title": "Task",
+      "details": ""
+    },
+    {
+      "category": 0,
+      "title": "Ajustar dedos de la garra para parar de rotar al tocar algo",
+      "details": "-No deberia contar si colisionan entre si\n-Deberia mantener el objeto sujetado"
     }
   ]
 }

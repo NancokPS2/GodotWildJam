@@ -24,6 +24,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Clases/Entidades/Entidad.gd"
 }, {
+"base": "Entidad",
+"class": "GarraGrua",
+"language": "GDScript",
+"path": "res://Clases/Entidades/GarraGrua.gd"
+}, {
+"base": "Entidad",
+"class": "Grua",
+"language": "GDScript",
+"path": "res://Clases/Entidades/Grua.gd"
+}, {
 "base": "Node2D",
 "class": "Herramienta",
 "language": "GDScript",
@@ -63,6 +73,8 @@ _global_script_class_icons={
 "AreaTemperatura": "",
 "CajaTexto": "",
 "Entidad": "",
+"GarraGrua": "",
+"Grua": "",
 "Herramienta": "",
 "HerramientaTaladro": "",
 "Jugador": "",
@@ -90,6 +102,12 @@ enabled=PoolStringArray( "res://addons/kanban_tasks/plugin.cfg" )
 [gui]
 
 common/drop_mouse_on_gui_input_disabled=true
+
+[importer_defaults]
+
+texture={
+"flags/filter": false
+}
 
 [input]
 
@@ -126,6 +144,11 @@ herramienta3={
 usar={
 "deadzone": 0.5,
 "events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":1,"pressed":false,"doubleclick":false,"script":null)
+ ]
+}
+usar2={
+"deadzone": 0.5,
+"events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":2,"pressed":false,"doubleclick":false,"script":null)
  ]
 }
 
