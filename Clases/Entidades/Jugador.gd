@@ -39,7 +39,7 @@ func _physics_process(delta):
 	._physics_process(delta)
 	
 	_on_floor_body_entered()#Checkear el estado actual antes de proseguir
-	if activo:
+	if controlando:
 		# Decrement the dash cooldown
 		dash_cooldown = max(0, dash_cooldown - delta)
 		# Decrement the Double jump cooldown
@@ -187,5 +187,5 @@ func cambiar_arma(slot:int):
 	
 
 #Misc
-var activo:bool = true
+
 
