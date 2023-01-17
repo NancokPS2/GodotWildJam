@@ -15,7 +15,7 @@ func _ready() -> void:
 	add_child(rayCast)#Añadirlo
 	
 	sprite.centered = true#Centrarlo
-	sprite.texture = textura#Darle la imagen
+	sprite.texture = load("res://Assets/Jugador/Taladro.png")#Darle la imagen
 	add_child(sprite)
 	
 func equip(user:Node):
