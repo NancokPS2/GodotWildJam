@@ -74,6 +74,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Clases/Obstaculos/ParedDestruible.gd"
 }, {
+"base": "RigidBody2D",
+"class": "Rigido",
+"language": "GDScript",
+"path": "res://Clases/Rigidos/Rigido.gd"
+}, {
 "base": "ProgressBar",
 "class": "Termometro",
 "language": "GDScript",
@@ -98,6 +103,7 @@ _global_script_class_icons={
 "Hitbox": "",
 "Jugador": "",
 "ParedDestruible": "",
+"Rigido": "",
 "Termometro": "",
 "Utility": ""
 }
