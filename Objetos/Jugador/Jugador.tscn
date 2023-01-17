@@ -1,12 +1,12 @@
 [gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Clases/Entidades/Jugador.gd" type="Script" id=1]
-[ext_resource path="res://Assets/Jugador/Robotic_Site_Protagonist.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Jugador/Robotic_Site_ProtagonistCut.png" type="Texture" id=2]
 [ext_resource path="res://Clases/Areas/HitBox.gd" type="Script" id=3]
 
 [sub_resource type="CapsuleShape2D" id=6]
 radius = 7.84904
-height = 4.61539
+height = 2.0
 
 [sub_resource type="Animation" id=2]
 length = 0.001
@@ -58,6 +58,7 @@ tracks/0/keys = {
 [sub_resource type="Animation" id=4]
 resource_name = "idle"
 length = 0.5
+loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("Jugador/Sprite:frame")
 tracks/0/interp = 1
@@ -75,7 +76,7 @@ tracks/0/keys = {
 script = ExtResource( 1 )
 
 [node name="Colision" type="CollisionShape2D" parent="."]
-position = Vector2( -2, 1.5 )
+position = Vector2( -1.5, 0.5 )
 scale = Vector2( 0.764423, 0.8125 )
 shape = SubResource( 6 )
 
@@ -83,6 +84,7 @@ shape = SubResource( 6 )
 scale = Vector2( 0.59375, 0.46875 )
 texture = ExtResource( 2 )
 hframes = 9
+region_rect = Rect2( 0, 0, 270, 36 )
 
 [node name="Anims" type="AnimationPlayer" parent="."]
 root_node = NodePath("../..")
@@ -101,3 +103,6 @@ margin_bottom = -16.0
 script = ExtResource( 3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxMele"]
+
+[node name="PosicionHerramienta" type="Position2D" parent="."]
+position = Vector2( -4.8, 0 )

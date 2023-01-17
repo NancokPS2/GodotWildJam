@@ -164,10 +164,12 @@ func cambiar_arma(slot:int):
 		herramientaEquipada = herramientas[slot]#Cambiar la herramienta equipada
 		
 		assert(herramientaEquipada is Herramienta)#Asegurarse que aun existe una en la variable
+		herramientaEquipada.position = $PosicionHerramienta.position
 		
 		add_child(herramientaEquipada)#Añadira la nueva herramienta
 		
 		herramientaEquipada.equip(self)#Ajustes varios
+		
 	
 
 
