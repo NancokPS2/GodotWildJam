@@ -19,6 +19,7 @@ func _ready() -> void:
 	add_child(sprite)
 	
 func equip(user:Node):
+	.equip(user)
 	rayCast.add_exception(user)
 	pass
 	
