@@ -19,10 +19,25 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Clases/Interfaz/CajaDeTexto.gd"
 }, {
+"base": "Estructura",
+"class": "CompuertaDobleEstructura",
+"language": "GDScript",
+"path": "res://Clases/Obstaculos/PuertaDoble.gd"
+}, {
+"base": "Estructura",
+"class": "CompuertaEstructura",
+"language": "GDScript",
+"path": "res://Clases/Obstaculos/Puerta.gd"
+}, {
 "base": "KinematicBody2D",
 "class": "Entidad",
 "language": "GDScript",
 "path": "res://Clases/Entidades/Entidad.gd"
+}, {
+"base": "StaticBody2D",
+"class": "Estructura",
+"language": "GDScript",
+"path": "res://Clases/Obstaculos/Estructura.gd"
 }, {
 "base": "Entidad",
 "class": "GarraGrua",
@@ -44,17 +59,17 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Clases/Herramientas/Taladro.gd"
 }, {
+"base": "Area2D",
+"class": "Hitbox",
+"language": "GDScript",
+"path": "res://Clases/Areas/HitBox.gd"
+}, {
 "base": "Entidad",
 "class": "Jugador",
 "language": "GDScript",
 "path": "res://Clases/Entidades/Jugador.gd"
 }, {
-"base": "StaticBody2D",
-"class": "Pared",
-"language": "GDScript",
-"path": "res://Clases/Obstaculos/Pared.gd"
-}, {
-"base": "Pared",
+"base": "Estructura",
 "class": "ParedDestruible",
 "language": "GDScript",
 "path": "res://Clases/Obstaculos/ParedDestruible.gd"
@@ -72,13 +87,16 @@ _global_script_classes=[ {
 _global_script_class_icons={
 "AreaTemperatura": "",
 "CajaTexto": "",
+"CompuertaDobleEstructura": "",
+"CompuertaEstructura": "",
 "Entidad": "",
+"Estructura": "",
 "GarraGrua": "",
 "Grua": "",
 "Herramienta": "",
 "HerramientaTaladro": "",
+"Hitbox": "",
 "Jugador": "",
-"Pared": "",
 "ParedDestruible": "",
 "Termometro": "",
 "Utility": ""
@@ -151,6 +169,17 @@ usar2={
 "events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":2,"pressed":false,"doubleclick":false,"script":null)
  ]
 }
+ataque={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":70,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+ ]
+}
+
+[layer_names]
+
+2d_physics/layer_1="Paredes"
+2d_physics/layer_2="Jugador"
+2d_physics/layer_8="Puertas"
 
 [physics]
 
