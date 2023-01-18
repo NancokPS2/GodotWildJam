@@ -41,7 +41,8 @@
         1,
         2,
         3,
-        4
+        4,
+        5
       ]
     },
     {
@@ -74,14 +75,19 @@
       "details": ""
     },
     {
-      "category": 1,
-      "title": "Task",
+      "category": 0,
+      "title": "Ajustar dedos de la garra para parar de rotar al tocar algo",
+      "details": "-No deberia contar si colisionan entre si\n-Deberia mantener el objeto sujetado"
+    },
+    {
+      "category": 2,
+      "title": "El taladro mantiene su raycast activo incluso si ya no esta tocando nada",
       "details": ""
     },
     {
       "category": 0,
-      "title": "Ajustar dedos de la garra para parar de rotar al tocar algo",
-      "details": "-No deberia contar si colisionan entre si\n-Deberia mantener el objeto sujetado"
+      "title": "Rediseñar la grua",
+      "details": "-Area de agarre que sostenga lo que tenga dentro\n-Dedos cosmeticos"
     }
   ]
 }
