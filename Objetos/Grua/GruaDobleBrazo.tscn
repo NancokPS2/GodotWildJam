@@ -6,11 +6,13 @@
 [ext_resource path="res://Assets/Grua/Layer 7.png" type="Texture" id=4]
 
 [node name="GruaDobleBrazo" type="KinematicBody2D"]
+collision_layer = 0
 script = ExtResource( 2 )
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 
 [node name="BrazoInferior" type="KinematicBody2D" parent="."]
+collision_layer = 0
 
 [node name="Sprite2" type="Sprite" parent="BrazoInferior"]
 position = Vector2( 0, -67 )
@@ -27,6 +29,7 @@ region_rect = Rect2( 57, 130, 21, 65 )
 
 [node name="BrazoSuperior" type="KinematicBody2D" parent="BrazoInferior"]
 position = Vector2( 0, -71 )
+collision_layer = 0
 
 [node name="Sprite" type="Sprite" parent="BrazoInferior/BrazoSuperior"]
 position = Vector2( 0, -32 )
@@ -38,3 +41,6 @@ region_rect = Rect2( 57, 130, 21, 65 )
 [node name="GarraGrua" parent="BrazoInferior/BrazoSuperior" instance=ExtResource( 1 )]
 position = Vector2( 0, -73 )
 rotation = 3.14159
+__meta__ = {
+"_editor_description_": ""
+}

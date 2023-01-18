@@ -5,11 +5,15 @@ class_name Jugador
 func _ready() -> void:
 #	assert(anim is AnimationPlayer, "anim no se inicio correctamente!")
 #	assert(spritePlayer is Sprite or spritePlayer is AnimatedSprite, "spritePlayer no se inicio correctamente!")
+
+	gravedad = 7
 	add_child(herramientaEquipada)
 	Ref.jugador = self#Crear una referencia a si mismo
 	initial_count  = count
 	isAttacking = false
 	controlando = true
+	
+	
 
 
 # Movimiento
@@ -37,7 +41,7 @@ var double_jump_cooldown = 0
 
 	
 func _physics_process(delta):
-	._physics_process(delta)
+	._physics_process(delta)#Proceso base de Entidad
 	
 	_on_floor_body_entered()#Checkear el estado actual antes de proseguir
 	if controlando:
@@ -55,7 +59,6 @@ func _physics_process(delta):
 			var parametro:Dictionary = { "delta":delta }
 			herramientaEquipada.use( parametro )
 	
-	Motion.y += gravity
 	Motion = move_and_slide(Motion, Vector2.UP)
 	$Debug.text = str(Motion)
 	pass

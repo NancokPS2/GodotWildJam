@@ -1,9 +1,13 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://Objetos/Grua/Garra.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Objetos/Grua/NOUSEGarra.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Objetos/Grua/GruaDeslizante.gd" type="Script" id=2]
 [ext_resource path="res://Assets/Grua/BaseLarga.png" type="Texture" id=3]
 [ext_resource path="res://Assets/Grua/Layer 7.png" type="Texture" id=4]
+
+[sub_resource type="AtlasTexture" id=1]
+atlas = ExtResource( 3 )
+region = Rect2( 57, 194, 21, 1 )
 
 [node name="GruaDeslizante" type="KinematicBody2D"]
 script = ExtResource( 2 )
@@ -12,20 +16,44 @@ script = ExtResource( 2 )
 
 [node name="Core" type="KinematicBody2D" parent="."]
 
-[node name="Sprite" type="Sprite" parent="Core"]
+[node name="Core" type="Sprite" parent="Core"]
 texture = ExtResource( 4 )
 region_enabled = true
 region_rect = Rect2( 56, 114, 23, 22 )
 
-[node name="Brazo" type="KinematicBody2D" parent="Core"]
-
-[node name="Sprite" type="Sprite" parent="Core/Brazo"]
-position = Vector2( 0, 32 )
+[node name="Base" type="Sprite" parent="Core"]
+position = Vector2( 0, 19 )
 z_index = -1
 texture = ExtResource( 3 )
-flip_v = true
 region_enabled = true
-region_rect = Rect2( 57, 130, 21, 65 )
+region_rect = Rect2( 57, 130, 21, 28 )
+
+[node name="Brazo" type="KinematicBody2D" parent="Core"]
 
 [node name="GarraGrua" parent="Core/Brazo" instance=ExtResource( 1 )]
-position = Vector2( 0, 71 )
+visible = false
+position = Vector2( 0, 58 )
+
+[node name="Base2" type="Sprite" parent="Core/Brazo"]
+visible = false
+position = Vector2( 0, -11 )
+scale = Vector2( 1, 2.2 )
+z_index = -1
+texture = ExtResource( 3 )
+offset = Vector2( 0, 25.1 )
+region_enabled = true
+region_rect = Rect2( 57, 139, 21, 1 )
+
+[node name="Control" type="Control" parent="Core/Brazo"]
+margin_left = -10.0
+margin_top = 33.0
+margin_right = 11.0
+margin_bottom = 500.0
+rect_pivot_offset = Vector2( 10, 0 )
+
+[node name="Arm" type="TextureRect" parent="Core/Brazo/Control"]
+margin_right = 21.0
+margin_bottom = 1.0
+rect_pivot_offset = Vector2( 10, 0 )
+texture = SubResource( 1 )
+stretch_mode = 2

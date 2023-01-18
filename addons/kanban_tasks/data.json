@@ -42,7 +42,8 @@
         2,
         3,
         4,
-        5
+        5,
+        6
       ]
     },
     {
@@ -88,6 +89,11 @@
       "category": 0,
       "title": "Rediseñar la grua",
       "details": "-Area de agarre que sostenga lo que tenga dentro\n-Dedos cosmeticos"
+    },
+    {
+      "category": 0,
+      "title": "Grua Deslizante esta desalineada, mejor sistema de extension?",
+      "details": ""
     }
   ]
 }

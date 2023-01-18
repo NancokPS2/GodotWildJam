@@ -1,11 +1,13 @@
 extends KinematicBody2D
 class_name Entidad
 
+
 var controlando:bool = false setget set_controlando #Solo deberia aceptar input si esto es true
 
 var temperatura:int 
-var inmortal:bool = false
+export (bool) var inmortal = false
 export (float) var salud = 50
+export (float) var gravedad = 0
 
 var temperaturaFusion = 50
 
@@ -19,6 +21,8 @@ func set_controlando(valor):
 
 func _physics_process(delta: float) -> void:
 	check_temperatura(delta)
+	if gravedad != 0:
+		move_and_slide(Vector2.DOWN * 10 * gravedad)
 
 func hurt(cantidad):
 	if not inmortal:

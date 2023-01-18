@@ -8,6 +8,9 @@ export (float) var salud = 50
 
 var temperaturaFusion = 50
 
+func _ready() -> void:
+	can_sleep = false
+
 func check_temperatura(delta):
 	if temperatura > temperaturaFusion:
 		hurt( (temperaturaFusion - temperatura) * delta )

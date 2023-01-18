@@ -5,3 +5,5 @@ const colores = {
 	2:Color(1, 0.843137, 0, 1),
 	3:Color(255,0,0)
 }
+
+const gravedad = 8

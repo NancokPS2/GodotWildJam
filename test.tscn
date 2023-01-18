@@ -8,10 +8,10 @@
 [ext_resource path="res://Clases/Entidades/Entidad.gd" type="Script" id=6]
 [ext_resource path="res://Objetos/Obstaculos/CompuertaDoble.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Objetos/Grua/GruaDobleBrazo.tscn" type="PackedScene" id=8]
-[ext_resource path="res://Objetos/Grua/GruaDeslizante.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Objetos/Misc/Caja.tscn" type="PackedScene" id=9]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 200.5, 22 )
+extents = Vector2( 231, 22 )
 
 [node name="Node2D" type="Node2D"]
 
@@ -51,7 +51,7 @@ position = Vector2( 2, 261 )
 script = ExtResource( 4 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Pared"]
-position = Vector2( 190.5, 12 )
+position = Vector2( 160, 12 )
 shape = SubResource( 1 )
 
 [node name="Enemigo" type="KinematicBody2D" parent="."]
@@ -70,8 +70,9 @@ texture = ExtResource( 3 )
 position = Vector2( 376, 207 )
 
 [node name="GruaDobleBrazo" parent="." instance=ExtResource( 8 )]
-position = Vector2( 102, 2 )
+position = Vector2( 37, 71 )
 rotation = 3.14159
+collision_mask = 0
 
-[node name="GruaDobleBrazo2" parent="." instance=ExtResource( 9 )]
-position = Vector2( 264, 7 )
+[node name="Entidad" parent="." instance=ExtResource( 9 )]
+position = Vector2( 134, 151 )
