@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Layer 6.png-57c1380373d5a4f3b867a96f2bef6430.stex"
+path="res://.import/Brazo2.png-119505534f58ff6531b41186113ce1cb.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Grua/Layer 6.png"
-dest_files=[ "res://.import/Layer 6.png-57c1380373d5a4f3b867a96f2bef6430.stex" ]
+source_file="res://Assets/Grua/Brazo2.png"
+dest_files=[ "res://.import/Brazo2.png-119505534f58ff6531b41186113ce1cb.stex" ]
 
 [params]
 
