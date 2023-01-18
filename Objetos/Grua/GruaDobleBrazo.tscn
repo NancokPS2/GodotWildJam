@@ -1,0 +1,40 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Objetos/Grua/Garra.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Clases/Entidades/Grua.gd" type="Script" id=2]
+[ext_resource path="res://Assets/Grua/BaseLarga.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Grua/Layer 7.png" type="Texture" id=4]
+
+[node name="GruaDobleBrazo" type="KinematicBody2D"]
+script = ExtResource( 2 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+
+[node name="BrazoInferior" type="KinematicBody2D" parent="."]
+
+[node name="Sprite2" type="Sprite" parent="BrazoInferior"]
+position = Vector2( 0, -67 )
+z_index = 1
+texture = ExtResource( 4 )
+region_enabled = true
+region_rect = Rect2( 56, 114, 23, 23 )
+
+[node name="Sprite" type="Sprite" parent="BrazoInferior"]
+position = Vector2( 0, -32 )
+texture = ExtResource( 3 )
+region_enabled = true
+region_rect = Rect2( 57, 130, 21, 65 )
+
+[node name="BrazoSuperior" type="KinematicBody2D" parent="BrazoInferior"]
+position = Vector2( 0, -71 )
+
+[node name="Sprite" type="Sprite" parent="BrazoInferior/BrazoSuperior"]
+position = Vector2( 0, -32 )
+texture = ExtResource( 3 )
+flip_v = true
+region_enabled = true
+region_rect = Rect2( 57, 130, 21, 65 )
+
+[node name="GarraGrua" parent="BrazoInferior/BrazoSuperior" instance=ExtResource( 1 )]
+position = Vector2( 0, -73 )
+rotation = 3.14159

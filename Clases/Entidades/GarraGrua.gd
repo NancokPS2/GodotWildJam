@@ -49,7 +49,7 @@ func test_collision()->bool:
 		var colisionIzq:KinematicCollision2D = $LadoIzq.move_and_collide(Vector2.ZERO, true, true, true)
 		var colisionDer:KinematicCollision2D = $LadoDer.move_and_collide(Vector2.ZERO, true, true, true)
 #		assert(colisionDer is KinematicCollision2D)
-		if colisionIzq.collider == colisionDer.collider:#Si ambos dedos tocan el mismo objeto, agarrarlo
+		if colisionIzq and colisionDer and colisionIzq.collider == colisionDer.collider:#Si ambos dedos tocan el mismo objeto, agarrarlo
 			objetoAgarrado = colisionIzq.collider
 			
 		if colisionDer is KinematicCollision2D or colisionIzq is KinematicCollision2D:#Si colisiono con algo, revertir el movimiento
