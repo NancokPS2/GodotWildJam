@@ -7,3 +7,11 @@ const colores = {
 }
 
 const gravedad = 8
+
+#enum materiales  { ROCA, ACERO, TECNICITA }
+
+enum piezas {}
+
+const tamanoEncastres = 1.0
+
+var debugMode = true

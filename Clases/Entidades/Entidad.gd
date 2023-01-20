@@ -14,6 +14,7 @@ var temperaturaFusion = 50
 func check_temperatura(delta):
 	if temperatura > temperaturaFusion:
 		hurt( (temperaturaFusion - temperatura) * delta )
+		modulate = Color()
 
 func set_controlando(valor):
 	controlando = valor

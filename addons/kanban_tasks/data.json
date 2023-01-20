@@ -43,7 +43,10 @@
         3,
         4,
         5,
-        6
+        7,
+        8,
+        9,
+        10
       ]
     },
     {
@@ -55,7 +58,7 @@
     {
       "title": "Done",
       "tasks": [
-
+        6
       ]
     }
   ],
@@ -94,6 +97,26 @@
       "category": 0,
       "title": "Grua Deslizante esta desalineada, mejor sistema de extension?",
       "details": ""
+    },
+    {
+      "category": 1,
+      "title": "Usar medidor de temperatura para saber que hay dentro de las cajas",
+      "details": ""
+    },
+    {
+      "category": 1,
+      "title": "Concepto general viejo",
+      "details": "Funde objetos para conseguir materiales\n\nCraftea objetos usando materiales\n\nColocar el producto en el reactor"
+    },
+    {
+      "category": 1,
+      "title": "Concepto general",
+      "details": "Caen los materiales\n\nLos agarra con la grua\n\nLos mete en un agujero, cambia cada vez\n\nLuego los pone en le reactor"
+    },
+    {
+      "category": 2,
+      "title": "Error con Area2D",
+      "details": "E 0:01:24.660   set_monitorable: Function blocked during in/out signal. Use set_deferred(\"monitorable\", true/false).\n  <C++ Error>   Condition \"locked || (is_inside_tree() && Physics2DServer::get_singleton()->is_flushing_queries())\" is true.\n  <C++ Source>  scene/2d/area_2d.cpp:383 @ set_monitorable()\n  <Stack Trace> Encastre.gd:6 @ activacion()\n                Frame.gd:8 @ activacion()\n                Frame.gd:45 @ place_piece()\n                Frame.gd:32 @ zone_detected()\n"
     }
   ]
 }

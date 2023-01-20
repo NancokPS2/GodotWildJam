@@ -13,7 +13,7 @@ func _ready() -> void:
 	isAttacking = false
 	controlando = true
 	
-	
+var inventario:Dictionary
 
 
 # Movimiento
