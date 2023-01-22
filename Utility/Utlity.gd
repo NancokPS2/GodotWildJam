@@ -52,7 +52,7 @@ class FileManipulation extends Node:
 				fileName = loadingDir.get_next()#Get next file
 			return returnedPaths
 
-	static func get_folders_in_folder(path:String)->#Me perdi
+	static func get_folders_in_folder(path:String)->Array:#Me perdi
 			var returnedPaths:Array
 			var loadingDir = Directory.new()
 			loadingDir.open(path)#Start loading abilities
@@ -65,3 +65,12 @@ class FileManipulation extends Node:
 					
 				folderName = loadingDir.get_next()#Get next file
 			return returnedPaths
+
+class VectorManipulation extends Node:
+	func clockwise_tangent(vector:Vector2, times:int=1)->Vector2:
+		var vec = vector
+		for amount in range(times):
+			vec = -vec.tangent()
+		return vec
+		
+		
