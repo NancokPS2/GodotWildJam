@@ -1,9 +1,12 @@
 extends Entidad
 class_name PiezaPuzzle
 
+var puedeEncastrar:bool = true
 var encastres:Array
 
 signal ACTIVAR_ENCASTRES
+
+var test = Vector2(0,4).tangent()
 
 func activacion(valor:bool):
 	for encastre in encastres:
@@ -42,3 +45,4 @@ func _unhandled_input(event: InputEvent) -> void:
 		
 	if Const.debugMode and seleccionado:
 		position = get_global_mouse_position()
+

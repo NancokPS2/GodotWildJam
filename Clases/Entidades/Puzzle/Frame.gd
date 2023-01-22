@@ -1,7 +1,9 @@
 extends Entidad
 class_name MarcoPuzzle
 
+var puedeEncastrar:bool = true
 var encastres:Array
+var piezasUnidas:Array
 
 func activacion(valor:bool):
 	for encastre in encastres:
@@ -26,11 +28,10 @@ func _ready() -> void:
 			area2D.connect("area_entered",self,"zone_detected")
 
 func zone_detected(zona):
-	var padre = zona.get_meta("padre",null)
-	if zona.get_meta("encastre",false) and zona.get_meta("padre",null) != self:#Es parte de un encastre
-		var pieza = zona.get_meta("padre",null)
+	var pieza = zona.get_meta("padre",null)
+	if zona.get_meta("encastre",false) and pieza != self and not piezasUnidas.has(pieza) and pieza.puedeEncastrar:#Es parte de un encastre
 		place_piece(pieza)
-		pass
+
 	
 func place_piece(pieza):
 	var info = compare_piece(pieza)
@@ -39,16 +40,18 @@ func place_piece(pieza):
 		
 	pieza.get_parent().remove_child(pieza)
 	
-	pieza.position = info["mio"].position - info["ajeno"].position
-	info["ajeno"].activacion(false)
-	
-	activacion(false)#Desactivar
-	
-	pieza.activacion(false)#Apagar su deteccion
-	
+
+#	info["ajeno"].activacion(false)
+
+	piezasUnidas.append(pieza)
+	pieza.puedeEncastrar = false
 	add_child(pieza)#Spawnear la pieza
 	
-	activacion(true)#Re encender la nuestra
+	pieza.position = info["mio"].position - info["ajeno"].position
+	
+	info["ajeno"].call_deferred("activacion",false)
+	pieza.puedeEncastrar = true
+	
 	pieza.seleccionado = false
 	seleccionado = false
 	
@@ -59,7 +62,7 @@ func compare_piece(pieza):
 	for encastreAjeno in pieza.encastres:
 		for encastreMio in encastres:
 			
-			if encastreAjeno.encastre == encastreMio.encastre:
+			if encastreAjeno.IDEncastre == encastreMio.IDEncastre:
 				infoEncastracion["ajeno"] = encastreAjeno
 				infoEncastracion["mio"] = encastreMio
 				return infoEncastracion
