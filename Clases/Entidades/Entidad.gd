@@ -3,7 +3,7 @@ class_name Entidad
 
 
 var controlando:bool = false setget set_controlando #Solo deberia aceptar input si esto es true
-
+var motion = Vector2.ZERO
 var temperatura:int 
 export (bool) var inmortal = false
 export (float) var salud = 50
@@ -22,8 +22,8 @@ func set_controlando(valor):
 
 func _physics_process(delta: float) -> void:
 	check_temperatura(delta)
-	if gravedad != 0:
-		move_and_slide(Vector2.DOWN * 10 * gravedad)
+#	if gravedad != 0:
+#		motion += Vector2.DOWN * 10 * gravedad * delta
 
 func hurt(cantidad):
 	if not inmortal:

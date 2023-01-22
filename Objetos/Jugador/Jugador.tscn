@@ -106,3 +106,6 @@ script = ExtResource( 3 )
 
 [node name="PosicionHerramienta" type="Position2D" parent="."]
 position = Vector2( -4.8, 0 )
+
+[node name="Afterimage" type="Particles2D" parent="."]
+local_coords = false

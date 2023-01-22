@@ -1,17 +1,23 @@
 extends Entidad
 class_name Jugador
 
-
+var afterimageTimer:Timer = Timer.new()
 func _ready() -> void:
 #	assert(anim is AnimationPlayer, "anim no se inicio correctamente!")
 #	assert(spritePlayer is Sprite or spritePlayer is AnimatedSprite, "spritePlayer no se inicio correctamente!")
 
-	gravedad = 7
 	add_child(herramientaEquipada)
 	Ref.jugador = self#Crear una referencia a si mismo
 	initial_count  = count
 	isAttacking = false
 	controlando = true
+	
+	gravedad = Const.gravedad
+	
+	add_child(afterimageTimer)
+	afterimageTimer.connect("timeout",self,"afterimage")
+	afterimageTimer.start(0.1)
+	
 	
 var inventario:Dictionary
 
@@ -24,7 +30,7 @@ var jump_force:float = 340
 var gravity = 9.8
 var acceleration = 0.25
 var friction = 0.25
-var Motion = Vector2.ZERO
+
 var dash_count = 2
 var is_jumping = false
 # Whether the player is currently in the air
@@ -58,24 +64,24 @@ func _physics_process(delta):
 		if Input.is_action_pressed("usar") and herramientaEquipada.has_method("use"):
 			var parametro:Dictionary = { "delta":delta }
 			herramientaEquipada.use( parametro )
-	
-	Motion = move_and_slide(Motion, Vector2.UP)
-	$Debug.text = str(Motion)
+	motion += Vector2.DOWN * gravedad * delta
+	motion = move_and_slide(motion, Vector2.UP)
+	$Debug.text = str(motion)
 	pass
 
 func side_movement():
 	var direccionHorizontal = Input.get_axis("move_left","move_right")#Toma ambos botons como si fueran lados opuestos de una palanca
 	#direccionHorizontal resulta en -1 si es hacia la izquierda o 1 si a la derecha
 	if direccionHorizontal != 0 and !isAttacking:
-		Motion.x = lerp(Motion.x, direccionHorizontal * speed , acceleration)
+		motion.x = lerp(motion.x, direccionHorizontal * speed , acceleration)
 	else:
-		Motion.x = lerp(Motion.x, 0, friction)
+		motion.x = lerp(motion.x, 0, friction)
 		
 func _jump():
 	if Input.is_action_just_pressed("jump"):
 		# If the player is on the ground, perform a jump
 		if is_on_floor():
-			Motion = move_and_slide(Vector2(0, -jump_velocity))
+			motion = move_and_slide(Vector2(0, -jump_velocity))
 			is_jumping = true#Se inicio un salto
 			
 		# If the player is in the air and the double jump is available, perform a double jump
@@ -83,7 +89,7 @@ func _jump():
 			double_jump_cooldown = 0.15
 			is_jumping = true
 			count -=1
-			Motion = move_and_slide(Vector2(0, -jump_velocity))
+			motion = move_and_slide(Vector2(0, -jump_velocity))
 			
 func _on_floor_body_entered():
 	if is_on_floor():
@@ -117,11 +123,11 @@ func Animations():
 	if not is_on_floor():
 		anim.play("aire")
 		
-	if Motion.x > 3:#Yendo a la derecha
+	if motion.x > 3:#Yendo a la derecha
 		anim.play("correr")
 		spritePlayer.flip_h = false
 		
-	elif Motion.x < -3:#Izquierda
+	elif motion.x < -3:#Izquierda
 		anim.play("correr")
 		spritePlayer.flip_h = true
 		
@@ -131,6 +137,23 @@ func Animations():
 func attack():
 	$HitboxMele
 
+
+func afterimage(duration:float = 0.15):
+	var afterimage = $Sprite.duplicate()
+	
+	yield(get_tree().create_timer(0.07),"timeout")
+	var timer = get_tree().create_timer(duration)
+	timer.connect("timeout",afterimage,"queue_free")#Borrar la imagen luego de 0.3 segundos
+	
+	afterimage.set_as_toplevel(true)#Colocar donde esta el personaje
+	afterimage.position = position
+	
+	afterimage.modulate = Color(1,1,1,0.7)
+	var tween:SceneTreeTween = get_tree().create_tween().bind_node(afterimage)#Hacer transparente
+	tween.tween_property(afterimage,"modulate",Color(1,1,1,0), duration)
+	
+	
+	add_child(afterimage)#Añadir a la escena
 
 #Jugabilidad
 func _unhandled_input(event: InputEvent) -> void:
