@@ -6,7 +6,7 @@ const colores = {
 	3:Color(255,0,0)
 }
 
-const gravedad = 8
+const gravedad = 800
 
 #enum materiales  { ROCA, ACERO, TECNICITA }
 
