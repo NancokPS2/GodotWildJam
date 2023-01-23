@@ -1,4 +1,4 @@
-extends Entidad
+extends KinematicBody2D
 class_name MarcoPuzzle
 
 var puedeEncastrar:bool = true

@@ -1,12 +1,13 @@
-extends Entidad
+extends KinematicBody2D
 class_name PiezaPuzzle
 
 var puedeEncastrar:bool = true
 var encastres:Array
 
+export (bool) var coneccionProximidad = true
+
 signal ACTIVAR_ENCASTRES
 
-var test = Vector2(0,4).tangent()
 
 func activacion(valor:bool):
 	for encastre in encastres:
@@ -14,27 +15,33 @@ func activacion(valor:bool):
 
 func _ready() -> void:
 
+	
 	for node in get_children():
 		if node is EncastrePuzzle:
 
 			encastres.append(node)
-			var area2D = Area2D.new()
-			var colision = CollisionShape2D.new()
-			var forma = CircleShape2D.new()
 			
-			forma.radius = Const.tamanoEncastres
-			colision.shape = forma
-			node.add_child(area2D)
-			area2D.set_meta("encastre",true)
-			area2D.set_meta("padre",self)
-			area2D.monitorable = false
-			area2D.monitoring = false
-
-			area2D.add_child(colision)
+			if coneccionProximidad:
+				var area2D = Area2D.new()
+				var colision = CollisionShape2D.new()
+				var forma = CircleShape2D.new()
+				
+				forma.radius = Const.tamanoEncastres
+				colision.shape = forma
+				node.add_child(area2D)
+				area2D.set_meta("encastre",true)
+				area2D.set_meta("padre",self)
+				area2D.monitorable = false
+				area2D.monitoring = false
+				area2D.add_child(colision)
 			
-			if not get_parent() is MarcoPuzzle:
-				node.activacion(true)
+				if not get_parent() is MarcoPuzzle:
+					node.activacion(true)
+				
 			
+				
+				
+		
 
 
 export (String) var inputSeleccion
