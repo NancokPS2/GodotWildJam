@@ -73,4 +73,15 @@ class VectorManipulation extends Node:
 			vec = -vec.tangent()
 		return vec
 		
+class SignalManipulation extends Node:
+	 
+	static func disconnect_all_signals(from:Object):
+		var signals = from.get_signal_list()
+
+		for sig in signals:#Check each signal
+			var connections = from.get_signal_connection_list(sig)
+			for connection in connections:#Check it's connections
+				from.disconnect(connection.signal, connection.target, connection.method)#Disconnect them
+			
+		
 		
