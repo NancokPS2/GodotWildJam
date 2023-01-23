@@ -5,9 +5,18 @@ class_name Entidad
 var controlando:bool = false setget set_controlando #Solo deberia aceptar input si esto es true
 var motion = Vector2.ZERO
 var temperatura:int 
+
 export (bool) var inmortal = false
 export (float) var salud = 50
 export (float) var gravedad = 0
+
+export (Dictionary) var afinidadElemental = {
+	Const.elementos.NINGUNO:0.0,
+	Const.elementos.FUEGO:0.0,
+	Const.elementos.TIERRA:0.0,
+	Const.elementos.AGUA:0.0,
+	Const.elementos.AIRE:0.0
+}
 
 var temperaturaFusion = 50
 
@@ -25,9 +34,12 @@ func _physics_process(delta: float) -> void:
 #	if gravedad != 0:
 #		motion += Vector2.DOWN * 10 * gravedad * delta
 
-func hurt(cantidad):
+func hurt(cantidad:int,elemento:int=0):
+	
+	var cantidadFinal = cantidad * afinidadElemental[elemento]#Aplicar elemento
 	if not inmortal:
-		salud -= cantidad
+		
+		salud -= cantidadFinal
 		
 	if salud <= 0:
 		die()
