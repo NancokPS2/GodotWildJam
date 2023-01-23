@@ -19,10 +19,20 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Clases/Areas/AreaTemperatura.gd"
 }, {
-"base": "Node2D",
-"class": "Arma",
+"base": "Position2D",
+"class": "ArmaEncastre",
 "language": "GDScript",
-"path": "res://Clases/Armas/Arma.gd"
+"path": "res://Clases/Armas/Armado/Encastre.gd"
+}, {
+"base": "Node2D",
+"class": "ArmaMarco",
+"language": "GDScript",
+"path": "res://Clases/Armas/Armado/Arma.gd"
+}, {
+"base": "KinematicBody2D",
+"class": "ArmaParte",
+"language": "GDScript",
+"path": "res://Clases/Armas/Armado/ParteArma.gd"
 }, {
 "base": "Entidad",
 "class": "Caja",
@@ -119,7 +129,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Clases/Misc/Level.gd"
 }, {
-"base": "Entidad",
+"base": "KinematicBody2D",
 "class": "MarcoPuzzle",
 "language": "GDScript",
 "path": "res://Clases/Entidades/Puzzle/Frame.gd"
@@ -129,7 +139,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Clases/Obstaculos/ParedDestruible.gd"
 }, {
-"base": "Entidad",
+"base": "KinematicBody2D",
 "class": "PiezaPuzzle",
 "language": "GDScript",
 "path": "res://Clases/Entidades/Puzzle/Pieza.gd"
@@ -157,7 +167,9 @@ _global_script_classes=[ {
 _global_script_class_icons={
 "AreaRecoleccion": "",
 "AreaTemperatura": "",
-"Arma": "",
+"ArmaEncastre": "",
+"ArmaMarco": "",
+"ArmaParte": "",
 "Caja": "",
 "CajaRigido": "",
 "CajaTexto": "",
