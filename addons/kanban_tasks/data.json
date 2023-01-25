@@ -46,7 +46,8 @@
         7,
         8,
         9,
-        10
+        10,
+        11
       ]
     },
     {
@@ -115,8 +116,13 @@
     },
     {
       "category": 2,
-      "title": "Error con Area2D",
+      "title": "Error con Area2D (deprecated)",
       "details": "E 0:01:24.660   set_monitorable: Function blocked during in/out signal. Use set_deferred(\"monitorable\", true/false).\n  <C++ Error>   Condition \"locked || (is_inside_tree() && Physics2DServer::get_singleton()->is_flushing_queries())\" is true.\n  <C++ Source>  scene/2d/area_2d.cpp:383 @ set_monitorable()\n  <Stack Trace> Encastre.gd:6 @ activacion()\n                Frame.gd:8 @ activacion()\n                Frame.gd:45 @ place_piece()\n                Frame.gd:32 @ zone_detected()\n"
+    },
+    {
+      "category": 1,
+      "title": "Funcionamiento armas",
+      "details": "Cada pieza aporta estadisticas al arma principal\n\nCada pieza puede tener su propio metodo de setup, ataque y desconeccion para manejar su funcionalidad"
     }
   ]
 }
