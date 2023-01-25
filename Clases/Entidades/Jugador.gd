@@ -6,7 +6,7 @@ func _ready() -> void:
 #	assert(anim is AnimationPlayer, "anim no se inicio correctamente!")
 #	assert(spritePlayer is Sprite or spritePlayer is AnimatedSprite, "spritePlayer no se inicio correctamente!")
 
-	add_child(herramientaEquipada)
+	add_child(equipado)
 	Ref.jugador = self#Crear una referencia a si mismo
 	initial_count  = count
 	isAttacking = false
@@ -20,7 +20,7 @@ func _ready() -> void:
 	
 	
 var inventario:Dictionary
-
+var armaEquipada
 
 # Movimiento
 var dash_velocity = 2000
@@ -60,10 +60,6 @@ func _physics_process(delta):
 		Animations()
 #		Attack()
 
-		#TEMPORAL
-		if Input.is_action_pressed("usar") and herramientaEquipada.has_method("use"):
-			var parametro:Dictionary = { "delta":delta }
-			herramientaEquipada.use( parametro )
 	motion += Vector2.DOWN * gravedad * delta
 	motion = move_and_slide(motion, Vector2.UP)
 	$Debug.text = str(motion)
@@ -157,11 +153,9 @@ func afterimage(duration:float = 0.15):
 
 #Jugabilidad
 func _unhandled_input(event: InputEvent) -> void:
-	if event is InputEventMouseMotion:
-		herramientaEquipada.follow_mouse()
 		
-	elif event.is_action_pressed("ataque"):
-		attack()
+	if event.is_action_pressed("ataque") and equipado is ArmaMarco:
+		equipado.pre_attack( {} )
 		
 	elif event.is_action_released("herramienta1"):
 		cambiar_arma(1)
@@ -178,23 +172,22 @@ func _unhandled_input(event: InputEvent) -> void:
 	
 
 
-var herramientaEquipada:Herramienta = Herramienta.new()
+var equipado:ArmaMarco
 
-var herramientas:Dictionary = {
-	1:HerramientaTaladro.new()
+var armas:Dictionary = {
+	1:load("res://Objetos/Armas/Pre creadas/EspadaSimple.tscn").instance()
 }
 func cambiar_arma(slot:int):
 	
-	if herramientas.has(slot):#Asegurarse que el slot seleccionado tengo una herramienta
-		remove_child(herramientaEquipada)#Remover la herramienta actualmente equipada de la escena
-		herramientaEquipada = herramientas[slot]#Cambiar la herramienta equipada
+	if armas.has(slot):#Asegurarse que el slot seleccionado tengo una herramienta
+		remove_child(equipado)#Remover la herramienta actualmente equipada de la escena
+		equipado = armas[slot]#Cambiar la herramienta equipada
 		
-		assert(herramientaEquipada is Herramienta)#Asegurarse que aun existe una en la variable
-		herramientaEquipada.position = $PosicionHerramienta.position
+		equipado.position = $PosicionArma.position
 		
-		add_child(herramientaEquipada)#Añadira la nueva herramienta
+		add_child(equipado)#Añadira la nueva herramienta
 		
-		herramientaEquipada.equip(self)#Ajustes varios
+		equipado.equipping(true)
 		
 	
 
