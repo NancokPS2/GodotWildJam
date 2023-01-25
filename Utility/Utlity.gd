@@ -21,6 +21,10 @@ class NodeManipulation extends Node:
 	static func remove_all_children(node:Node):
 		for child in node.get_children():
 			node.remove_child(child)
+			
+	static func safe_unparent(node:Node):
+		if node.get_parent() != null:
+			node.get_parent().remove_child(node)
 	
 class FileManipulation extends Node:
 	static func get_files_in_folder(path:String) -> Array:#Obtiene todos los archivos en una carpeta
@@ -79,7 +83,7 @@ class SignalManipulation extends Node:
 		var signals = from.get_signal_list()
 
 		for sig in signals:#Check each signal
-			var connections = from.get_signal_connection_list(sig)
+			var connections = from.get_signal_connection_list(sig["name"])
 			for connection in connections:#Check it's connections
 				from.disconnect(connection.signal, connection.target, connection.method)#Disconnect them
 			
