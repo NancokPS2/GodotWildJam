@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Clases/Armas/Armado/ParteArma.gd" type="Script" id=1]
+[ext_resource path="res://Objetos/Armas/Animaciones/SwordSwing.tscn" type="PackedScene" id=2]
+[ext_resource path="res://icon.png" type="Texture" id=3]
+
+[node name="HojaEspada" type="KinematicBody2D"]
+script = ExtResource( 1 )
+origen = Vector2( 0, -9 )
+tipoDePieza = 2
+animationPlayer = ExtResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="."]
+scale = Vector2( 0.09375, 0.28125 )
+texture = ExtResource( 3 )
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
+polygon = PoolVector2Array( -3, -9, -3, 9, 3, 9, 3, -9 )
