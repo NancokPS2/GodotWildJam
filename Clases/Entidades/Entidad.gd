@@ -10,12 +10,12 @@ export (bool) var inmortal = false
 export (float) var salud = 50
 export (float) var gravedad = 0
 
-export (Dictionary) var afinidadElemental = {
-	Const.elementos.NINGUNO:0.0,
-	Const.elementos.FUEGO:0.0,
-	Const.elementos.TIERRA:0.0,
-	Const.elementos.AGUA:0.0,
-	Const.elementos.AIRE:0.0
+export (Dictionary) var multiplicadorElemental = {
+	Const.elementos.NINGUNO:1.0,
+	Const.elementos.FUEGO:1.0,
+	Const.elementos.TIERRA:1.0,
+	Const.elementos.AGUA:1.0,
+	Const.elementos.AIRE:1.0
 }
 
 var temperaturaFusion = 50
@@ -36,7 +36,7 @@ func _physics_process(delta: float) -> void:
 
 func hurt(cantidad:int,elemento:int=0):
 	
-	var cantidadFinal = cantidad * afinidadElemental[elemento]#Aplicar elemento
+	var cantidadFinal = cantidad * multiplicadorElemental[elemento]#Aplicar elemento
 	if not inmortal:
 		
 		salud -= cantidadFinal
