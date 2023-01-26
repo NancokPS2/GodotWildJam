@@ -54,6 +54,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Clases/Interfaz/CajaDeTexto.gd"
 }, {
+"base": "Camera2D",
+"class": "ChaseCam",
+"language": "GDScript",
+"path": "res://Clases/ChaseCam.gd"
+}, {
 "base": "Entidad",
 "class": "Colectible",
 "language": "GDScript",
@@ -189,6 +194,7 @@ _global_script_class_icons={
 "Caja": "",
 "CajaRigido": "",
 "CajaTexto": "",
+"ChaseCam": "",
 "Colectible": "",
 "ColectibleMaterial": "",
 "CompuertaDobleEstructura": "",

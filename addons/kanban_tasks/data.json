@@ -47,7 +47,8 @@
         8,
         9,
         10,
-        11
+        11,
+        12
       ]
     },
     {
@@ -123,6 +124,11 @@
       "category": 1,
       "title": "Funcionamiento armas",
       "details": "Cada pieza aporta estadisticas al arma principal\n\nCada pieza puede tener su propio metodo de setup, ataque y desconeccion para manejar su funcionalidad"
+    },
+    {
+      "category": 2,
+      "title": "AnimationPlayer es nulo al momento de usar el arma en el Jugador",
+      "details": ""
     }
   ]
 }
