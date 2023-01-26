@@ -18,6 +18,8 @@ func _ready() -> void:
 	afterimageTimer.connect("timeout",self,"afterimage")
 	afterimageTimer.start(0.1)
 	
+	add_to_group("JUGADOR",true)
+	
 	
 var inventario:Dictionary
 var armaEquipada
@@ -175,7 +177,7 @@ func _unhandled_input(event: InputEvent) -> void:
 var equipado:ArmaMarco
 
 var armas:Dictionary = {
-	1:load("res://Objetos/Armas/Pre creadas/EspadaSimple.tscn").instance()
+	1:load("res://Objetos/Armas/Guardadas/EspadaSimple.tscn").instance()
 }
 func cambiar_arma(slot:int):
 	
