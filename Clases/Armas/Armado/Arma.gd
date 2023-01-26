@@ -10,7 +10,7 @@ var type:int
 var poder:int = 0
 var cooldown:float = 0
 
-var animationPlayer:AnimationPlayer
+onready var animationPlayer:AnimationPlayer
 
 var cooldownTimer:Timer = Timer.new()
 
@@ -27,6 +27,7 @@ func _ready() -> void:
 	add_child(cooldownTimer)
 	
 	register_nodes()
+	refresh_animations()
 	
 	
 	
@@ -36,7 +37,7 @@ func equipping(equip:bool):
 
 func pre_attack(params:Dictionary):
 	for pieza in piezasConectadas:
-		pieza.pre_attack(params)
+		get_node(pieza).pre_attack(params)
 		pass
 		
 	emit_signal("PRE_ATTACK")
@@ -46,9 +47,13 @@ func pre_attack(params:Dictionary):
 
 func attack(params:Dictionary):
 	for pieza in piezasConectadas:
-		pieza.attack(params)
+		get_node(pieza).attack(params)
 		pass
-	animationPlayer.play("attack")
+		
+	assert(animationPlayer)
+	
+	if animationPlayer != null:
+		animationPlayer.play("attack")
 	
 	emit_signal("ATTACK")
 	push_error("This weapon does not know how to attack!")
@@ -56,7 +61,7 @@ func attack(params:Dictionary):
 
 func post_attack(params:Dictionary):
 	for pieza in piezasConectadas:
-		pieza.post_attack(params)
+		get_node(pieza).post_attack(params)
 		pass
 	emit_signal("POST_ATTACK")
 	pass
@@ -71,8 +76,9 @@ func target_hit(objetivo):
 func _unhandled_input(event: InputEvent) -> void:
 #	assert(active,"El input se disparo a pesar de estar inactiva!!!")
 	
-	for pieza in piezasConectadas:
-		pieza.incoming_input(event)#Delega cualquier input dirigido al arma a todas sus partes
+	if not piezasConectadas.empty():
+		for piezaPath in piezasConectadas:
+			get_node(piezaPath).incoming_input(event)#Delega cualquier input dirigido al arma a todas sus partes
 		
 	if event.is_action_pressed("attack"):
 		pre_attack( {} )
@@ -178,6 +184,7 @@ func refresh_animations():#Obtiene un nodo de animacion de la primera pieza que 
 
 static func save_to_blueprint(arma:ArmaMarco) -> ArmaBlueprint:
 	var blueprint = ArmaBlueprint.new()
+	return blueprint
 	
 
 static func build_from_blueprint(blueprint:ArmaBlueprint):
