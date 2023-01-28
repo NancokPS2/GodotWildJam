@@ -1,7 +1,7 @@
 extends Camera2D
 class_name ChaseCam
 
-export(Rect2) var areaLimite:Rect2
+export(Rect2) var areaLimite:Rect2 = Rect2( Vector2(limit_left,limit_top), Vector2(limit_right,limit_bottom)*2 )
 
 func _ready() -> void:
 	limit_left = areaLimite.position.x
