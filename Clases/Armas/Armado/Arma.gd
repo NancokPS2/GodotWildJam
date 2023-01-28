@@ -173,11 +173,13 @@ func remove_piece(pieza:ArmaParte):
 	
 func refresh_animations():#Obtiene un nodo de animacion de la primera pieza que contenga uno
 	if animationPlayer:
+		remove_child(animationPlayer)
 		animationPlayer.queue_free()#Borrar las animaciones actuales
 	
 	for pieza in piezasConectadas:
-		if pieza is ArmaParte and pieza.animationPlayer != null:
-			animationPlayer = pieza.animationPlayer.instance()
+		if get_node(pieza).get("animationPlayer") != null:
+			animationPlayer = get_node(pieza).animationPlayer.instance()
+			add_child(animationPlayer)
 			animationPlayer.root_node = animationPlayer.get_path_to(self)#Conectar el AnimationPlayer a esta arma
 			break
 	
