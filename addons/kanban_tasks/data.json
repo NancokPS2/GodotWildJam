@@ -48,7 +48,8 @@
         9,
         10,
         11,
-        12
+        12,
+        13
       ]
     },
     {
@@ -128,6 +129,11 @@
     {
       "category": 2,
       "title": "AnimationPlayer es nulo al momento de usar el arma en el Jugador",
+      "details": ""
+    },
+    {
+      "category": 1,
+      "title": "Streets of Rage 4, usa vida para atacar, recuperala al golpear",
       "details": ""
     }
   ]

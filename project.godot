@@ -57,7 +57,7 @@ _global_script_classes=[ {
 "base": "Camera2D",
 "class": "ChaseCam",
 "language": "GDScript",
-"path": "res://Clases/ChaseCam.gd"
+"path": "res://Clases/Misc/ChaseCam.gd"
 }, {
 "base": "Entidad",
 "class": "Colectible",

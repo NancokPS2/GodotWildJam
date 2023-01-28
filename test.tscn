@@ -11,7 +11,7 @@
 [ext_resource path="res://Objetos/Misc/Caja.tscn" type="PackedScene" id=9]
 [ext_resource path="res://test.gd" type="Script" id=10]
 [ext_resource path="res://Objetos/Jefes/JefePrueba.tscn" type="PackedScene" id=11]
-[ext_resource path="res://Clases/ChaseCam.gd" type="Script" id=12]
+[ext_resource path="res://Clases/Misc/ChaseCam.gd" type="Script" id=12]
 
 [sub_resource type="CircleShape2D" id=2]
 radius = 50.0
@@ -38,7 +38,7 @@ __meta__ = {
 }
 
 [node name="Jugador" parent="." instance=ExtResource( 2 )]
-position = Vector2( 56, 198 )
+position = Vector2( 313, 250 )
 collision_layer = 3
 
 [node name="Pared" type="StaticBody2D" parent="."]
