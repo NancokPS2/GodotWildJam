@@ -30,8 +30,7 @@ func force_trigger():
 func trigger(target:Node):
 	if not activa:#Si no esta activa, terminar aqui
 		return 
-		
-	temporizador.start(cooldown)
+	var tiempoExtra:float = 0.0
 	var lastimar:bool = false
 	if target.is_in_group("JUGADOR") and objetivoValido && TiposObjetivos.JUGADOR:#Si es un jugador y tiene permitido dañarlo
 		lastimar = true
@@ -51,7 +50,12 @@ func trigger(target:Node):
 		if cooldown == 0:#Si no hay cooldown, terminar aqui
 			return
 		else:#Sino, ejecutar
-			temporizador.start()#Empezar el temporizador
+			temporizador.start(cooldown)#Empezar el temporizador
 			yield(temporizador,"timeout")#Esperar a que termine
+			
+			var timerInvul = target.get("timerInvul")#Adquirir el temporizador de imunidad del objetivo
+			if timerInvul is Timer and not timerInvul.is_stoped():#Si este existe y no se a detenido
+				yield(timerInvul,"timeout")#Esperar por el
+				
 		#Una vez termine el temporizador, siempre y cuando el objetivo sigua en su zona, continua dañandolo
 

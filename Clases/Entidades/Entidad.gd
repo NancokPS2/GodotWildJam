@@ -1,14 +1,29 @@
 extends KinematicBody2D
 class_name Entidad
 
+signal VIDA_CAMBIO
 
 var controlando:bool = false setget set_controlando #Solo deberia aceptar input si esto es true
 var motion = Vector2.ZERO
 var temperatura:int 
 
 export (bool) var inmortal = false
-export (float) var salud = 50
 export (float) var gravedad = 0
+export (float) var tiempoInvul = 0
+var timerInvul:Timer = Timer.new()
+
+
+var estadisticasBase:Dictionary
+export (Dictionary) var estadisticas = {
+	"salud":10,
+	"saludMaxima":10,
+	"fuerza":10,
+	"agilidad":10,
+	"resistencia":10
+}
+
+func _init() -> void:
+	estadisticasBase = estadisticas.duplicate()
 
 export (Dictionary) var multiplicadorElemental = {
 	Const.elementos.NINGUNO:1.0,
@@ -37,11 +52,13 @@ func _physics_process(delta: float) -> void:
 func hurt(cantidad:int,elemento:int=0):
 	
 	var cantidadFinal = cantidad * multiplicadorElemental[elemento]#Aplicar elemento
-	if not inmortal:
+	
+	if not inmortal and timerInvul.is_stopped():	
+		estadisticas.salud = min(estadisticas.salud - cantidadFinal, estadisticas.saludMaxima)
+		timerInvul.start(tiempoInvul)
+		emit_signal("VIDA_CAMBIO",self)
 		
-		salud -= cantidadFinal
-		
-	if salud <= 0:
+	if estadisticas.salud <= 0:
 		die()
 		
 func die():
