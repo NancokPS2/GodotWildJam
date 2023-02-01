@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Clases/Entidades/Jugador.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Jugador/Robotic_Site_ProtagonistCut.png" type="Texture" id=2]
@@ -72,6 +72,11 @@ tracks/0/keys = {
 "values": [ 0, 1, 2, 3 ]
 }
 
+[sub_resource type="PlaneMesh" id=7]
+size = Vector2( 0.5, 2 )
+subdivide_width = 6
+subdivide_depth = 5
+
 [node name="Jugador" type="KinematicBody2D"]
 script = ExtResource( 1 )
 
@@ -109,3 +114,40 @@ position = Vector2( -4.8, 0 )
 
 [node name="Afterimage" type="Particles2D" parent="."]
 local_coords = false
+
+[node name="PlayerPoint" type="KinematicBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.04836 )
+
+[node name="SoftBody" type="SoftBody" parent="PlayerPoint"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -0.926873, 0 )
+mesh = SubResource( 7 )
+skeleton = NodePath("../Camera")
+pinned_points = [ 55, 54, 53, 50, 49, 48, 52, 51 ]
+attachments/0/point_index = 55
+attachments/0/spatial_attachment_path = NodePath("..")
+attachments/0/offset = Vector3( -0.25, 0.0731273, 4.37114e-08 )
+attachments/1/point_index = 54
+attachments/1/spatial_attachment_path = NodePath("..")
+attachments/1/offset = Vector3( -0.178571, 0.0731273, 4.37114e-08 )
+attachments/2/point_index = 53
+attachments/2/spatial_attachment_path = NodePath("..")
+attachments/2/offset = Vector3( -0.107143, 0.0731273, 4.37114e-08 )
+attachments/3/point_index = 50
+attachments/3/spatial_attachment_path = NodePath("..")
+attachments/3/offset = Vector3( 0.107143, 0.0731273, 4.37114e-08 )
+attachments/4/point_index = 49
+attachments/4/spatial_attachment_path = NodePath("..")
+attachments/4/offset = Vector3( 0.178571, 0.0731273, 4.37114e-08 )
+attachments/5/point_index = 48
+attachments/5/spatial_attachment_path = NodePath("..")
+attachments/5/offset = Vector3( 0.25, 0.0731273, 4.37114e-08 )
+attachments/6/point_index = 52
+attachments/6/spatial_attachment_path = NodePath("..")
+attachments/6/offset = Vector3( -0.0357143, 0.0731273, 4.37114e-08 )
+attachments/7/point_index = 51
+attachments/7/spatial_attachment_path = NodePath("..")
+attachments/7/offset = Vector3( 0.0357143, 0.0731273, 4.37114e-08 )
+
+[node name="Camera" type="Camera" parent="PlayerPoint"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2, 0.4, 1.7 )
+current = true

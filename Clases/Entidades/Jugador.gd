@@ -1,7 +1,7 @@
 extends Entidad
 class_name Jugador
 
-var afterimageTimer:Timer = Timer.new()
+
 func _ready() -> void:
 #	assert(anim is AnimationPlayer, "anim no se inicio correctamente!")
 #	assert(spritePlayer is Sprite or spritePlayer is AnimatedSprite, "spritePlayer no se inicio correctamente!")
@@ -64,7 +64,16 @@ func _physics_process(delta):
 
 	motion += Vector2.DOWN * gravedad * delta
 	motion = move_and_slide(motion, Vector2.UP)
-	$Debug.text = str(motion)
+	
+	var globalPlayerPosVec3 = Vector3(global_position.x,global_position.y,0)
+	$PlayerPoint/Camera.translation.x = globalPlayerPosVec3.x / get_viewport_rect().size.x
+	$PlayerPoint/Camera.translation.y = globalPlayerPosVec3.y / get_viewport_rect().size.y
+	$PlayerPoint/Camera.translation.z = 2.0
+	$PlayerPoint.move_and_slide( -Vector3(motion.x,motion.y,0) )
+	
+#	$Debug.text = str(motion)
+	$Debug.text = str(global_position / get_viewport_rect().size)
+	
 	pass
 
 func side_movement():
@@ -132,10 +141,9 @@ func Animations():
 	else:#Si ninguna otra animacion califica
 		anim.play("idle")
 
-func attack():
-	$HitboxMele
 
 
+var afterimageTimer:Timer = Timer.new()
 func afterimage(duration:float = 0.15):
 	var afterimage = $Sprite.duplicate()
 	
@@ -157,7 +165,7 @@ func afterimage(duration:float = 0.15):
 func _unhandled_input(event: InputEvent) -> void:
 		
 	if event.is_action_pressed("ataque") and equipado is ArmaMarco:
-		equipado.pre_attack( {} )
+		equipado.attack( {} )
 		
 	elif event.is_action_released("herramienta1"):
 		cambiar_arma(1)
@@ -171,8 +179,17 @@ func _unhandled_input(event: InputEvent) -> void:
 
 #	elif event.is_action_pressed("usar") and herramientaEquipada.has_method("use"):
 #		herramientaEquipada.use()
-	
 
+export (float) var energia
+func update_stats(diccionario:Dictionary, resetearAntes:bool=false):
+	
+	if resetearAntes:
+		estadisticas = estadisticasBase.duplicate()
+	
+	for stat in diccionario:
+		if estadisticas.has(stat):
+			estadisticas[stat] += diccionario[stat]
+			pass
 
 var equipado:ArmaMarco
 
