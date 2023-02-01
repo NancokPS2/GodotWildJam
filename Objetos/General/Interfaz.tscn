@@ -1,26 +1,30 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://Clases/Misc/Termometro.gd" type="Script" id=1]
+[ext_resource path="res://Clases/Misc/SegmentedBar.gd" type="Script" id=1]
+[ext_resource path="res://icon.png" type="Texture" id=2]
+[ext_resource path="res://Objetos/General/Interfaz.gd" type="Script" id=3]
 
 [node name="Interfaz" type="CanvasLayer"]
+script = ExtResource( 3 )
 
 [node name="Control" type="Control" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
 
-[node name="Termometro" type="ProgressBar" parent="Control"]
-anchor_right = 1.0
-anchor_bottom = 0.04
-size_flags_horizontal = 3
-step = 1.0
-value = 30.0
-percent_visible = false
+[node name="Vida" type="HBoxContainer" parent="Control"]
+anchor_right = 0.42
+anchor_bottom = 0.11
 script = ExtResource( 1 )
+texturaSegmento = ExtResource( 2 )
+max_value = 5
+value = 2
 
-[node name="Vida" type="ProgressBar" parent="Control"]
-anchor_top = 0.05
-anchor_right = 1.0
-anchor_bottom = 0.1
-max_value = 4.0
-value = 3.0
-percent_visible = false
+[node name="VidaJefe" type="TextureProgress" parent="Control"]
+anchor_left = 0.1
+anchor_top = 0.9
+anchor_right = 0.9
+anchor_bottom = 1.0
+value = 52.0
+texture_progress = ExtResource( 2 )
+tint_progress = Color( 1, 0, 0, 1 )
+nine_patch_stretch = true
