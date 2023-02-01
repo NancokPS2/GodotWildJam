@@ -4,6 +4,11 @@ class_name ArmaParte
 export(Vector2) var origen
 export(Const.piezas,FLAGS) var tipoDePieza
 export (PackedScene) var animationPlayer
+export (Dictionary) var estadisticas = {
+	"poder":5,
+	"critico":15,
+}
+
 
 var encastres:Array#Todos los encastres en esta arma se guardan aqui
 var hitbox:Area2D

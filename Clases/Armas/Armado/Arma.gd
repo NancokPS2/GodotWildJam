@@ -6,8 +6,8 @@ signal ATTACK
 signal POST_ATTACK
 
 
+var estadisticas:Dictionary
 var type:int
-var poder:int = 0
 var cooldown:float = 0
 
 onready var animationPlayer:AnimationPlayer
@@ -35,40 +35,26 @@ func equipping(equip:bool):
 	set_process_unhandled_input(equip)
 	active = equip
 
-func pre_attack(params:Dictionary):
-	for pieza in piezasConectadas:
-		get_node(pieza).pre_attack(params)
-		pass
-		
-	emit_signal("PRE_ATTACK")
-	cooldownTimer.start(cooldown)
-	attack(params)
-
 
 func attack(params:Dictionary):
-	for pieza in piezasConectadas:
-		get_node(pieza).attack(params)
-		pass
+	emit_signal("PRE_ATTACK")
+	cooldownTimer.start(cooldown)
 		
 	assert(animationPlayer)
 	
-	if animationPlayer != null:
+	if animationPlayer != null and cooldownTimer.time_left != 0.0:
+		for pieza in piezasConectadas:
+			get_node(pieza).attack(params)
+			
 		animationPlayer.play("attack")
-	
-	emit_signal("ATTACK")
-	push_error("This weapon does not know how to attack!")
-
-
-func post_attack(params:Dictionary):
-	for pieza in piezasConectadas:
-		get_node(pieza).post_attack(params)
-		pass
+		emit_signal("ATTACK")
+		push_error("This weapon does not know how to attack!")
+		
 	emit_signal("POST_ATTACK")
-	pass
 		
 func target_hit(objetivo):
 	if objetivo is Entidad:
-		objetivo.hurt(poder)
+		objetivo.hurt(estadisticas.poder)
 	pass
 		
 
@@ -81,7 +67,7 @@ func _unhandled_input(event: InputEvent) -> void:
 			get_node(piezaPath).incoming_input(event)#Delega cualquier input dirigido al arma a todas sus partes
 		
 	if event.is_action_pressed("attack"):
-		pre_attack( {} )
+		attack( {} )
 		
 		
 static func report_weapon_status(arma:ArmaMarco):#Revisa el estado del arma y avisa de algun fallo
