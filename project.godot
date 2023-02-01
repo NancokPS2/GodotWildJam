@@ -39,6 +39,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Clases/Armas/Armado/ParteArma.gd"
 }, {
+"base": "HBoxContainer",
+"class": "BarraSegmentada",
+"language": "GDScript",
+"path": "res://Clases/Misc/SegmentedBar.gd"
+}, {
 "base": "Entidad",
 "class": "Caja",
 "language": "GDScript",
@@ -191,6 +196,7 @@ _global_script_class_icons={
 "ArmaEncastre": "",
 "ArmaMarco": "",
 "ArmaParte": "",
+"BarraSegmentada": "",
 "Caja": "",
 "CajaRigido": "",
 "CajaTexto": "",

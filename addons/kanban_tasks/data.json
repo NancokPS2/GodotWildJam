@@ -49,7 +49,12 @@
         10,
         11,
         12,
-        13
+        13,
+        14,
+        15,
+        16,
+        17,
+        18
       ]
     },
     {
@@ -134,6 +139,31 @@
     {
       "category": 1,
       "title": "Streets of Rage 4, usa vida para atacar, recuperala al golpear",
+      "details": ""
+    },
+    {
+      "category": 1,
+      "title": "Estadisticas personaje",
+      "details": "Agilidad:\n\t-Critico\n\t-Velocidad de movimiento\n\t-Velocidad de ataque"
+    },
+    {
+      "category": 2,
+      "title": "El jefe se congela",
+      "details": ""
+    },
+    {
+      "category": 2,
+      "title": "El pañuelo no se alinea",
+      "details": ""
+    },
+    {
+      "category": 2,
+      "title": "Las armas no tienen hitbox",
+      "details": ""
+    },
+    {
+      "category": 0,
+      "title": "Añadir sistema de parry",
       "details": ""
     }
   ]
