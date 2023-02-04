@@ -1,6 +1,25 @@
 extends Node
 class_name Utility
 
+class ControllableCamera2D extends Camera2D:
+	export (float) var speed:float = 15
+	
+	func _input(event: InputEvent) -> void:
+		if event.is_action_pressed("ui_down"):
+			position += Vector2.DOWN * speed
+			
+		elif event.is_action_pressed("ui_up"):
+			position += Vector2.UP * speed
+
+		if event.is_action_pressed("ui_left"):
+			position += Vector2.LEFT * speed
+			
+		elif event.is_action_pressed("ui_right"):
+			position += Vector2.RIGHT * speed
+			
+	pass
+	
+
 class NodeManipulation extends Node:
 	
 	static func get_all_children(node:Node,typeFilter:String="") -> Array:#Obtiene todos los nodos hijos y nietos en un array

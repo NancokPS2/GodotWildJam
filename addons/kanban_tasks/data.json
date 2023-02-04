@@ -54,7 +54,8 @@
         15,
         16,
         17,
-        18
+        18,
+        19
       ]
     },
     {
@@ -164,6 +165,11 @@
     {
       "category": 0,
       "title": "Añadir sistema de parry",
+      "details": ""
+    },
+    {
+      "category": 0,
+      "title": "Falta la habilidad de añadir piezas en el ArmaCreador",
       "details": ""
     }
   ]
