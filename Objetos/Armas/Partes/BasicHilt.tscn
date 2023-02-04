@@ -12,7 +12,7 @@ position = Vector2( 0, -6 )
 script = ExtResource( 2 )
 piezasCompatibles = 2
 
-[node name="Icon" type="Sprite" parent="."]
+[node name="Sprite" type="Sprite" parent="."]
 scale = Vector2( 0.320001, 0.2 )
 texture = ExtResource( 3 )
 
