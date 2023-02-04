@@ -64,7 +64,10 @@ func _unhandled_input(event: InputEvent) -> void:
 	
 	if not piezasConectadas.empty():
 		for piezaPath in piezasConectadas:
-			get_node(piezaPath).incoming_input(event)#Delega cualquier input dirigido al arma a todas sus partes
+			if piezaPath is NodePath:
+				get_node(piezaPath).incoming_input(event)#Delega cualquier input dirigido al arma a todas sus partes
+			else:
+				piezaPath.incoming_input(event)
 		
 	if event.is_action_pressed("attack"):
 		attack( {} )
@@ -88,7 +91,7 @@ var encastres:Array
 var encastresLibres:Array
 export (Array,NodePath) var piezasConectadas:Array
 
-var encastresEnUso:Dictionary = {
+export (Dictionary) var encastresEnUso:Dictionary = {
 	
 }
 
@@ -111,6 +114,10 @@ func register_nodes():
 	for encastre in encastres:#Guardar los sin usar por separado
 		if encastre.usado:
 			encastresLibres.append(encastre)
+			
+	for pieza in piezasConectadas:#Transformar todos los NodePaths a referencias directas
+		if pieza is NodePath:
+			pieza = get_node(pieza)
 
 func add_initial_piece(pieza:ArmaParte):#Usado cuando no hay encastres, para empezar con el arma
 	Utility.NodeManipulation.safe_unparent(pieza)
@@ -126,8 +133,6 @@ func add_piece(piezaAEncastrar:ArmaParte,encastre:ArmaEncastre):#Añade una piez
 	Utility.NodeManipulation.safe_unparent(piezaAEncastrar)
 	add_child(piezaAEncastrar)
 	if encastre.piezasCompatibles && piezaAEncastrar.tipoDePieza and not encastre.usado:
-		
-		
 		Utility.NodeManipulation.safe_unparent(piezaAEncastrar)
 		add_child(piezaAEncastrar)
 		piezaAEncastrar.position = encastre.position - piezaAEncastrar.origen
@@ -163,12 +168,18 @@ func refresh_animations():#Obtiene un nodo de animacion de la primera pieza que 
 		animationPlayer.queue_free()#Borrar las animaciones actuales
 	
 	for pieza in piezasConectadas:
-		if get_node(pieza).get("animationPlayer") != null:
+		if pieza is NodePath and get_node(pieza).get("animationPlayer") != null:
 			animationPlayer = get_node(pieza).animationPlayer.instance()
 			add_child(animationPlayer)
 			animationPlayer.root_node = animationPlayer.get_path_to(self)#Conectar el AnimationPlayer a esta arma
 			break
-	
+			
+		elif pieza.get("animationPlayer") != null:
+			animationPlayer = pieza.animationPlayer.instance()
+			add_child(animationPlayer)
+			animationPlayer.root_node = animationPlayer.get_path_to(self)#Conectar el AnimationPlayer a esta arma
+			break
+				
 
 static func save_to_blueprint(arma:ArmaMarco) -> ArmaBlueprint:
 	var blueprint = ArmaBlueprint.new()
