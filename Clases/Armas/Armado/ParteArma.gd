@@ -1,6 +1,8 @@
 extends KinematicBody2D
 class_name ArmaParte
 
+
+
 export(Vector2) var origen
 export(Const.piezas,FLAGS) var tipoDePieza
 export (PackedScene) var animationPlayer
@@ -9,7 +11,7 @@ export (Dictionary) var estadisticas = {
 	"critico":15,
 }
 
-
+var sprite:Sprite
 var encastres:Array#Todos los encastres en esta arma se guardan aqui
 var hitbox:Area2D
 var arma #ArmaMarco, referencia a el arma del cual esta parte es parte, parte
@@ -25,8 +27,11 @@ func register_children():
 		if node is ArmaEncastre:
 			encastres.append(node)
 			
-		if node is Area2D:
+		elif node is Area2D:
 			hitbox = node
+			
+		elif node is Sprite:
+			sprite = node
 			
 	
 
@@ -54,10 +59,10 @@ func incoming_input(event):
 		
 export (String) var inputSeleccion
 var seleccionado:bool
-func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed(inputSeleccion):
-		seleccionado = !seleccionado
-		
-	if Const.debugMode and seleccionado:
-		position = get_global_mouse_position()
+#func _unhandled_input(event: InputEvent) -> void:
+#	if event.is_action(inputSeleccion) and event.is_action_pressed(inputSeleccion):
+#		seleccionado = !seleccionado
+#
+#	if Const.debugMode and seleccionado:
+#		position = get_global_mouse_position()
 
