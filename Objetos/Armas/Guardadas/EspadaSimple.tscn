@@ -6,9 +6,9 @@
 
 [node name="ArmaMarco" type="Node2D"]
 script = ExtResource( 1 )
-piezasConectadas = [ NodePath("HojaEspada"), NodePath("ParteArma") ]
+piezasConectadas = [ NodePath("ParteArma"), NodePath("HojaEspada") ]
+
+[node name="ParteArma" parent="." instance=ExtResource( 4 )]
 
 [node name="HojaEspada" parent="." instance=ExtResource( 3 )]
 position = Vector2( 0, -9 )
-
-[node name="ParteArma" parent="." instance=ExtResource( 4 )]
