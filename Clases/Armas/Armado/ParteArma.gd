@@ -6,7 +6,7 @@ class_name ArmaParte
 export(Vector2) var origen
 export(Const.piezas,FLAGS) var tipoDePieza
 export (PackedScene) var animationPlayer
-export (Dictionary) var estadisticas = {
+export (Dictionary) var statBoosts = {
 	"poder":5,
 	"critico":15,
 }
