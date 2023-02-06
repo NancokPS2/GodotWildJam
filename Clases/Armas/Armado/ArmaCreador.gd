@@ -27,8 +27,12 @@ func _ready():
 	camara = Utility.ControllableCamera2D.new()
 	viewport.add_child(camara)
 	
-	camara.current = true
-	camara.zoom *= 0.3
+	$Viewport/UI/FileDialog.connect("file_selected", self, "load_weapon")
+	$Viewport/UI/Abrir.connect("pressed", $Viewport/UI/FileDialog, "popup")
+	$Viewport/UI/Guardar.connect("pressed", self, "save_arma")
+	$Viewport/UI/LineEdit.connect("text_entered", self, "rename_arma")
+#	camara.current = true
+#	camara.zoom *= 0.3
 	
 	if piezas.empty():
 		piezas = valoresDefault.piezas
@@ -37,26 +41,33 @@ func _ready():
 		
 	setup_new_arma()
 	fill_lista()
-	add_parte($Viewport/UI/ListaPiezas.get_child(0).referenciaParte, null)
 
 func reset_view():
 	arma.position = get_rect().size / 2
 	camara.position = get_rect().size / 2
 
 func setup_new_arma(armaMarco:ArmaMarco = ArmaMarco.new()):
+	if arma:
+		arma.queue_free()
+		yield(get_tree(),"idle_frame")
+	
 	viewport.add_child(armaMarco)
 	arma = armaMarco
+	
+	refresh_visual_encastres()
 	reset_view()
 	
 func add_parte(parte:ArmaParte,encastre:ArmaEncastre):
+	var valido:bool
 	if encastre == null:
 		arma.add_initial_piece(parte)
 	else:
-		arma.add_piece(parte,encastre)
-		
+		valido = arma.add_piece(parte.duplicate(),encastre)
+	print( "Valido " + str(valido) )
+	refresh_visual_encastres()
 	reset_view()
 	
-	
+
 	
 func fill_lista():
 	for parte in piezas:
@@ -67,13 +78,47 @@ func fill_lista():
 
 func select_pieza(representacion:RepresentacionParte):
 	piezaSeleccionada = representacion.referenciaParte
+	if arma.piezasConectadas.empty():#Si no hay piezas aun, añadir la seleccionada
+		add_parte( piezaSeleccionada, null )
+	refresh_visual_encastres()
 	
 #func display_piezas():
 #	for parte in arma.piezasConectadas:
 		
 func refresh_visual_encastres():
 	for encastre in arma.encastresLibres:
-		print("Arma " + arma.get_name() + " con encastres libres: " + encastre.piezasCompatibles)
+		print( "Arma " + arma.get_name() + " con encastres libres: " + str(encastre.piezasCompatibles) )
+		var button:Button = Button.new()
+		encastre.add_child(button)
+		
+		button.margin_right = 0
+		button.margin_bottom = 0
+		button.rect_pivot_offset = rect_size / 2
+		button.connect("pressed",self,"add_parte",[piezaSeleccionada,encastre])
+		
+
+func load_arma(armaCargada:PackedScene):
+	var armaAUsar = armaCargada.instance()
+	if armaAUsar is ArmaMarco:
+		setup_new_arma(armaAUsar.instance())
+
+func rename_arma(nombreNuevo:String):
+	if arma:
+		arma.nombre = nombreNuevo
+	$Viewport/UI/LineEdit.text = ""
+	
+
+func save_arma():
+	var dir:Directory = Directory.new()
+	if not dir.dir_exists("user://ArmasGuardadas"):
+		dir.make_dir("user://ArmasGuardadas")
+	
+	var armaAGuardar:PackedScene = PackedScene.new()
+	armaAGuardar.pack(arma)
+	
+	var logrado:int = ResourceSaver.save("user://ArmasGuardadas/" + arma.nombre + ".tscn", armaAGuardar)
+	if logrado != OK:
+		push_error( "No se pudo guardar! Codigo de error: " + str(logrado) )
 	
 
 class RepresentacionParte extends Button:
