@@ -180,7 +180,7 @@ func _unhandled_input(event: InputEvent) -> void:
 #	elif event.is_action_pressed("usar") and herramientaEquipada.has_method("use"):
 #		herramientaEquipada.use()
 
-export (float) var energia
+
 func update_stats(diccionario:Dictionary, resetearAntes:bool=false):
 	
 	if resetearAntes:
@@ -189,7 +189,9 @@ func update_stats(diccionario:Dictionary, resetearAntes:bool=false):
 	for stat in diccionario:
 		if estadisticas.has(stat):
 			estadisticas[stat] += diccionario[stat]
-			pass
+		else:
+			estadisticas[stat] = diccionario[stat]
+
 
 var equipado:ArmaMarco
 
@@ -207,6 +209,9 @@ func cambiar_arma(slot:int):
 		add_child(equipado)#Añadira la nueva herramienta
 		
 		equipado.equipping(true)
+		
+		var boosts:Dictionary = equipado.get_stat_boosts_from_partes()#Aplicar los boosts de las partes combinadas
+		update_stats(boosts,true)
 		
 	
 

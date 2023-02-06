@@ -17,6 +17,8 @@ var estadisticasBase:Dictionary
 export (Dictionary) var estadisticas = {
 	"salud":10,
 	"saludMaxima":10,
+	"energia":10,
+	"energiaMaxima":10,
 	"fuerza":10,
 	"agilidad":10,
 	"resistencia":10
