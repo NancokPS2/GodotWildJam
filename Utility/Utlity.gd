@@ -19,6 +19,14 @@ class ControllableCamera2D extends Camera2D:
 			
 	pass
 	
+class DictionaryManipulation extends Node:
+	
+	static func sum_dictionary_values(target:Dictionary, provider:Dictionary):
+		for key in provider:
+			if target.has(key):
+				target[key] += provider[key]
+			else:
+				target[key] = provider[key]
 
 class NodeManipulation extends Node:
 	
