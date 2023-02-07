@@ -128,6 +128,15 @@ func register_nodes():
 	encastres.clear()
 	encastresLibres.clear()
 	
+	for node in get_children():#Guardar todos los encastres
+		if node is ArmaParte:
+			encastres += node.encastres
+			
+			if not piezasConectadas.has(node):#Añadir cualquier nodo que falte
+				piezasConectadas.append(node)
+			
+	encastresLibres = get_free_encastres()
+	
 	var listaTemp:Array#Lista para filtrar todos los NodePaths
 	for pieza in piezasConectadas:#Transformar todos los NodePaths a referencias directas
 		var piezaInspect = piezasConectadas.pop_back()
@@ -136,12 +145,6 @@ func register_nodes():
 		listaTemp.append(piezaInspect)
 	piezasConectadas.clear()
 	piezasConectadas.append_array(listaTemp)
-	
-	for node in get_children():#Guardar todos los encastres
-		if node is ArmaParte:
-			encastres += node.encastres
-			
-	encastresLibres = get_free_encastres()
 	
 
 func add_initial_piece(pieza:ArmaParte):#Usado cuando no hay encastres, para empezar con el arma
@@ -194,7 +197,7 @@ func remove_piece(pieza:ArmaParte):
 func refresh_animations():#Obtiene un nodo de animacion de la primera pieza que contenga uno
 	if animationPlayer:
 		remove_child(animationPlayer)
-		animationPlayer.queue_free()#Borrar las animaciones actuales
+#		animationPlayer.queue_free()#Borrar las animaciones actuales
 	
 	for pieza in piezasConectadas:
 		if pieza is NodePath and get_node(pieza).get("animationPlayer") != null:
