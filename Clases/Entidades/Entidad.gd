@@ -21,7 +21,9 @@ export (Dictionary) var estadisticas = {
 	"energiaMaxima":10,
 	"fuerza":10,
 	"agilidad":10,
-	"resistencia":10
+	"resistencia":10,
+	"dashCooldown":0.4,
+	"dashDistance":2500
 }
 
 func _init() -> void:
