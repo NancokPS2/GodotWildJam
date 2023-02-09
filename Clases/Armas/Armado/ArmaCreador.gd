@@ -57,17 +57,10 @@ func setup_new_arma(armaMarco:ArmaMarco = ArmaMarco.new()):
 	refresh_visual_encastres()
 	reset_view()
 	
-func add_parte(parte:ArmaParte,encastre:ArmaEncastre):
+func add_parte(parte:ArmaParte,encastre):
 	var valido:bool
-	if encastre == null:
-		arma.add_initial_piece(parte)
-	else:
-		valido = arma.add_piece(parte.duplicate(),encastre)
-	print( "Valido " + str(valido) )
 	refresh_visual_encastres()
 	reset_view()
-	
-
 	
 func fill_lista():
 	for parte in piezas:
@@ -78,23 +71,34 @@ func fill_lista():
 
 func select_pieza(representacion:RepresentacionParte):
 	piezaSeleccionada = representacion.referenciaParte
-	if arma.piezasConectadas.empty():#Si no hay piezas aun, añadir la seleccionada
+	if arma.nodosPartes.empty():#Si no hay piezas aun, añadir la seleccionada
 		add_parte( piezaSeleccionada, null )
 	refresh_visual_encastres()
 	
 #func display_piezas():
 #	for parte in arma.piezasConectadas:
-		
+var listaBotones:Dictionary
 func refresh_visual_encastres():
-	for encastre in arma.encastresLibres:
-		print( "Arma " + arma.get_name() + " con encastres libres: " + str(encastre.piezasCompatibles) )
-		var button:Button = Button.new()
-		encastre.add_child(button)
+	var indiceEncastre:int
+	for parte in arma.nodosPartes:
+		if parte.get_meta("boton",false):#Quitar cualquier boton que ya tuviera
+			parte.remove_child( parte.get_meta("boton") )
+			
+		indiceEncastre = 0
 		
-		button.margin_right = 0
-		button.margin_bottom = 0
-		button.rect_pivot_offset = rect_size / 2
-		button.connect("pressed",self,"add_parte",[piezaSeleccionada,encastre])
+		for encastre in parte.encastres:
+			var button:Button = Button.new()
+			parte.add_child(button)
+
+			button.margin_right = 0
+			button.margin_bottom = 0
+			rect_size = Vector2(8,8)
+			button.rect_pivot_offset = rect_size / 2
+			button.connect("pressed",self,"add_parte",[parte,indiceEncastre])
+			indiceEncastre += 1
+			parte.set_meta("boton",button)
+			
+
 		
 
 func load_arma(armaCargada:PackedScene):
