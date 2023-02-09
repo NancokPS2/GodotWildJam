@@ -1,19 +1,51 @@
 extends KinematicBody2D
 class_name ArmaParte
 
+const EncastreIndices = {
+	"piezasCompatibles":0,
+	"usado":1
+}
+const Tipos = {
+	"MANGO":1<<1,
+	"HOJA_ESPADA":1<<2,
+	"HOJA_LANZA":1<<3
+	}
+	
+const EncastreFormato = {"posicion":Vector2(0.0,0.0), "piezasCompatibles":Tipos.HOJA_ESPADA, "usado":false}
+
+
 export (String) var nombre
 
 export(Vector2) var origen
 export(Const.piezas,FLAGS) var tipoDePieza
-export (PackedScene) var animationPlayer
+export (String) var animationPlayerPath
+export (String) var texturaSprite
+export (Array,Dictionary) var encastres = [ EncastreFormato ]
+export (PoolVector2Array) var colisiones
 export (Dictionary) var statBoosts = {
 	"poder":5,
 	"critico":15,
 }
+export (Dictionary) var miscValues
+
+
+func get_save_dict()->Dictionary:
+	var dictReturn:Dictionary = {
+		"nombre":nombre,
+		"origen":origen,
+		"tipoDePieza":tipoDePieza,
+		"animationPlayerPath":animationPlayerPath,
+		"texturaSprite":texturaSprite,
+		"encastres":encastres,
+		"statBoosts":statBoosts,
+		"colisiones":colisiones,
+		"miscValues":miscValues,
+		"script":get_script().resource_path
+	}
+	return dictReturn
 
 var sprite:Sprite
-var encastres:Array#Todos los encastres en esta arma se guardan aqui
-var coordenadasEncastres:Dictionary#Para identificarlos
+#var encastres:Array#Todos los encastres en esta arma se guardan aqui
 var hitbox:Area2D
 var arma #ArmaMarco, referencia a el arma del cual esta parte es parte, parte
 
@@ -25,10 +57,10 @@ func _ready() -> void:
 func register_children():
 	encastres.clear()
 	for node in get_children():
-		if node is ArmaEncastre:
-			encastres.append(node)
+#		if node is ArmaEncastre:
+#			encastres.append(node)
 			
-		elif node is Area2D:
+		if node is Area2D:
 			hitbox = node
 			
 		elif node is Sprite:
@@ -66,3 +98,9 @@ var seleccionado:bool
 #
 #	if Const.debugMode and seleccionado:
 #		position = get_global_mouse_position()
+
+
+
+class Encastre extends Resource:
+	export(Const.piezas,FLAGS) var piezasCompatibles
+	

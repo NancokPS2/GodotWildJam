@@ -19,10 +19,29 @@ var active:bool
 
 var estadisticasPartes:Array
 
+export (Array,Dictionary) var partesGuardadas
+export (Array,Dictionary) var conexiones = [
+	{
+		"proveedor":0,
+		"encastre":{},
+		"encastrada":1
+	}
+]
+
+
 export (Resource) var blueprint = null
 
 func _init() -> void:
 	equipping(false)
+
+func save_dict()->Dictionary:
+	var dictReturn:Dictionary = {
+		"nombre":nombre,
+		"partesGuardadas":partesGuardadas,
+		"conexiones":conexiones
+	}
+	return dictReturn
+	
 
 func _ready() -> void:
 	cooldownTimer.one_shot = true
@@ -30,7 +49,7 @@ func _ready() -> void:
 	cooldownTimer.stop()
 	add_child(cooldownTimer)
 	
-	register_nodes()
+	add_saved_partes()
 	refresh_animations()
 	
 	
@@ -47,8 +66,8 @@ func attack(params:Dictionary):
 	assert(animationPlayer)
 	
 	if animationPlayer != null and cooldownTimer.time_left != 0.0:
-		for pieza in piezasConectadas:
-			pieza.attack(params)
+		for parte in nodosPartes:
+			parte.attack(params)
 			
 		animationPlayer.play("attack")
 		emit_signal("ATTACK")
@@ -66,12 +85,12 @@ func target_hit(objetivo):
 func _unhandled_input(event: InputEvent) -> void:
 #	assert(active,"El input se disparo a pesar de estar inactiva!!!")
 	
-	if not piezasConectadas.empty():
-		for piezaPath in piezasConectadas:
-			if piezaPath is NodePath:
-				get_node(piezaPath).incoming_input(event)#Delega cualquier input dirigido al arma a todas sus partes
+	if not nodosPartes.empty():
+		for partePath in nodosPartes:
+			if partePath is NodePath:
+				get_node(partePath).incoming_input(event)#Delega cualquier input dirigido al arma a todas sus partes
 			else:
-				piezaPath.incoming_input(event)
+				partePath.incoming_input(event)
 		
 	if event.is_action_pressed("attack"):
 		attack( {} )
@@ -84,16 +103,34 @@ static func report_weapon_status(arma:ArmaMarco):#Revisa el estado del arma y av
 	
 	if arma.animationPlayer == null:
 		push_error("Missing an animation set!")
+
+
+
+static func generate_parte_from_dict(saveDict:Dictionary)->ArmaParte:
+	var parte := ArmaParte.new()
+	parte.set_script(saveDict.script)
 	
+	for key in saveDict:
+		parte.set(key,saveDict[key])
+		
+	parte.sprite = Sprite.new()
+	parte.hitbox = Area2D.new()
+	
+	parte.sprite.texture = parte.spriteTexture
+	
+	var colision = CollisionPolygon2D.new()
+	colision.polygon = parte.colisiones
+	parte.hitbox.add_child(colision)
+	
+	return parte
 	
 #----------------------------------------------
 #CONNECTION SECTION
 #----------------------------------------------
 
 
-var encastres:Array
-var encastresLibres:Array
-export (Array,NodePath) var piezasConectadas:Array
+var encastres:Dictionary
+var nodosPartes:Array
 
 export (Dictionary) var encastresEnUso:Dictionary = {
 	
@@ -107,7 +144,7 @@ export (Dictionary) var encastresEnUso:Dictionary = {
 			
 func get_stat_boosts_from_partes() -> Dictionary:
 	var dictRetorno:Dictionary
-	for parte in piezasConectadas:
+	for parte in nodosPartes:
 		for stat in parte.statBoosts:
 			if dictRetorno.has(stat):
 				dictRetorno[stat] += parte.statBoosts[stat]
@@ -115,91 +152,94 @@ func get_stat_boosts_from_partes() -> Dictionary:
 				dictRetorno[stat] = parte.statBoosts[stat]
 	return dictRetorno
 			
-func get_free_encastres():
-	var encastresRetornables:Array
-	for encastre in encastres:#Guardar los sin usar por separado
-		if not encastre.usado:
-			encastresRetornables.append(encastre)
-	print(encastresRetornables)
-	return encastresRetornables
+#func get_free_encastres():
+#	var encastresRetornables:Array
+#	for encastre in encastres:#Guardar los sin usar por separado
+#		if not encastre.usado:
+#			encastresRetornables.append(encastre)
+#	print(encastresRetornables)
+#	return encastresRetornables
 
 #CONNECTIONS
-func register_nodes():
-	encastres.clear()
-	encastresLibres.clear()
-	
-	for node in get_children():#Guardar todos los encastres
-		if node is ArmaParte:
-			encastres += node.encastres
-			
-			if not piezasConectadas.has(node):#Añadir cualquier nodo que falte
-				piezasConectadas.append(node)
-			
-	encastresLibres = get_free_encastres()
-	
-	var listaTemp:Array#Lista para filtrar todos los NodePaths
-	for pieza in piezasConectadas:#Transformar todos los NodePaths a referencias directas
-		var piezaInspect = piezasConectadas.pop_back()
-		if piezaInspect is NodePath:
-			piezaInspect = get_node(pieza)
-		listaTemp.append(piezaInspect)
-	piezasConectadas.clear()
-	piezasConectadas.append_array(listaTemp)
-	
 
-func add_initial_piece(pieza:ArmaParte):#Usado cuando no hay encastres, para empezar con el arma
-	Utility.NodeManipulation.safe_unparent(pieza)
-	pieza.position -= pieza.origen
-	pieza.arma = self
-	add_child(pieza)
-	piezasConectadas.append(pieza)
-	pieza.connection_setup()
-	register_nodes()
+func add_saved_partes():
+	while not nodosPartes.empty():
+		nodosPartes.pop_back().queue_free()
+		
+	for parteDict in partesGuardadas:
+		var parteNueva:ArmaParte = generate_parte_from_dict(parteDict)
+		nodosPartes.append(parteNueva)
+		parteNueva.arma = self
+
+		add_child(parteNueva)
+		parteNueva.connection_setup()
+	
+	for conexion in conexiones:
+		var IDEncastrada = nodosPartes[conexion.encastrada]
+		var IDProveedora
+		var encastreProveedora
+		connect_parte(IDEncastrada,IDProveedora,encastreProveedora)
+		pass
+		
 	refresh_animations()
-
-func add_piece(piezaAEncastrar:ArmaParte,encastre:ArmaEncastre) -> bool:#Añade una pieza a un encastre
-	Utility.NodeManipulation.safe_unparent(piezaAEncastrar)
-	add_child(piezaAEncastrar)
-	var seLogro:bool
-	if encastre.piezasCompatibles && piezaAEncastrar.tipoDePieza and not encastre.usado:
-		Utility.NodeManipulation.safe_unparent(piezaAEncastrar)
-		add_child(piezaAEncastrar)
-		piezaAEncastrar.position = encastre.position - piezaAEncastrar.origen
-		piezaAEncastrar.arma = self#Añadir referencia al arma de la cual forma parte
 		
-		encastre.usado = true
-		encastresEnUso[piezaAEncastrar] = encastre#Añadir encastre a la lista
-		
-		piezasConectadas.append(piezaAEncastrar)
-		piezaAEncastrar.connection_setup()
-		seLogro = true
+func connect_parte(parteConectada:ArmaParte,parteProveedora:ArmaParte,encastre:int):
+	var encastreEnUso:Dictionary = parteProveedora.encastres[encastre]
+	if encastreEnUso.piezasCompatibles && parteConectada.tipoDePieza:
+		parteConectada.position = encastreEnUso.posicion - parteProveedora.origen
 	else:
-		remove_child(piezaAEncastrar)
-		push_error("Could not join parts!")
-		seLogro = false
+		push_error("Se intento encastrar 2 piezas incompatibles")
+
+#func add_initial_piece(pieza:ArmaParte):#Usado cuando no hay encastres, para empezar con el arma
+#	pieza.position -= pieza.origen
+#	pieza.arma = self
+#	add_child(pieza.duplicate())
+#	nodosPartes.append(pieza)
+#	pieza.connection_setup()
+#	add_saved_partes()
+#	refresh_animations()
+#
+#
+#
+#func add_piece(piezaAEncastrar:ArmaParte,encastre:Vector3) -> bool:#Añade una pieza a un encastre
+#	var seLogro:bool
+#	var encastreActual = piezaAEncastrar.encastres[encastre]
+#	if encastreActual.piezasCompatibles && piezaAEncastrar.tipoDePieza != -1 and not encastreActual.usado:
+#		add_child(piezaAEncastrar.duplicate())
+#		piezaAEncastrar.position = encastreActual.posicion - piezaAEncastrar.origen
+#		piezaAEncastrar.arma = self#Añadir referencia al arma de la cual forma parte
+#
+#		encastreActual.usado = true
+#		encastresEnUso[piezaAEncastrar] = encastre#Añadir encastre a la lista
+#
+#		nodosPartes.append(piezaAEncastrar)
+#		piezaAEncastrar.connection_setup()
+#		seLogro = true
+#	else:
+#		remove_child(piezaAEncastrar)
+#		push_error("Could not join parts!")
+#		seLogro = false
+#
+#	refresh_animations()
+#	return seLogro
 		
-	register_nodes()
-	refresh_animations()
-	return seLogro
 		
-		
-func remove_piece(pieza:ArmaParte):
-	pieza.arma = null#Quitar la referencia
-	encastresEnUso[pieza].usado = false#Reactivar el encastre que estaba usando
-	encastresEnUso.erase(pieza)#Remover la pieza del registro de encastres
-	pieza.disconnection_setup()#Desconectar todas las señales
-	remove_child(pieza)#Remover la pieza
-	
-	piezasConectadas.erase(pieza)#Remover la pieza de la lista
-	register_nodes()#Actualizar encastres
-	refresh_animations()
+#func remove_piece(pieza:ArmaParte):
+#	pieza.arma = null#Quitar la referencia
+#	encastresEnUso[pieza].usado = false#Reactivar el encastre que estaba usando
+#	encastresEnUso.erase(pieza)#Remover la pieza del registro de encastres
+#	pieza.disconnection_setup()#Desconectar todas las señales
+#	remove_child(pieza)#Remover la pieza
+#
+#	nodosPartes.erase(pieza)#Remover la pieza de la lista
+#	refresh_animations()
 	
 func refresh_animations():#Obtiene un nodo de animacion de la primera pieza que contenga uno
 	if animationPlayer:
 		remove_child(animationPlayer)
 #		animationPlayer.queue_free()#Borrar las animaciones actuales
 	
-	for pieza in piezasConectadas:
+	for pieza in nodosPartes:
 		if pieza is NodePath and get_node(pieza).get("animationPlayer") != null:
 			animationPlayer = get_node(pieza).animationPlayer.instance()
 			add_child(animationPlayer)
