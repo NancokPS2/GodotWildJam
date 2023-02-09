@@ -1,5 +1,5 @@
 extends Position2D
-class_name ArmaEncastre
+#class_name ArmaEncastre
 
 
 #const Direcciones = {
