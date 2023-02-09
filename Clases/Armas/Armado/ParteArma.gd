@@ -17,7 +17,7 @@ const EncastreFormato = {"posicion":Vector2(0.0,0.0), "piezasCompatibles":Tipos.
 export (String) var nombre
 
 export(Vector2) var origen
-export(Const.piezas,FLAGS) var tipoDePieza
+export(Tipos) var tipoDePieza
 export (String) var animationPlayerPath
 export (String) var texturaSprite
 export (Array,Dictionary) var encastres = [ EncastreFormato ]
@@ -99,8 +99,4 @@ var seleccionado:bool
 #	if Const.debugMode and seleccionado:
 #		position = get_global_mouse_position()
 
-
-
-class Encastre extends Resource:
-	export(Const.piezas,FLAGS) var piezasCompatibles
 	

@@ -54,7 +54,8 @@
         15,
         16,
         17,
-        18
+        18,
+        20
       ]
     },
     {
@@ -170,6 +171,11 @@
     {
       "category": 0,
       "title": "Falta la habilidad de añadir piezas en el ArmaCreador",
+      "details": ""
+    },
+    {
+      "category": 0,
+      "title": "Como guardar y cargar las conexiones de las armas",
       "details": ""
     }
   ]
