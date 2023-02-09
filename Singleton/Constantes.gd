@@ -1,4 +1,13 @@
 extends Node
+
+const Directorios:Dictionary = {
+	"PartidasGuardadas":"user://Saves/",
+	"PiezasGeneradas":"GeneratedPieces/",
+	"BlueprintsArmas":"Blueprints/"
+	
+}
+
+
 const colores = {
 	0:Color(0,0,255),
 	1:Color(0,255,0),
