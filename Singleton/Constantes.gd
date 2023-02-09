@@ -21,9 +21,6 @@ const gravedad = 800
 
 enum tipoArma {ESPADA,LANZA,MAZO,HACHA,RANGO}
 
-enum piezas {
-	MANGO,HOJA_ESPADA,HOJA_LANZA
-	}
 
 const tamanoEncastres = 1.0
 
