@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Resource",
+"class": "ArchivoGuardado",
+"language": "GDScript",
+"path": "res://Clases/Misc/ArchivoGuardado.gd"
+}, {
 "base": "Node",
 "class": "AreaRecoleccion",
 "language": "GDScript",
@@ -47,7 +52,7 @@ _global_script_classes=[ {
 "base": "HBoxContainer",
 "class": "BarraSegmentada",
 "language": "GDScript",
-"path": "res://Clases/Misc/SegmentedBar.gd"
+"path": "res://Clases/Interfaz/SegmentedBar.gd"
 }, {
 "base": "Entidad",
 "class": "Caja",
@@ -197,7 +202,7 @@ _global_script_classes=[ {
 "base": "ProgressBar",
 "class": "Termometro",
 "language": "GDScript",
-"path": "res://Clases/Misc/Termometro.gd"
+"path": "res://Clases/Interfaz/Termometro.gd"
 }, {
 "base": "Entidad",
 "class": "UNUSEDJugador",
@@ -207,9 +212,10 @@ _global_script_classes=[ {
 "base": "Node",
 "class": "Utility",
 "language": "GDScript",
-"path": "res://Utility/Utlity.gd"
+"path": "res://Utility/Utility.gd"
 } ]
 _global_script_class_icons={
+"ArchivoGuardado": "",
 "AreaRecoleccion": "",
 "AreaTemperatura": "",
 "ArmaBlueprint": "",
