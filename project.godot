@@ -34,11 +34,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Clases/Armas/Armado/ArmaCreador.gd"
 }, {
-"base": "Position2D",
-"class": "ArmaEncastre",
-"language": "GDScript",
-"path": "res://Clases/Armas/Armado/Encastre.gd"
-}, {
 "base": "Node2D",
 "class": "ArmaMarco",
 "language": "GDScript",
@@ -220,7 +215,6 @@ _global_script_class_icons={
 "AreaTemperatura": "",
 "ArmaBlueprint": "",
 "ArmaCreador": "",
-"ArmaEncastre": "",
 "ArmaMarco": "",
 "ArmaParte": "",
 "BarraSegmentada": "",
