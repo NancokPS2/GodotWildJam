@@ -213,11 +213,5 @@ func refresh_animations():#Obtiene un nodo de animacion de la primera pieza que 
 			break
 				
 
-static func save_to_blueprint(arma:ArmaMarco) -> ArmaBlueprint:
-	var blueprint = ArmaBlueprint.new()
-	return blueprint
-	
 
-static func build_from_blueprint(blueprint:ArmaBlueprint):
-	var piezas = blueprint.piezasACargar
-	pass
+	

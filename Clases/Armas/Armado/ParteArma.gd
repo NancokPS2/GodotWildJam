@@ -1,7 +1,7 @@
 extends KinematicBody2D
 class_name ArmaParte
 
-
+export (String) var nombre
 
 export(Vector2) var origen
 export(Const.piezas,FLAGS) var tipoDePieza
@@ -13,6 +13,7 @@ export (Dictionary) var statBoosts = {
 
 var sprite:Sprite
 var encastres:Array#Todos los encastres en esta arma se guardan aqui
+var coordenadasEncastres:Dictionary#Para identificarlos
 var hitbox:Area2D
 var arma #ArmaMarco, referencia a el arma del cual esta parte es parte, parte
 
@@ -65,4 +66,3 @@ var seleccionado:bool
 #
 #	if Const.debugMode and seleccionado:
 #		position = get_global_mouse_position()
-

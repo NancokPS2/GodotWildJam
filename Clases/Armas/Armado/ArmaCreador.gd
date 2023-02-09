@@ -114,9 +114,9 @@ func save_arma():
 		dir.make_dir("user://ArmasGuardadas")
 	
 	var armaAGuardar:PackedScene = PackedScene.new()
-	armaAGuardar.pack(arma)
+	armaAGuardar.pack(arma.duplicate())
 	
-	var logrado:int = ResourceSaver.save("user://ArmasGuardadas/" + arma.nombre + ".tscn", armaAGuardar)
+	var logrado = ResourceSaver.save("user://ArmasGuardadas/" + arma.nombre + ".tscn", armaAGuardar, 2)
 	if logrado != OK:
 		push_error( "No se pudo guardar! Codigo de error: " + str(logrado) )
 	
