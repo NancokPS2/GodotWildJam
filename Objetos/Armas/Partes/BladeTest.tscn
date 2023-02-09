@@ -7,6 +7,11 @@
 script = ExtResource( 1 )
 origen = Vector2( 0, -9 )
 tipoDePieza = 2
+encastres = [ {
+"piezasCompatibles": [ 2 ],
+"posicion": Vector2( 0, 0 ),
+"usado": false
+} ]
 
 [node name="Sprite" type="Sprite" parent="."]
 scale = Vector2( 0.09375, 0.28125 )

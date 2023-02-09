@@ -4,4 +4,7 @@
 
 [resource]
 script = ExtResource( 1 )
+nombreArma = ""
 piezasACargar = [  ]
+conexiones = {
+}
