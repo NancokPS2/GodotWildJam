@@ -52,6 +52,12 @@ class NodeManipulation extends Node:
 	static func safe_unparent(node:Node):
 		if node.get_parent() != null:
 			node.get_parent().remove_child(node)
+			
+	static func nodepaths_to_nodes(ownerNode:Node,nodePaths:Array)->Array:
+		var nodeList:Array #Lista para filtrar todos los NodePaths
+		for nodePath in nodePaths:#Transformar todos los NodePaths a referencias directas
+			nodeList.append( ownerNode.get_node(nodePath) )
+		return nodeList
 	
 class FileManipulation extends Node:
 	static func get_files_in_folder(path:String) -> Array:#Obtiene todos los archivos en una carpeta
