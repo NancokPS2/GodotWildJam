@@ -96,6 +96,33 @@ class FileManipulation extends Node:
 					
 				folderName = loadingDir.get_next()#Get next file
 			return returnedPaths
+			
+	enum FileNameFormats {NUMBERED,DATE}
+	static func ensure_unique_filename(folderPath:String,fileName:String,format:int=FileNameFormats.NUMBERED)->String:
+		var dir:= Directory.new()
+		if not dir.file_exists(folderPath+fileName):#File already has a unique name, return it
+			return fileName
+		else:
+			var tempFileName:String = fileName
+			match format:
+				FileNameFormats.NUMBERED:
+					var number:int = 1
+					while dir.file_exists(folderPath+tempFileName):
+						tempFileName = fileName + str(number)
+						number += 1
+					return tempFileName
+					
+				FileNameFormats.DATE:
+					var HMS:String = str(Time.get_time_dict_from_system().hour + "_" + Time.get_time_dict_from_system().minute + "_" + Time.get_time_dict_from_system().second) 
+					tempFileName = fileName + HMS + str(randi() % 10)
+					if dir.file_exists(folderPath+tempFileName):
+						tempFileName = ensure_unique_filename(folderPath, fileName, format)
+					return tempFileName
+				_:
+					push_error( str(format) + " is an invalid format for ensure_unique_filename()" )
+					
+		push_error("Could not ensure unique filename: Unhandled error")
+		return ""
 
 class VectorManipulation extends Node:
 	func clockwise_tangent(vector:Vector2, times:int=1)->Vector2:
