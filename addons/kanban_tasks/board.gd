@@ -1,10 +1,11 @@
-#@tool
+@tool
 extends Control
 
 signal categories_changed()
 signal tasks_changed()
 signal stages_changed()
 signal columns_changed()
+signal settings_changed()
 
 const save_path := "res://addons/kanban_tasks/data.json"
 
@@ -16,13 +17,19 @@ var columns = []
 var stages = []
 var tasks = []
 var categories = []
+var show_details_preview: bool = true:
+	set(val):
+		show_details_preview = val
+		emit_signal('settings_changed')
+	get:
+		return show_details_preview
 
-var shortcut_delete := ShortCut.new()
-var shortcut_duplicate := ShortCut.new()
-var shortcut_new := ShortCut.new()
-var shortcut_rename := ShortCut.new()
-var shortcut_search := ShortCut.new()
-var shortcut_confirm := ShortCut.new()
+var shortcut_delete := Shortcut.new()
+var shortcut_duplicate := Shortcut.new()
+var shortcut_new := Shortcut.new()
+var shortcut_rename := Shortcut.new()
+var shortcut_search := Shortcut.new()
+var shortcut_confirm := Shortcut.new()
 
 @onready var search_bar: LineEdit = $Header/HBoxContainer/Search
 @onready var button_search_details: Button = $Header/HBoxContainer/SearchDetails
@@ -37,16 +44,23 @@ var shortcut_confirm := ShortCut.new()
 class Category:
 	signal changed()
 	var title: String:
-		set = set_title
+		set(val):
+			title = val
+			emit_signal("changed")
+
 	var color: Color:
-		set = set_color
+		set(val):
+			color = val
+			emit_signal("changed")
+
 	func set_title(val):
 		title = val
 		emit_signal("changed")
+
 	func set_color(val):
 		color = val
 		emit_signal("changed")
-	
+
 	func _init(title: String, color: Color):
 		self.title = title
 		self.color = color
@@ -60,68 +74,69 @@ func setup_shortcuts():
 	# delete
 	var delete = InputEventKey.new()
 	if OS.get_name() == "OSX":
-		delete.scancode = KEY_BACKSPACE
+		delete.keycode = KEY_BACKSPACE
 		delete.command = true
 	else:
-		delete.scancode = KEY_DELETE
-	shortcut_delete.shortcut = delete
-	
+		delete.keycode = KEY_DELETE
+	shortcut_delete.events.append(delete)
+
 	# duplicate
 	var dupe = InputEventKey.new()
 	if OS.get_name() == "OSX":
-		dupe.scancode = KEY_D
+		dupe.keycode = KEY_D
 		dupe.command = true
 	else:
-		dupe.scancode = KEY_D
-		dupe.control = true
-	shortcut_duplicate.shortcut = dupe
-	
+		dupe.keycode = KEY_D
+		dupe.ctrl_pressed = true
+	shortcut_duplicate.events.append(dupe)
+
 	# new
 	var new = InputEventKey.new()
 	if OS.get_name() == "OSX":
-		new.scancode = KEY_A
+		new.keycode = KEY_A
 		new.command = true
 	else:
-		new.scancode = KEY_A
-		new.control = true
-	shortcut_new.shortcut = new
-	
+		new.keycode = KEY_A
+		new.ctrl_pressed = true
+	shortcut_new.events.append(new)
+
 	# rename
 	var rename = InputEventKey.new()
-	rename.scancode = KEY_F2
-	shortcut_rename.shortcut = rename
-	
+	rename.keycode = KEY_F2
+	shortcut_rename.events.append(rename)
+
 	# search
 	var search = InputEventKey.new()
 	if OS.get_name() == "OSX":
-		search.scancode = KEY_F
+		search.keycode = KEY_F
 		search.command = true
 	else:
-		search.scancode = KEY_F
-		search.control = true
-	shortcut_search.shortcut = search
-	
+		search.keycode = KEY_F
+		search.ctrl_pressed = true
+	shortcut_search.events.append(search)
+
 	# confirm
 	var confirm = InputEventKey.new()
-	confirm.scancode = KEY_ENTER
-	shortcut_confirm.shortcut = confirm
-	
+	confirm.keycode = KEY_ENTER
+	shortcut_confirm.events.append(confirm)
+
 
 func _ready():
 	setup_shortcuts()
 	setup_board()
-	
-	search_bar.connect("text_changed", self, "__on_filter_changed")
-	search_bar.connect("text_entered", self, "__on_filter_entered")
-	button_search_details.connect("toggled", self, "__on_filter_changed")
-	button_help.connect("pressed", self, "__on_documentation_button_clicked")
-	button_settings.connect("pressed", self, "__on_settings_button_clicked")
-	
-	connect("categories_changed", self, "save_data")
-	connect("tasks_changed", self, "save_data")
-	connect("columns_changed", self, "save_data")
-	connect("stages_changed", self, "save_data")
-	
+
+	search_bar.text_changed.connect(__on_filter_changed)
+	search_bar.text_submitted.connect(__on_filter_entered)
+	button_search_details.toggled.connect(__on_filter_changed)
+	button_help.pressed.connect(__on_documentation_button_clicked)
+	button_settings.pressed.connect(__on_settings_button_clicked)
+
+	categories_changed.connect(save_data)
+	tasks_changed.connect(save_data)
+	columns_changed.connect(save_data)
+	stages_changed.connect(save_data)
+	settings_changed.connect(save_data)
+
 	notification(NOTIFICATION_THEME_CHANGED)
 
 func get_details_dialog():
@@ -130,7 +145,7 @@ func get_details_dialog():
 func construct_category(title: String, color: Color):
 	var cat = Category.new(title, color)
 	categories.append(cat)
-	cat.connect("changed", self, "save_data")
+	cat.changed.connect(save_data)
 	emit_signal("categories_changed")
 	return cat
 func category_index(cat, unsafe = false):
@@ -141,17 +156,16 @@ func delete_category(cat):
 	categories.erase(cat)
 	emit_signal("categories_changed")
 
-func _unhandled_key_input(event):
+func _shortcut_input(event: InputEvent) -> void:
 	if not can_handle_shortcut(self):
 		return
-		
-	if not event.is_echo() and event.is_pressed() and shortcut_search.is_shortcut(event):
+	if not event.is_echo() and event.is_pressed() and shortcut_search.matches_event(event):
 		search_bar.grab_focus()
-		get_tree().set_input_as_handled()
+		get_viewport().set_input_as_handled()
 
 func construct_task(title:String="Task", details:String="", category=categories[0]):
 	var scene = task_scene.instantiate()
-	scene.connect("change", self, "save_data")
+	scene.change.connect(save_data)
 	tasks.append(scene)
 	scene.init(self, title, details, category)
 	emit_signal("tasks_changed")
@@ -169,7 +183,7 @@ func delete_task(scene):
 
 func construct_stage(title:String="Stage", tasks:Array=[]):
 	var scene = stage_scene.instantiate()
-	scene.connect("change", self, "save_data")
+	scene.change.connect(save_data)
 	stages.append(scene)
 	scene.init(self, title, tasks)
 	emit_signal("stages_changed")
@@ -187,7 +201,7 @@ func delete_stage(scene):
 
 func construct_column(stages:Array=[]):
 	var scene = column_scene.instantiate()
-	scene.connect("change", self, "save_data")
+	scene.change.connect(save_data)
 	columns.append(scene)
 	scene.init(self, stages)
 	emit_signal("columns_changed")
@@ -198,13 +212,14 @@ func column_index(column, unsafe = false):
 	return columns.find(column)
 func delete_column(scene):
 	if scene.is_inside_tree():
-		scene.get_owner().remove_column(scene)
+		column_holder.remove_child(scene)
 	columns.erase(scene)
 	scene.queue_free()
 	emit_signal("columns_changed")
 
 func can_handle_shortcut(node):
-	return get_focus_owner() and (node.is_a_parent_of(get_focus_owner()) or get_focus_owner()==node)
+	var focus_owner = get_viewport().gui_get_focus_owner()
+	return focus_owner and (node.is_ancestor_of(focus_owner) or focus_owner==node)
 
 func clear_board():
 	for c in column_holder.get_children():
@@ -218,41 +233,43 @@ func clear_board():
 	emit_signal("tasks_changed")
 
 func load_data()->Dictionary:
-	var file := File.new()
-	var res = file.open(save_path, File.READ)
+	var json := JSON.new()
+	var file := FileAccess.open(save_path, FileAccess.READ)
+
+	if file == null:
+		return default_data()
+
+	var res = json.parse(file.get_as_text())
 	if res != OK:
 		return default_data()
-	
-	res = JSON.parse(file.get_as_text())
-	if res.error != OK:
-		return default_data()
-	file.close()
-	
-	res = res.result
-	
+
+	res = json.get_data()
+
 	for category in res["categories"]:
 		category["color"] = Color(category["color"])
-	
+
 	for task in res["tasks"]:
 		task["category"] = int(task["category"])
-	
+
 	for stage in res["stages"]:
 		var tasks_i = []
 		for t in stage["tasks"]:
 			tasks_i.append(int(t))
 		stage["tasks"] = tasks_i
-	
+
 	for column in res["columns"]:
 		var stages_i = []
 		for t in column["stages"]:
 			stages_i.append(int(t))
 		column["stages"] = stages_i
-		
-	
+
 	return res
 
 func default_data():
 	return {
+		"settings": {
+			"show_details_preview": true,
+		},
 		"columns": [
 			{
 				"stages": [0],
@@ -280,12 +297,15 @@ func default_data():
 		],
 		"tasks": [],
 		"categories": [
-			{"title": "Task", "color": Color.cornflower}
+			{"title": "Task", "color": Color.CORNFLOWER_BLUE}
 		],
 	}
 
 func serialze():
 	var res = {
+		"settings": {
+			"show_details_preview": show_details_preview,
+		},
 		"categories": [],
 		"columns": [],
 		"stages": [],
@@ -303,56 +323,60 @@ func serialze():
 
 func save_data():
 	var data = serialze()
-	
-	var file := File.new()
-	var res = file.open(save_path, File.WRITE)
-	if res != OK:
+
+	var file := FileAccess.open(save_path, FileAccess.WRITE)
+	if file == null:
 		push_warning("Could not save board data.")
-	
-	var string = JSON.print(data, "  ")
-	
+
+	var json := JSON.new()
+	var string = json.stringify(data, "  ")
+
 	file.store_string(string)
-	file.close()
 
 func setup_board():
 	clear_board()
 	var data = load_data()
-	
+
+	if data.has("settings"):
+		if data["settings"].has("show_details_preview"):
+			show_details_preview = data["settings"]["show_details_preview"]
+
 	for c in data["categories"]:
 		construct_category(c["title"],
 				c["color"])
-	
+
 	for t in data["tasks"]:
 		construct_task(
 			t["title"],
 			t["details"],
 			categories[t["category"]])
-		
+
 	for s in data["stages"]:
 		construct_stage(
 			s["title"],
 			s["tasks"])
-		
+
 	for c in data["columns"]:
 		var column = construct_column(c["stages"])
 		column_holder.add_child(column)
-	
+
 	emit_signal("categories_changed")
 	emit_signal("columns_changed")
 	emit_signal("stages_changed")
 	emit_signal("tasks_changed")
-		
+	emit_signal('settings_changed')
+
 func _notification(what):
 	match(what):
 		NOTIFICATION_THEME_CHANGED:
 			if is_instance_valid(search_bar):
-				search_bar.right_icon = get_icon("Search", "EditorIcons")
+				search_bar.right_icon = get_theme_icon("Search", "EditorIcons")
 			if is_instance_valid(button_settings):
-				button_settings.icon = get_icon("Tools", "EditorIcons")
+				button_settings.icon = get_theme_icon("Tools", "EditorIcons")
 			if is_instance_valid(button_help):
-				button_help.icon = get_icon("Help", "EditorIcons")
+				button_help.icon = get_theme_icon("Help", "EditorIcons")
 			if is_instance_valid(button_search_details):
-				button_search_details.icon = get_icon("MultiLine", "EditorIcons")
+				button_search_details.icon = get_theme_icon("FileList", "EditorIcons")
 
 func reset_filter():
 	search_bar.text = ""
@@ -366,7 +390,7 @@ func show_settings():
 
 func __update_filter():
 	for t in tasks:
-		t.apply_filter(search_bar.text, button_search_details.pressed)
+		t.apply_filter(search_bar.text, button_search_details.button_pressed)
 
 # do not use parameters
 # method is bound to diffrent signals

@@ -28,3 +28,4 @@ res://Clases/Misc/ChaseCam.gd
 res://Clases/Armas/Armado/Encastre.gd
 res://Objetos/General/Interfaz.tscn
 res://Objetos/Jugador/Jugador.tscn
+res://Singleton/RecursosCargados.gd
