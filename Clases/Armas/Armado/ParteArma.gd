@@ -12,6 +12,7 @@ const EncastreFormato = {"posicion":Vector2(0.0,0.0), "piezasCompatibles":Tipos.
 
 @export_category("Custom")
 @export var nombre:String
+@export var identificador:String
 
 @export var origen:Vector2
 @export var tipoDePieza:Tipos
@@ -28,6 +29,7 @@ const EncastreFormato = {"posicion":Vector2(0.0,0.0), "piezasCompatibles":Tipos.
 
 func get_save_dict()->Dictionary:
 	var dictReturn:Dictionary = {
+		"identificador":identificador,
 		"nombre":nombre,
 		"origen":origen,
 		"tipoDePieza":tipoDePieza,
@@ -40,6 +42,24 @@ func get_save_dict()->Dictionary:
 		"script":get_script().resource_path
 	}
 	return dictReturn
+
+static func generate_from_dict(saveDict:Dictionary)->ArmaParte:
+	var parte := ArmaParte.new()
+	parte.set_script(saveDict.script)
+	
+	for key in saveDict:
+		parte.set(key,saveDict[key])
+		
+	parte.sprite = Sprite2D.new()
+	parte.hitbox = Area2D.new()
+	
+	parte.sprite.texture = parte.spriteTexture
+	
+	var colision = CollisionPolygon2D.new()
+	colision.polygon = parte.colisiones
+	parte.hitbox.add_child(colision)
+	
+	return parte
 
 var sprite:Sprite2D
 #var encastres:Array#Todos los encastres en esta arma se guardan aqui

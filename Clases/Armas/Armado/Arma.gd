@@ -5,6 +5,7 @@ signal PRE_ATTACK
 signal ATTACK
 signal POST_ATTACK
 
+@export var identificador:String
 @export var nombre:String = "Arma Sin Nombre"
 
 var estadisticas:Dictionary
@@ -31,14 +32,27 @@ var estadisticasPartes:Array
 func _init() -> void:
 	equipping(false)
 
-func save_dict()->Dictionary:
+func get_save_dict()->Dictionary:
 	var dictReturn:Dictionary = {
+		"identificador":identificador,
 		"nombre":nombre,
 		"partesGuardadas":partesGuardadas,
-		"conexiones":conexiones
+		"conexiones":conexiones,
+		"script":get_script()
 	}
 	return dictReturn
 	
+static func generate_from_dict(saveDict:Dictionary):
+	var nuevaArma = ArmaMarco.new()
+	nuevaArma.set_script(saveDict.script)
+	
+	for key in saveDict:
+		nuevaArma.set(key,saveDict[key])
+	
+	nuevaArma.add_saved_partes()
+	
+	
+	pass
 
 func _ready() -> void:
 	cooldownTimer.one_shot = true
@@ -103,23 +117,7 @@ static func report_weapon_status(arma:ArmaMarco):#Revisa el estado del arma y av
 
 
 
-static func generate_parte_from_dict(saveDict:Dictionary)->ArmaParte:
-	var parte := ArmaParte.new()
-	parte.set_script(saveDict.script)
-	
-	for key in saveDict:
-		parte.set(key,saveDict[key])
-		
-	parte.sprite = Sprite2D.new()
-	parte.hitbox = Area2D.new()
-	
-	parte.sprite.texture = parte.spriteTexture
-	
-	var colision = CollisionPolygon2D.new()
-	colision.polygon = parte.colisiones
-	parte.hitbox.add_child(colision)
-	
-	return parte
+
 	
 #----------------------------------------------
 #CONNECTION SECTION
@@ -159,12 +157,14 @@ func get_stat_boosts_from_partes() -> Dictionary:
 
 #CONNECTIONS
 
+
+
 func add_saved_partes():
 	while not nodosPartes.is_empty():
 		nodosPartes.pop_back().queue_free()
 		
 	for parteDict in partesGuardadas:
-		var parteNueva:ArmaParte = generate_parte_from_dict(parteDict)
+		var parteNueva:ArmaParte = ArmaParte.generate_from_dict(parteDict)
 		nodosPartes.append(parteNueva)
 		parteNueva.arma = self
 
@@ -238,13 +238,13 @@ func refresh_animations():#Obtiene un nodo de animacion de la primera pieza que 
 	
 	for pieza in nodosPartes:
 		if pieza is NodePath and get_node(pieza).get("animationPlayer") != null:
-			animationPlayer = get_node(pieza).animationPlayer.instantiate()
+			animationPlayer = get_node(pieza).animationPlayer.instance()
 			add_child(animationPlayer)
 			animationPlayer.root_node = animationPlayer.get_path_to(self)#Conectar el AnimationPlayer a esta arma
 			break
 			
 		elif pieza.get("animationPlayer") != null:
-			animationPlayer = pieza.animationPlayer.instantiate()
+			animationPlayer = pieza.animationPlayer.instance()
 			add_child(animationPlayer)
 			animationPlayer.root_node = animationPlayer.get_path_to(self)#Conectar el AnimationPlayer a esta arma
 			break
