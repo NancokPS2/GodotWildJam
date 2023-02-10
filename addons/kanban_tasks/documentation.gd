@@ -1,7 +1,7 @@
 tool
 extends AcceptDialog
 
-onready var label := $VBoxContainer/RichTextLabel
+@onready var label := $VBoxContainer/RichTextLabel
 
 func _ready():
 	label.connect("meta_clicked", self, "__label_meta_clicked")

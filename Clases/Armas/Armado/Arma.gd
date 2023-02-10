@@ -5,13 +5,13 @@ signal PRE_ATTACK
 signal ATTACK
 signal POST_ATTACK
 
-export (String) var nombre = "Arma Sin Nombre"
+@export var nombre:String = "Arma Sin Nombre"
 
 var estadisticas:Dictionary
 var type:int
 var cooldown:float = 0
 
-onready var animationPlayer:AnimationPlayer
+@onready var animationPlayer:AnimationPlayer
 
 var cooldownTimer:Timer = Timer.new()
 
@@ -19,17 +19,14 @@ var active:bool
 
 var estadisticasPartes:Array
 
-export (Array,Dictionary) var partesGuardadas
-export (Array,Dictionary) var conexiones = [
+@export var partesGuardadas:Array
+@export var conexiones:Array = [
 	{
 		"proveedor":0,
 		"encastre":{},
 		"encastrada":1
 	}
 ]
-
-
-export (Resource) var blueprint = null
 
 func _init() -> void:
 	equipping(false)
@@ -85,7 +82,7 @@ func target_hit(objetivo):
 func _unhandled_input(event: InputEvent) -> void:
 #	assert(active,"El input se disparo a pesar de estar inactiva!!!")
 	
-	if not nodosPartes.empty():
+	if not nodosPartes.is_empty():
 		for partePath in nodosPartes:
 			if partePath is NodePath:
 				get_node(partePath).incoming_input(event)#Delega cualquier input dirigido al arma a todas sus partes
@@ -98,7 +95,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		
 static func report_weapon_status(arma:ArmaMarco):#Revisa el estado del arma y avisa de algun fallo
 	assert(arma.animationPlayer)
-	assert(not arma.piezasConectadas.empty())
+	assert(not arma.piezasConectadas.is_empty())
 	
 	
 	if arma.animationPlayer == null:
@@ -113,7 +110,7 @@ static func generate_parte_from_dict(saveDict:Dictionary)->ArmaParte:
 	for key in saveDict:
 		parte.set(key,saveDict[key])
 		
-	parte.sprite = Sprite.new()
+	parte.sprite = Sprite2D.new()
 	parte.hitbox = Area2D.new()
 	
 	parte.sprite.texture = parte.spriteTexture
@@ -132,7 +129,7 @@ static func generate_parte_from_dict(saveDict:Dictionary)->ArmaParte:
 var encastres:Dictionary
 var nodosPartes:Array
 
-export (Dictionary) var encastresEnUso:Dictionary = {
+@export var encastresEnUso:Dictionary = {
 	
 }
 
@@ -163,7 +160,7 @@ func get_stat_boosts_from_partes() -> Dictionary:
 #CONNECTIONS
 
 func add_saved_partes():
-	while not nodosPartes.empty():
+	while not nodosPartes.is_empty():
 		nodosPartes.pop_back().queue_free()
 		
 	for parteDict in partesGuardadas:
@@ -241,13 +238,13 @@ func refresh_animations():#Obtiene un nodo de animacion de la primera pieza que 
 	
 	for pieza in nodosPartes:
 		if pieza is NodePath and get_node(pieza).get("animationPlayer") != null:
-			animationPlayer = get_node(pieza).animationPlayer.instance()
+			animationPlayer = get_node(pieza).animationPlayer.instantiate()
 			add_child(animationPlayer)
 			animationPlayer.root_node = animationPlayer.get_path_to(self)#Conectar el AnimationPlayer a esta arma
 			break
 			
 		elif pieza.get("animationPlayer") != null:
-			animationPlayer = pieza.animationPlayer.instance()
+			animationPlayer = pieza.animationPlayer.instantiate()
 			add_child(animationPlayer)
 			animationPlayer.root_node = animationPlayer.get_path_to(self)#Conectar el AnimationPlayer a esta arma
 			break

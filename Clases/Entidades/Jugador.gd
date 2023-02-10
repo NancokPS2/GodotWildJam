@@ -14,7 +14,7 @@ func _ready() -> void:
 	gravedad = Const.gravedad
 	
 	add_child(afterimageTimer)
-	afterimageTimer.connect("timeout",self,"afterimage")
+	afterimageTimer.timeout.connect(afterimage)
 	afterimageTimer.start(0.1)
 	
 	add_to_group("JUGADOR",true)
@@ -39,16 +39,16 @@ var jump_velocity = 340
 var saltoRestantes:int
 var saltoCooldown:float
 
-onready var anim = $Anims
-onready var spritePlayer = $Sprite
-onready var colision = $Colision
+@onready var anim = $Anims
+@onready var spritePlayer = $Sprite
+@onready var colision = $Colision
 
-export var  estadoAtaque = false
+@export var  estadoAtaque = false
 # The time remaining before the double jump can be used again (in seconds)
 
 	
 func _physics_process(delta):
-	._physics_process(delta)#Proceso base de Entidad
+	super._physics_process(delta)#Proceso base de Entidad
 	
 	surface_procs()#Checkear el estado actual antes de proseguir
 	
@@ -64,27 +64,35 @@ func _physics_process(delta):
 		_jump()
 		Animations()
 #		Attack()
+	
 
-	motion += Vector2.DOWN * gravedad * delta
-	motion = move_and_slide(motion, Vector2.UP)
+	velocity += Vector2.DOWN * gravedad * delta
+	move_and_slide()
 	
 	
 	#Pañuelo
 	var globalPlayerPosVec3 = Vector3(global_position.x,global_position.y,0)
-	$PlayerPoint/Camera.translation.x = globalPlayerPosVec3.x / get_viewport_rect().size.x
-	$PlayerPoint/Camera.translation.y = globalPlayerPosVec3.y / get_viewport_rect().size.y
-	$PlayerPoint/Camera.translation.z = 2.0
-	$PlayerPoint.move_and_slide( Vector3(motion.x,motion.y,0) * 0.05 )
+	$PlayerPoint/Camera.position.x = globalPlayerPosVec3.x / get_viewport_rect().size.x
+	$PlayerPoint/Camera.position.y = globalPlayerPosVec3.y / get_viewport_rect().size.y
+	$PlayerPoint/Camera.position.z = 2.0
 	
-#	$Debug.text = str(motion)
+	$PlayerPoint.velocity = Vector3(velocity.x, velocity.y, 0) * 0.05
+	$PlayerPoint.move_and_slide()
+	
+#	$Debug.text = str(velocity)
 	$Debug.text = str(global_position / get_viewport_rect().size)
 	
 
 func dash():
 	if Input.is_action_just_pressed("dash") and dashCooldownCurrent <= 0:
 		var direccion:float = Input.get_axis("move_left","move_right")
-#	motion.x = direccion.x * dashDistance
-		move_and_slide( Vector2(direccion * estadisticas.dashDistance, 0) )
+#
+
+		var originalVel = velocity
+		velocity += Vector2(direccion * estadisticas["dashDistance"])
+		move_and_slide()
+		velocity = originalVel
+		
 		dashCooldownCurrent = estadisticas.dashCooldown
 
 
@@ -93,15 +101,15 @@ func side_movement():
 	#direccionHorizontal resulta en -1 si es hacia la izquierda o 1 si a la derecha
 
 	if direccionHorizontal != 0 and !estadoAtaque:
-		motion.x = lerp(motion.x, direccionHorizontal * speed , acceleration)
+		velocity.x = lerp(velocity.x, direccionHorizontal * speed , acceleration)
 	else:
-		motion.x = lerp(motion.x, 0, friction)
+		velocity.x = lerp(velocity.x, 0.0, friction)
 		
-	if motion.x > 0 and scale != Vector2(1,1) and not estadoAtaque:
+	if velocity.x > 0 and scale != Vector2(1,1) and not estadoAtaque:
 		scale = Vector2(1,1)
 		rotation = 0
 
-	elif motion.x < 0 and scale == Vector2(1,1) and not estadoAtaque:
+	elif velocity.x < 0 and scale == Vector2(1,1) and not estadoAtaque:
 		scale = Vector2(-1,1)
 		
 		
@@ -111,7 +119,7 @@ func _jump():
 	if Input.is_action_just_pressed("jump"):
 		# If the player is on the ground, perform a jump
 		if is_on_floor():
-			motion += move_and_slide(Vector2(0, -jump_velocity))
+			velocity += Vector2.UP * jump_velocity
 			estadoSalto = true#Se inicio un salto
 			
 		# If the player is in the air and the double jump is available, perform a double jump
@@ -119,7 +127,7 @@ func _jump():
 			saltoCooldown = 0.15
 			estadoSalto = true
 			saltoRestantes -= 1
-			motion += move_and_slide(Vector2(0, -jump_velocity))
+			velocity += Vector2.UP * jump_velocity
 			
 func surface_procs():
 	if is_on_floor():
@@ -152,11 +160,11 @@ func Animations():
 	if not is_on_floor():
 		anim.play("aire")
 		
-	if motion.x > 3:#Yendo a la derecha
+	if velocity.x > 3:#Yendo a la derecha
 		anim.play("correr")
 #		spritePlayer.flip_h = false
 		
-	elif motion.x < -3:#Izquierda
+	elif velocity.x < -3:#Izquierda
 		anim.play("correr")
 #		spritePlayer.flip_h = true
 		
@@ -167,17 +175,18 @@ func Animations():
 
 var afterimageTimer:Timer = Timer.new()
 func afterimage(duration:float = 0.15):
-	var afterimage = $Sprite.duplicate()
+	var afterimage:Sprite2D = $Sprite.duplicate()
 	
-	yield(get_tree().create_timer(0.07),"timeout")
-	var timer = get_tree().create_timer(duration)
-	timer.connect("timeout",afterimage,"queue_free")#Borrar la imagen luego de 0.3 segundos
+	await get_tree().create_timer(0.07).timeout
+	var timer:SceneTreeTimer = get_tree().create_timer(duration)
+	timer.timeout.connect( Callable(afterimage,"queue_free") )#Borrar la imagen luego de 0.3 segundos
 	
-	afterimage.set_as_toplevel(true)#Colocar donde esta el personaje
+	afterimage.top_level = true#Colocar donde esta el personaje pero desconectado de el
 	afterimage.position = position
+	afterimage.z_index = spritePlayer.z_index - 1
 	
 	afterimage.modulate = Color(1,1,1,0.7)
-	var tween:SceneTreeTween = get_tree().create_tween().bind_node(afterimage)#Hacer transparente
+	var tween:Tween = get_tree().create_tween().bind_node(afterimage)#Hacer transparente
 	tween.tween_property(afterimage,"modulate",Color(1,1,1,0), duration)
 	
 	
@@ -218,7 +227,7 @@ func update_stats(diccionario:Dictionary, resetearAntes:bool=false):
 var equipado:ArmaMarco
 
 var armas:Dictionary = {
-	1:load("res://Objetos/Armas/Guardadas/EspadaSimple.tscn").instance()
+	1:load("res://Objetos/Armas/Guardadas/EspadaSimple.tscn").instantiate()
 }
 func cambiar_arma(slot:int):
 	

@@ -1,9 +1,9 @@
 extends Entidad
 class_name EntidadJefe
 
-onready var animationPlayer: AnimationPlayer = $AnimationPlayer
-onready var jugador = Ref.jugador
-export (float) var velocidad = 50
+@onready var animationPlayer: AnimationPlayer = $AnimationPlayer
+@onready var jugador:Jugador = Ref.jugador
+@export var velocidad:float = 50
 
 enum Estados {IDLE,CHASE,ATTACK}
 var estadoActual:int
@@ -15,7 +15,7 @@ var subEstados = {
 
 
 func _ready() -> void:
-	animationPlayer.connect("animation_finished",self,"animation_ended")
+	animationPlayer.animation_finished.connect(animation_ended)
 	add_to_group("ENEMIGO",true)
 	Ref.jefes.append(self)
 
@@ -26,11 +26,11 @@ func animation_ended(nombreAnimacion:String):
 
 var chaseDistance:float = 50
 func decide_state():
-	
-	if jugador == null:
+
+	if not is_instance_valid(jugador):
 		estadoActual = Estados.IDLE
 	
-	if position.distance_to(jugador.position) > chaseDistance:
+	elif position.distance_to(jugador.position) > chaseDistance:
 		estadoActual = Estados.CHASE
 		
 	elif position.distance_to(jugador.position) <= chaseDistance:
@@ -45,7 +45,7 @@ func decide_state():
 func _physics_process(delta: float) -> void:
 	match estadoActual:
 		Estados.CHASE:
-			walk(position.direction_to(jugador.position))
+			velocity = position.direction_to(jugador.position) * velocidad
 			animationPlayer.play("chase")
 		Estados.ATTACK:
 			pass
@@ -54,7 +54,7 @@ func _physics_process(delta: float) -> void:
 			if jugador:
 				decide_state()
 			
-		
+	move_and_slide()
 
 	
 func entered_state():#Llamado UNA vez cuando se cambia de estado
@@ -63,9 +63,7 @@ func entered_state():#Llamado UNA vez cuando se cambia de estado
 			animationPlayer.play("attack")
 			
 			
-	
-func walk(direccion:Vector2): 
-	move_and_slide(direccion * velocidad)
+
 	
 	
 	

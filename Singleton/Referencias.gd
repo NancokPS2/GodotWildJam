@@ -1,6 +1,14 @@
 extends Node
 
-var jugador:Node
+var jugador:Node:
+	get:
+		return jugador
+	set(valor):
+		jugador = valor
+		print("Jugador cambiado")
+		
+
+
 
 var jefes:Array
 

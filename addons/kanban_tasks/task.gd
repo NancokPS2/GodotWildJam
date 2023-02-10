@@ -3,10 +3,10 @@ extends Control
 
 const color_width := 8
 
-onready var panel_container := $PanelContainer
-onready var title_label := $PanelContainer/HBoxContainer/MarginContainer/Title
-onready var edit_button := $PanelContainer/HBoxContainer/EditButton
-onready var context_menu := $ContextMenu
+@onready var panel_container := $PanelContainer
+@onready var title_label := $PanelContainer/HBoxContainer/MarginContainer/Title
+@onready var edit_button := $PanelContainer/HBoxContainer/EditButton
+@onready var context_menu := $ContextMenu
 
 signal change()
 
@@ -58,7 +58,7 @@ func serialize():
 	return res
 
 func apply_filter(filter: String, descriptions: bool):
-	if filter.empty():
+	if filter.is_empty():
 		visible = true
 		return
 	

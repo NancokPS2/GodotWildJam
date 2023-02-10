@@ -1,14 +1,14 @@
 extends Entidad
 class_name GarraGrua
 
-onready var dedoDer = $LadoDer
-onready var dedoIzq = $LadoIzq
+@onready var dedoDer = $LadoDer
+@onready var dedoIzq = $LadoIzq
 
-onready var tipDer = $LadoDer/Tip
-onready var tipIzq = $LadoIzq/Tip
+@onready var tipDer = $LadoDer/Tip
+@onready var tipIzq = $LadoIzq/Tip
 
-const maxRotDer = deg2rad(-55.0)
-const maxRotIzq = deg2rad(55.0)
+const maxRotDer = deg_to_rad(-55.0)
+const maxRotIzq = deg_to_rad(55.0)
 
 var areaDeAgarre:Area2D = Area2D.new()
 
@@ -17,7 +17,7 @@ enum Estados {IDLE,ABRIR,CERRAR}
 
 var objetoAgarrado:Node2D
 
-export (float) var velocidad = 2.0
+@export var velocidad:float = 2.0
 
 func _physics_process(delta: float) -> void:
 	if dedoDer and dedoIzq:#Si ambos dedos son validos...
@@ -52,7 +52,7 @@ func fingers_colliding()->bool:
 			return false
 
 func grab():
-	if not $AreaAgarre.get_overlapping_bodies().empty():
+	if not $AreaAgarre.get_overlapping_bodies().is_empty():
 		objetoAgarrado = $AreaAgarre.get_overlapping_bodies()[0]
 
 func still_in_range(body) -> bool:

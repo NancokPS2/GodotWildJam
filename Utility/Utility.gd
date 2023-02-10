@@ -2,7 +2,7 @@ extends Node
 class_name Utility
 
 class ControllableCamera2D extends Camera2D:
-	export (float) var speed:float = 15
+	@export var speed:float = 15
 	
 	func _input(event: InputEvent) -> void:
 		if event.is_action_pressed("ui_down"):
@@ -64,7 +64,7 @@ class FileManipulation extends Node:
 		var returnedFiles:Array
 		var loadingDir = Directory.new()
 		loadingDir.open(path)#Start loading abilities
-		loadingDir.list_dir_begin(true)
+		loadingDir.list_dir_begin()
 		var fileName = loadingDir.get_next()
 		
 		while fileName != "":
@@ -93,7 +93,7 @@ class FileManipulation extends Node:
 			var returnedPaths:Array
 			var loadingDir = Directory.new()
 			loadingDir.open(path)#Start loading abilities
-			loadingDir.list_dir_begin(true)
+			loadingDir.list_dir_begin()
 			var folderName = loadingDir.get_next()
 			
 			while folderName != "":
@@ -138,14 +138,13 @@ class VectorManipulation extends Node:
 		return vec
 		
 class SignalManipulation extends Node:
-	 
 	static func disconnect_all_signals(from:Object):
 		var signals = from.get_signal_list()
 
 		for sig in signals:#Check each signal
 			var connections = from.get_signal_connection_list(sig["name"])
 			for connection in connections:#Check it's connections
-				from.disconnect(connection.signal, connection.target, connection.method)#Disconnect them
+				from.disconnect( connection["signal"], Callable(connection.target, connection.method) )#Disconnect them
 			
 		
-		
+

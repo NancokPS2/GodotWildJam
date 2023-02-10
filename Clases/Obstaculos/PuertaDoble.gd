@@ -3,16 +3,16 @@ class_name CompuertaDobleEstructura
 
 const ColMaskDefault:int = 130
 
-onready var parteSup = $Superior
-onready var parteInf = $Inferior
+@onready var parteSup = $Superior
+@onready var parteInf = $Inferior
 
 var posicionCerradaSup:Vector2 = Vector2.ZERO
 var posicionCerradaInf:Vector2 = Vector2.ZERO
 
-export (Vector2) var posicionAbiertaSup:Vector2 = Vector2(0,-32)
-export (Vector2) var posicionAbiertaInf:Vector2 = Vector2(0,32)
+@export var posicionAbiertaSup:Vector2 = Vector2(0,-32)
+@export var posicionAbiertaInf:Vector2 = Vector2(0,32)
 
-export (float) var duracion = 0.5
+@export var duracion:float = 0.5
 
 
 var estado:int 
@@ -44,8 +44,8 @@ func _ready() -> void:
 signal matar_tweens
 func open():
 	emit_signal("matar_tweens")
-	var tweenPuertas:SceneTreeTween = get_tree().create_tween().bind_node(self).set_parallel(true).set_process_mode(Tween.TWEEN_PROCESS_PHYSICS)
-	connect("matar_tweens",tweenPuertas,"kill")
+	var tweenPuertas:Tween = get_tree().create_tween().bind_node(self).set_parallel(true).set_process_mode(Tween.TWEEN_PROCESS_PHYSICS)
+	matar_tweens.connect( Callable(tweenPuertas,"kill") )
 	
 	tweenPuertas.tween_property(parteSup, "position", posicionAbiertaSup, duracion)
 	tweenPuertas.tween_property(parteInf, "position", posicionAbiertaInf, duracion)
@@ -53,8 +53,8 @@ func open():
 	
 func close():
 	emit_signal("matar_tweens")
-	var tweenPuertas:SceneTreeTween = get_tree().create_tween().bind_node(self).set_parallel(true).set_process_mode(Tween.TWEEN_PROCESS_PHYSICS)
-	connect("matar_tweens",tweenPuertas,"kill")
+	var tweenPuertas:Tween = get_tree().create_tween().bind_node(self).set_parallel(true).set_process_mode(Tween.TWEEN_PROCESS_PHYSICS)
+	matar_tweens.connect( Callable(tweenPuertas,"kill") )
 	
 	tweenPuertas.tween_property(parteSup, "position", posicionCerradaSup, duracion)
 	tweenPuertas.tween_property(parteInf, "position", posicionCerradaInf, duracion)

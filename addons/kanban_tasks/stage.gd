@@ -5,15 +5,15 @@ const task_script := preload("res://addons/kanban_tasks/task.gd")
 
 const edit_label_script := preload("res://addons/kanban_tasks/edit_label/edit_label.gd")
 
-onready var panel_container := $PanelContainer
-onready var label_title := $PanelContainer/VBoxContainer/HBoxContainer/Title
-onready var button_new := $PanelContainer/VBoxContainer/HBoxContainer/New
-onready var menu_button_new := $PanelContainer/VBoxContainer/HBoxContainer/NewCategory
-onready var task_holder := $PanelContainer/VBoxContainer/ScrollContainer/MarginContainer/TaskHolder
-onready var scroll_container := $PanelContainer/VBoxContainer/ScrollContainer
+@onready var panel_container := $PanelContainer
+@onready var label_title := $PanelContainer/VBoxContainer/HBoxContainer/Title
+@onready var button_new := $PanelContainer/VBoxContainer/HBoxContainer/New
+@onready var menu_button_new := $PanelContainer/VBoxContainer/HBoxContainer/NewCategory
+@onready var task_holder := $PanelContainer/VBoxContainer/ScrollContainer/MarginContainer/TaskHolder
+@onready var scroll_container := $PanelContainer/VBoxContainer/ScrollContainer
 
-onready var preview_position := $PanelContainer/VBoxContainer/ScrollContainer/MarginContainer/PreviewHolder/PreviewPosition
-onready var preview_color := $PanelContainer/VBoxContainer/ScrollContainer/MarginContainer/PreviewHolder/PreviewPosition/ColorRect
+@onready var preview_position := $PanelContainer/VBoxContainer/ScrollContainer/MarginContainer/PreviewHolder/PreviewPosition
+@onready var preview_color := $PanelContainer/VBoxContainer/ScrollContainer/MarginContainer/PreviewHolder/PreviewPosition/ColorRect
 
 var board
 
@@ -23,7 +23,7 @@ var title: String setget set_title
 # but upon _ready objects get stored inside (when they where loaded)
 # this behaviour results in the unusability of it before the _ready call
 # this could be changed when/if godot supports parameters for 
-# .instance() like it works with .new()
+# .instantiate() like it works with .new()
 var tasks: Array
 
 signal change()

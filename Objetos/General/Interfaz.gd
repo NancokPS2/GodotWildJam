@@ -4,8 +4,8 @@ var jugador:Jugador
 var jefes:Array
 
 func _ready() -> void:
-	get_tree().connect("node_added",self,"track_entity_health")
-	yield(get_tree().create_timer(1),"timeout")
+	get_tree().node_added.connect(track_entity_health)
+	await get_tree().create_timer(1).timeout
 	track_entity_health(Ref.jugador)
 	track_entity_health(Ref.jefes[0])
 
@@ -15,11 +15,11 @@ func track_entity_health(entidad:Node):
 		jefes.append(entidad)
 		if jefes.size() > 1:#Si ya hay un jefe
 			add_child( $Control/VidaJefe.duplicate() ) #Añadir otra barra de vida
-			entidad.connect("VIDA_CAMBIO",self,"update_boss_health")
+			entidad.VIDA_CAMBIO.connect(update_boss_health)
 		
 	elif Ref.jugador == entidad:
 		jugador = entidad
-		entidad.connect("VIDA_CAMBIO",self,"update_player_health")
+		entidad.VIDA_CAMBIO.connect(update_player_health)
 		
 
 

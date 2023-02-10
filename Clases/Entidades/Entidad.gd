@@ -1,20 +1,21 @@
-extends KinematicBody2D
+extends CharacterBody2D
 class_name Entidad
 
 signal VIDA_CAMBIO
 
-var controlando:bool = false setget set_controlando #Solo deberia aceptar input si esto es true
-var motion = Vector2.ZERO
+var controlando:bool = false: 
+	set = set_controlando #Solo deberia aceptar input si esto es true
+	
 var temperatura:int 
 
-export (bool) var inmortal = false
-export (float) var gravedad = 0
-export (float) var tiempoInvul = 0
+@export var inmortal:bool = false
+@export var gravedad:float = 0
+@export var tiempoInvul:float = 0
 var timerInvul:Timer = Timer.new()
 
 
 var estadisticasBase:Dictionary
-export (Dictionary) var estadisticas = {
+@export var estadisticas:Dictionary = {
 	"salud":10,
 	"saludMaxima":10,
 	"energia":10,
@@ -29,7 +30,7 @@ export (Dictionary) var estadisticas = {
 func _init() -> void:
 	estadisticasBase = estadisticas.duplicate()
 
-export (Dictionary) var multiplicadorElemental = {
+@export var multiplicadorElemental:Dictionary = {
 	Const.elementos.NINGUNO:1.0,
 	Const.elementos.FUEGO:1.0,
 	Const.elementos.TIERRA:1.0,
@@ -50,8 +51,6 @@ func set_controlando(valor):
 
 func _physics_process(delta: float) -> void:
 	check_temperatura(delta)
-#	if gravedad != 0:
-#		motion += Vector2.DOWN * 10 * gravedad * delta
 
 func hurt(cantidad:int,elemento:int=0):
 	

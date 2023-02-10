@@ -1,9 +1,9 @@
 extends StaticBody2D
 class_name Estructura
 
-export (int) var salud = 10
-export (bool) var inmortal = true
-export (int) var temperatura
+@export var salud:int = 10
+@export var inmortal:bool = true
+@export var temperatura:int
 
 func hurt(cantidad:int,incomingDirection:Vector2=Vector2.ZERO):
 	if not inmortal:

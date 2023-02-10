@@ -8,7 +8,7 @@ var board
 # but upon _ready objects get stored inside (when they where loaded)
 # this behaviour results in the unusability of it before the _ready call
 # this could be changed when/if godot supports parameters for 
-# .instance() like it works with .new()
+# .instantiate() like it works with .new()
 var stages: Array
 
 signal change()

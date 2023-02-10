@@ -5,14 +5,14 @@ extends AcceptDialog
 
 signal change()
 
-onready var board: Control = get_node("../../../VBoxContainer")
+@onready var board: Control = get_node("../../../VBoxContainer")
 
 var title: String
 var details: String setget __set_details
 var category
 
-onready var details_edit: TextEdit = $VBoxContainer/TextEdit
-onready var category_option: OptionButton = $VBoxContainer/HBoxContainer/OptionButton
+@onready var details_edit: TextEdit = $VBoxContainer/TextEdit
+@onready var category_option: OptionButton = $VBoxContainer/HBoxContainer/OptionButton
 
 func _ready():
 	details_edit.connect("text_changed", self, "__on_details_edit_changed")

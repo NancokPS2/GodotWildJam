@@ -1,4 +1,4 @@
-tool
+#@tool
 extends Control
 
 signal categories_changed()
@@ -24,20 +24,22 @@ var shortcut_rename := ShortCut.new()
 var shortcut_search := ShortCut.new()
 var shortcut_confirm := ShortCut.new()
 
-onready var search_bar: LineEdit = $Header/HBoxContainer/Search
-onready var button_search_details: Button = $Header/HBoxContainer/SearchDetails
-onready var button_settings: Button = $Header/HBoxContainer/Settings
-onready var button_help: Button = $Header/HBoxContainer/Help
-onready var column_holder: HBoxContainer = $MarginContainer/ScrollContainer/Columns
+@onready var search_bar: LineEdit = $Header/HBoxContainer/Search
+@onready var button_search_details: Button = $Header/HBoxContainer/SearchDetails
+@onready var button_settings: Button = $Header/HBoxContainer/Settings
+@onready var button_help: Button = $Header/HBoxContainer/Help
+@onready var column_holder: HBoxContainer = $MarginContainer/ScrollContainer/Columns
 
-onready var details_dialog := $Dialogs/Details
-onready var documentation_dialog := $Dialogs/Documentation
-onready var settings_dialog := $Dialogs/Settings
+@onready var details_dialog := $Dialogs/Details
+@onready var documentation_dialog := $Dialogs/Documentation
+@onready var settings_dialog := $Dialogs/Settings
 
 class Category:
 	signal changed()
-	var title: String setget set_title
-	var color: Color setget set_color
+	var title: String:
+		set = set_title
+	var color: Color:
+		set = set_color
 	func set_title(val):
 		title = val
 		emit_signal("changed")
@@ -148,7 +150,7 @@ func _unhandled_key_input(event):
 		get_tree().set_input_as_handled()
 
 func construct_task(title:String="Task", details:String="", category=categories[0]):
-	var scene = task_scene.instance()
+	var scene = task_scene.instantiate()
 	scene.connect("change", self, "save_data")
 	tasks.append(scene)
 	scene.init(self, title, details, category)
@@ -166,7 +168,7 @@ func delete_task(scene):
 	emit_signal("tasks_changed")
 
 func construct_stage(title:String="Stage", tasks:Array=[]):
-	var scene = stage_scene.instance()
+	var scene = stage_scene.instantiate()
 	scene.connect("change", self, "save_data")
 	stages.append(scene)
 	scene.init(self, title, tasks)
@@ -184,7 +186,7 @@ func delete_stage(scene):
 	emit_signal("stages_changed")
 
 func construct_column(stages:Array=[]):
-	var scene = column_scene.instance()
+	var scene = column_scene.instantiate()
 	scene.connect("change", self, "save_data")
 	columns.append(scene)
 	scene.init(self, stages)

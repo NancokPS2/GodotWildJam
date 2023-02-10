@@ -6,7 +6,7 @@ export (Const.materiales) var tipoMaterial
 
 export (Texture) var textura
 var nombre:String
-var sprite = Sprite.new()
+var sprite = Sprite2D.new()
 var area = Area2D.new()
 
 func _ready():

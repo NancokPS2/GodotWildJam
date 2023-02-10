@@ -1,4 +1,4 @@
-extends KinematicBody2D
+extends CharacterBody2D
 class_name PiezaPuzzle
 
 var puedeEncastrar:bool = true

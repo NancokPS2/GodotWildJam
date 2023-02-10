@@ -2,8 +2,8 @@ extends Resource
 class_name ArchivoGuardado
 
 
-export (String) var nombre
-export (Dictionary) var datosJugador
+@export var nombre:String
+@export var datosJugador:Dictionary
 
 
 var dir := Directory.new()

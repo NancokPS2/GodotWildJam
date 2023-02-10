@@ -1,22 +1,22 @@
 extends Area2D
 class_name Hitbox
 
-enum TiposObjetivos { ESTRUCTURA,JUGADOR,ENEMIGO,ENTIDAD}
+enum TiposObjetivos { ESTRUCTURA=1<<1,JUGADOR=1<<2,ENEMIGO=1<<3,ENTIDAD=1<<4}
 
-export (Array,NodePath) var immunes
-export (bool) var activa:bool = true
-export (int) var poder:int = 1
-export (TiposObjetivos,FLAGS) var objetivoValido:int
-export (bool) var autoActivar = true
+@export var immunes:Array[NodePath]
+@export var activa:bool = true
+@export var poder:int = 1
+@export var objetivoValido:TiposObjetivos
+@export var autoActivar:bool = true
 
-export (float) var cooldown = 1
+@export var cooldown:float = 1
 
-onready var temporizador:Timer = Timer.new()
+@onready var temporizador:Timer = Timer.new()
 
 
 
 func _ready() -> void:
-	connect("body_entered",self,"trigger")
+	body_entered.connect(trigger)
 	
 func _physics_process(delta: float) -> void:
 	if autoActivar:
@@ -51,11 +51,11 @@ func trigger(target:Node):
 			return
 		else:#Sino, ejecutar
 			temporizador.start(cooldown)#Empezar el temporizador
-			yield(temporizador,"timeout")#Esperar a que termine
+			await temporizador.timeout#Esperar a que termine
 			
 			var timerInvul = target.get("timerInvul")#Adquirir el temporizador de imunidad del objetivo
 			if timerInvul is Timer and not timerInvul.is_stoped():#Si este existe y no se a detenido
-				yield(timerInvul,"timeout")#Esperar por el
+				await timerInvul.timeout#Esperar por el
 				
 		#Una vez termine el temporizador, siempre y cuando el objetivo sigua en su zona, continua dañandolo
 

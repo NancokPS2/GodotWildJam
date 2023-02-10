@@ -4,10 +4,10 @@ extends AcceptDialog
 
 const EditLabel = preload('./edit_label/edit_label.gd')
 
-onready var category_container: PanelContainer = $ScrollContainer/VBoxContainer/Categories
-onready var category_holder: VBoxContainer = $ScrollContainer/VBoxContainer/Categories/VBoxContainer/VBoxContainer
-onready var category_add: Button = $ScrollContainer/VBoxContainer/Categories/VBoxContainer/Header/Add
-onready var board = $'../../../VBoxContainer'
+@onready var category_container: PanelContainer = $ScrollContainer/VBoxContainer/Categories
+@onready var category_holder: VBoxContainer = $ScrollContainer/VBoxContainer/Categories/VBoxContainer/VBoxContainer
+@onready var category_add: Button = $ScrollContainer/VBoxContainer/Categories/VBoxContainer/Header/Add
+@onready var board = $'../../../VBoxContainer'
 
 
 class CategoryEntry extends HBoxContainer:

@@ -1,32 +1,29 @@
-extends KinematicBody2D
+extends CharacterBody2D
 class_name ArmaParte
 
 const EncastreIndices = {
 	"piezasCompatibles":0,
 	"usado":1
 }
-const Tipos = {
-	"MANGO":1<<1,
-	"HOJA_ESPADA":1<<2,
-	"HOJA_LANZA":1<<3
-	}
+
+enum Tipos {MANGO = 1<<1,HOJA_ESPADA = 1<<2,HOJA_LANZA = 1<<3}
 	
 const EncastreFormato = {"posicion":Vector2(0.0,0.0), "piezasCompatibles":Tipos.HOJA_ESPADA, "usado":false}
 
+@export_category("Custom")
+@export var nombre:String
 
-export (String) var nombre
-
-export(Vector2) var origen
-export(Tipos) var tipoDePieza
-export (String) var animationPlayerPath
-export (String) var texturaSprite
-export (Array,Dictionary) var encastres = [ EncastreFormato ]
-export (PoolVector2Array) var colisiones
-export (Dictionary) var statBoosts = {
+@export var origen:Vector2
+@export var tipoDePieza:Tipos
+@export var animationPlayerPath:String
+@export var texturaSprite:Texture
+@export var encastres:Array = [ EncastreFormato ]
+@export var colisiones:PackedVector2Array
+@export var statBoosts:Dictionary = {
 	"poder":5,
 	"critico":15,
 }
-export (Dictionary) var miscValues
+@export var miscValues:Dictionary
 
 
 func get_save_dict()->Dictionary:
@@ -44,7 +41,7 @@ func get_save_dict()->Dictionary:
 	}
 	return dictReturn
 
-var sprite:Sprite
+var sprite:Sprite2D
 #var encastres:Array#Todos los encastres en esta arma se guardan aqui
 var hitbox:Area2D
 var arma #ArmaMarco, referencia a el arma del cual esta parte es parte, parte
@@ -63,7 +60,7 @@ func register_children():
 		if node is Area2D:
 			hitbox = node
 			
-		elif node is Sprite:
+		elif node is Sprite2D:
 			sprite = node
 			
 	
@@ -79,7 +76,7 @@ func post_attack(params:Dictionary):
 
 func connection_setup():
 	disconnect_signals()
-	hitbox.connect("body_entered",arma,"target_hit")
+	hitbox.body_entered.connect( Callable(arma,"target_hit") )
 	
 func disconnection_setup():
 	disconnect_signals()
@@ -90,13 +87,3 @@ func disconnect_signals():
 func incoming_input(event):
 	pass
 		
-export (String) var inputSeleccion
-var seleccionado:bool
-#func _unhandled_input(event: InputEvent) -> void:
-#	if event.is_action(inputSeleccion) and event.is_action_pressed(inputSeleccion):
-#		seleccionado = !seleccionado
-#
-#	if Const.debugMode and seleccionado:
-#		position = get_global_mouse_position()
-
-	

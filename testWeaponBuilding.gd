@@ -1,8 +1,8 @@
 extends Node2D
 
 var marco = ArmaMarco.new()
-var parteMango = load("res://Objetos/Armas/Partes/BasicHilt.tscn").instance()
-var parteHoja = load("res://Objetos/Armas/Partes/Blade.tscn").instance()
+var parteMango = load("res://Objetos/Armas/Partes/BasicHilt.tscn").instantiate()
+var parteHoja = load("res://Objetos/Armas/Partes/Blade.tscn").instantiate()
 
 func _ready() -> void:
 	add_child(marco)

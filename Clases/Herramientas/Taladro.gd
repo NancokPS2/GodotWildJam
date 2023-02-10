@@ -1,17 +1,17 @@
 extends Herramienta
 class_name HerramientaTaladro
 
-export (float) var alcanze = 50
-export (int) var poder = 1
+@export var alcanze:float = 50
+@export var poder:int = 1
 
 
 var rayCast = RayCast2D.new()
-var sprite = Sprite.new()
+var sprite = Sprite2D.new()
 
 
 
 func _ready() -> void:
-	rayCast.cast_to = Vector2(alcanze,0)#Darle forma
+	rayCast.target_position = Vector2(alcanze,0)#Darle forma
 	add_child(rayCast)#Añadirlo
 	
 	sprite.centered = true#Centrarlo
@@ -19,7 +19,7 @@ func _ready() -> void:
 	add_child(sprite)
 	
 func equip(user:Node):
-	.equip(user)
+	super.equip(user)
 	rayCast.add_exception(user)
 	pass
 	

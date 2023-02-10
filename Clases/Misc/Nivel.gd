@@ -7,7 +7,7 @@ export (PackedScene) var escenaEstructura:PackedScene
 export (Vector2) var spawnJefe:Vector2
 export (Vector2) var spawnJugador:Vector2
 
-onready var jefe:EntidadJefe = escenaJefe.instance()
+@onready var jefe:EntidadJefe = escenaJefe.instantiate()
 
 func _ready() -> void:
 	jefe.position = spawnJefe

@@ -149,7 +149,7 @@ func afterimage(duration:float = 0.15):
 	afterimage.position = position
 	
 	afterimage.modulate = Color(1,1,1,0.7)
-	var tween:SceneTreeTween = get_tree().create_tween().bind_node(afterimage)#Hacer transparente
+	var tween:Tween = get_tree().create_tween().bind_node(afterimage)#Hacer transparente
 	tween.tween_property(afterimage,"modulate",Color(1,1,1,0), duration)
 	
 	

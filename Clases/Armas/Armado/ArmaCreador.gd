@@ -1,7 +1,7 @@
 extends ViewportContainer
 class_name ArmaCreador
 
-onready var valoresDefault:Dictionary = {
+@onready var valoresDefault:Dictionary = {
 	"piezas":[ load("res://Objetos/Armas/Partes/BasicHilt.tscn").duplicate(), load("res://Objetos/Armas/Partes/Blade.tscn").duplicate() ],
 	"arma":load("res://Objetos/Armas/Guardadas/EspadaSimple.tscn")
 }
@@ -9,8 +9,8 @@ onready var valoresDefault:Dictionary = {
 var arma:ArmaMarco
 var camara:Camera2D
 var buttonGroup:ButtonGroup = ButtonGroup.new()
-onready var viewport = $Viewport
-onready var listaPiezas = $Viewport/UI/ListaPiezas
+@onready var viewport = $Viewport
+@onready var listaPiezas = $Viewport/UI/ListaPiezas
 
 var piezas:Array
 
@@ -18,7 +18,7 @@ var piezaSeleccionada:Node
 
 func _ready():
 	#TEMP
-#	arma = load("res://Objetos/Armas/Guardadas/EspadaSimple.tscn").instance()
+#	arma = load("res://Objetos/Armas/Guardadas/EspadaSimple.tscn").instantiate()
 	
 	
 	listaPiezas.margin_right = 0.2
@@ -34,10 +34,10 @@ func _ready():
 #	camara.current = true
 #	camara.zoom *= 0.3
 	
-	if piezas.empty():
+	if piezas.is_empty():
 		piezas = valoresDefault.piezas
 	if arma == null:
-		arma = valoresDefault.arma.instance()
+		arma = valoresDefault.arma.instantiate()
 		
 	setup_new_arma()
 	fill_lista()
@@ -71,7 +71,7 @@ func fill_lista():
 
 func select_pieza(representacion:RepresentacionParte):
 	piezaSeleccionada = representacion.referenciaParte
-	if arma.nodosPartes.empty():#Si no hay piezas aun, añadir la seleccionada
+	if arma.nodosPartes.is_empty():#Si no hay piezas aun, añadir la seleccionada
 		add_parte( piezaSeleccionada, null )
 	refresh_visual_encastres()
 	
@@ -102,9 +102,9 @@ func refresh_visual_encastres():
 		
 
 func load_arma(armaCargada:PackedScene):
-	var armaAUsar = armaCargada.instance()
+	var armaAUsar = armaCargada.instantiate()
 	if armaAUsar is ArmaMarco:
-		setup_new_arma(armaAUsar.instance())
+		setup_new_arma(armaAUsar.instantiate())
 
 func rename_arma(nombreNuevo:String):
 	if arma:
@@ -132,7 +132,7 @@ class RepresentacionParte extends Button:
 	var referenciaParte:ArmaParte
 
 	func _init(referencia,buttonGroup:ButtonGroup):
-		referenciaParte = referencia.instance().duplicate()
+		referenciaParte = referencia.instantiate().duplicate()
 		group = buttonGroup
 
 	func _ready() -> void:

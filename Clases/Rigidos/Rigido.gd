@@ -1,10 +1,11 @@
 extends RigidBody2D
 class_name Rigido
-var controlando:bool = false setget set_controlando #Solo deberia aceptar input si esto es true
+var controlando:bool = false:
+	set = set_controlando #Solo deberia aceptar input si esto es true
 
 var temperatura:int 
 var inmortal:bool = false
-export (float) var salud = 50
+@export var salud:float = 50
 
 var temperaturaFusion = 50
 

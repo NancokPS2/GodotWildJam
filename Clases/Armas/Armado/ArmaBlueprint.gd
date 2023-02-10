@@ -56,7 +56,7 @@ static func build_from_blueprint(blueprint:ArmaBlueprint):
 	var piezasCargadas:Array
 	var armaNueva:=ArmaMarco.new()
 	for pieza in blueprint.piezasACargar:
-		piezasCargadas.append(load(pieza).instance().duplicate())
+		piezasCargadas.append(load(pieza).instantiate().duplicate())
 		
 	for conexion in blueprint.conexiones:#WIP
 		armaNueva
