@@ -12,7 +12,7 @@ func _ready():
 	add_child(area)
 	area.add_child(colision)
 	
-	area.connect("body_entered",self,"send_to_reactor")
+	area.connect("body_entered",send_to_reactor)
 	
 func send_to_reactor():
 	pass

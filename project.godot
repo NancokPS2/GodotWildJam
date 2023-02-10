@@ -9,11 +9,6 @@
 config_version=5
 
 _global_script_classes=[{
-"base": "Node",
-"class": &"AreaRecoleccion",
-"language": &"GDScript",
-"path": "res://Clases/Areas/AreaRecoleccion.gd"
-}, {
 "base": "Entidad",
 "class": &"Caja",
 "language": &"GDScript",
@@ -55,7 +50,6 @@ _global_script_classes=[{
 "path": "res://Clases/Interfaz/Termometro.gd"
 }]
 _global_script_class_icons={
-"AreaRecoleccion": "",
 "Caja": "",
 "CajaTexto": "",
 "ColectibleMaterial": "",
