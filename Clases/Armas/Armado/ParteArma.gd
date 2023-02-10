@@ -45,7 +45,7 @@ func get_save_dict()->Dictionary:
 
 static func generate_from_dict(saveDict:Dictionary)->ArmaParte:
 	var parte := ArmaParte.new()
-	parte.set_script(saveDict.script)
+	parte.set_script( load(saveDict.script) )
 	
 	for key in saveDict:
 		parte.set(key,saveDict[key])
