@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://d01ctwrkclp4j"]
+[gd_scene load_steps=5 format=3 uid="uid://d01ctwrkclp4j"]
 
 [ext_resource type="Script" path="res://Clases/Interfaz/SegmentedBar.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://dbl1ids8t3dao" path="res://icon.png" id="2"]
 [ext_resource type="Script" path="res://Objetos/General/Interfaz.gd" id="3"]
+[ext_resource type="Texture2D" uid="uid://bf1tw4eal3ghq" path="res://Assets/Interfaz/HUD_ANIMATION.png" id="4_fxldu"]
 
 [node name="Interfaz" type="CanvasLayer"]
 script = ExtResource("3")
@@ -12,8 +13,12 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="Vida" type="HBoxContainer" parent="Control"]
+visible = false
+layout_mode = 1
 anchors_preset = -1
 anchor_right = 0.42
 anchor_bottom = 0.11
@@ -23,6 +28,7 @@ max_value = 5
 value = 2
 
 [node name="VidaJefe" type="TextureProgressBar" parent="Control"]
+layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.1
 anchor_top = 0.9
@@ -32,3 +38,10 @@ value = 52.0
 nine_patch_stretch = true
 texture_progress = ExtResource("2")
 tint_progress = Color(1, 0, 0, 1)
+
+[node name="VidaJugador" type="Sprite2D" parent="Control"]
+modulate = Color(1, 0.301961, 0.294118, 1)
+position = Vector2(55, 16)
+texture = ExtResource("4_fxldu")
+hframes = 10
+frame = 3
