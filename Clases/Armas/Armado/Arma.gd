@@ -20,39 +20,31 @@ var active:bool
 
 var estadisticasPartes:Array
 
-@export var partesGuardadas:Array
-@export var conexiones:Array = [
-	{
-		"proveedor":0,
-		"encastre":{},
-		"encastrada":1
-	}
-]
+#@export var partesGuardadas:Array[Dictionary]
 
 func _init() -> void:
 	equipping(false)
 
+const conexionesEjemplo = []
 func get_save_dict()->Dictionary:
 	var dictReturn:Dictionary = {
 		"identificador":identificador,
 		"nombre":nombre,
-		"partesGuardadas":partesGuardadas,
 		"conexiones":conexiones,
-		"script":get_script()
+		"script":get_script().resource_path
 	}
 	return dictReturn
 	
-static func generate_from_dict(saveDict:Dictionary):
-	var nuevaArma = ArmaMarco.new()
-	nuevaArma.set_script(saveDict.script)
+static func generate_from_dict(saveDict:Dictionary)->ArmaMarco:
+	var nuevaArma:ArmaMarco = ArmaMarco.new()
+	nuevaArma.set_script( load(saveDict.script) )
 	
 	for key in saveDict:
-		nuevaArma.set(key,saveDict[key])
+		if key != "script":
+			nuevaArma.set(key,saveDict[key])
+		assert(nuevaArma is ArmaMarco)
 	
-	nuevaArma.add_saved_partes()
-	
-	
-	pass
+	return nuevaArma.duplicate()
 
 func _ready() -> void:
 	cooldownTimer.one_shot = true
@@ -60,7 +52,7 @@ func _ready() -> void:
 	cooldownTimer.stop()
 	add_child(cooldownTimer)
 	
-	add_saved_partes()
+	refresh_partes_from_conexiones()
 	refresh_animations()
 	
 	
@@ -123,19 +115,24 @@ static func report_weapon_status(arma:ArmaMarco):#Revisa el estado del arma y av
 #CONNECTION SECTION
 #----------------------------------------------
 
+#Formate encastresRegistrados = {}
+var conexiones:Dictionary = {
+	#Vector3.ZERO:{}#Key=posicion, value=diccionario del arma
+}#Registro de todas las conexiones con armas
 
-var encastres:Dictionary
+var encastresDePartes:Array:
+	get: 
+		var disponibles:Array
+		for parte in conexiones.values():
+			disponibles.append(parte["encastres"])
+					
+#					if encastre["usado"] == false:
+#						disponibles.append(encastre)
+		return disponibles
+
 var nodosPartes:Array
 
-@export var encastresEnUso:Dictionary = {
-	
-}
-
 #SETUP
-#func apply_part_attributes():
-#	for node in get_children():
-#		if node is ArmaParte:
-#			node.apply_attributes(self)
 			
 func get_stat_boosts_from_partes() -> Dictionary:
 	var dictRetorno:Dictionary
@@ -147,45 +144,37 @@ func get_stat_boosts_from_partes() -> Dictionary:
 				dictRetorno[stat] = parte.statBoosts[stat]
 	return dictRetorno
 			
-#func get_free_encastres():
-#	var encastresRetornables:Array
-#	for encastre in encastres:#Guardar los sin usar por separado
-#		if not encastre.usado:
-#			encastresRetornables.append(encastre)
-#	print(encastresRetornables)
-#	return encastresRetornables
+#CONNECTIONS		
 
-#CONNECTIONS
-
-
-
-func add_saved_partes():
+func refresh_partes_from_conexiones():
 	while not nodosPartes.is_empty():
 		nodosPartes.pop_back().queue_free()
 		
-	for parteDict in partesGuardadas:
-		var parteNueva:ArmaParte = ArmaParte.generate_from_dict(parteDict)
+	for posicionEncastre in conexiones:
+		var parteNueva:ArmaParte = ArmaParte.generate_from_dict(conexiones[posicionEncastre])
 		nodosPartes.append(parteNueva)
-		parteNueva.arma = self
+		parteNueva.set("arma", self)
+		parteNueva.set( "position", Vector2(posicionEncastre.x, posicionEncastre.y) )
 
 		add_child(parteNueva)
 		parteNueva.connection_setup()
 	
-	for conexion in conexiones:
-		var IDEncastrada = nodosPartes[conexion.encastrada]
-		var IDProveedora
-		var encastreProveedora
-		connect_parte(IDEncastrada,IDProveedora,encastreProveedora)
-		pass
-		
 	refresh_animations()
 		
-func connect_parte(parteConectada:ArmaParte,parteProveedora:ArmaParte,encastre:int):
-	var encastreEnUso:Dictionary = parteProveedora.encastres[encastre]
-	if encastreEnUso.piezasCompatibles && parteConectada.tipoDePieza:
-		parteConectada.position = encastreEnUso.posicion - parteProveedora.origen
+func add_conexion(parte:Dictionary,encastre:Dictionary,forzar:bool = false):
+	if encastre["piezasCompatibles"] && parte["tipoDePieza"] or forzar:
+		conexiones[encastre["posicion"]] = parte
 	else:
 		push_error("Se intento encastrar 2 piezas incompatibles")
+		
+func remove_conexion(posicionEncastre:Vector2):
+	conexiones.erase(posicionEncastre)
+
+	for nodo in get_children():#Encontrar la parte en esa posicion y borrarlo
+		if nodo.get("position") == Vector2(posicionEncastre.x, posicionEncastre.y):
+			nodo.queue_free()
+			return
+			
 
 #func add_initial_piece(pieza:ArmaParte):#Usado cuando no hay encastres, para empezar con el arma
 #	pieza.position -= pieza.origen
@@ -244,7 +233,7 @@ func refresh_animations():#Obtiene un nodo de animacion de la primera pieza que 
 			break
 			
 		elif pieza.get("animationPlayer") != null:
-			animationPlayer = pieza.animationPlayer.instance()
+			animationPlayer = pieza.animationPlayer
 			add_child(animationPlayer)
 			animationPlayer.root_node = animationPlayer.get_path_to(self)#Conectar el AnimationPlayer a esta arma
 			break

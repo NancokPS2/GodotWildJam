@@ -179,7 +179,8 @@ var afterimageTimer:Timer = Timer.new()
 func afterimage(duration:float = 0.15):
 	var afterimage:Sprite2D = $Sprite.duplicate()
 	
-	await get_tree().create_timer(0.07).timeout
+	await get_tree().create_timer(0.07).timeout#Esperar un poco para crear la siguiente
+	
 	var timer:SceneTreeTimer = get_tree().create_timer(duration)
 	timer.timeout.connect( Callable(afterimage,"queue_free") )#Borrar la imagen luego de 0.3 segundos
 	

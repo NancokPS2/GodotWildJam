@@ -2,6 +2,7 @@ extends CharacterBody2D
 class_name Entidad
 
 signal VIDA_CAMBIO
+signal MUERTO
 
 var controlando:bool = false: 
 	set = set_controlando #Solo deberia aceptar input si esto es true
@@ -65,6 +66,7 @@ func hurt(cantidad:int,elemento:int=0):
 		die()
 		
 func die():
+	emit_signal("MUERTO",self)
 	get_parent().remove_child(self)
 
 # Declare member variables here. Examples:

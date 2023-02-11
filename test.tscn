@@ -10,7 +10,7 @@
 [ext_resource type="PackedScene" path="res://Objetos/Grua/GruaDobleBrazo.tscn" id="8"]
 [ext_resource type="PackedScene" path="res://Objetos/Misc/Caja.tscn" id="9"]
 [ext_resource type="Script" path="res://test.gd" id="10"]
-[ext_resource type="PackedScene" path="res://Objetos/Jefes/JefePrueba.tscn" id="11"]
+[ext_resource type="PackedScene" uid="uid://bls7rwvn2vwwa" path="res://Objetos/Jefes/JefePrueba.tscn" id="11"]
 [ext_resource type="Script" path="res://Clases/Misc/ChaseCam.gd" id="12"]
 
 [sub_resource type="CircleShape2D" id="2"]
