@@ -19,6 +19,8 @@ func _ready() -> void:
 	
 	add_to_group("JUGADOR",true)
 	
+	estadisticas["salud"] = 10
+	estadisticas["saludMaxima"] = 10
 	
 var inventario:Dictionary
 var armaEquipada
@@ -89,7 +91,7 @@ func dash():
 #
 
 		var originalVel = velocity
-		velocity += Vector2(direccion * estadisticas["dashDistance"])
+		velocity += Vector2(direccion * estadisticas["dashDistance"],0)
 		move_and_slide()
 		velocity = originalVel
 		
@@ -206,6 +208,10 @@ func _unhandled_input(event: InputEvent) -> void:
 		
 	elif event.is_action_released("herramienta3"):
 		cambiar_arma(3)
+	
+	elif event.is_action_released("debug1"):
+		hurt(1)
+	
 		
 
 #	elif event.is_action_pressed("usar") and herramientaEquipada.has_method("use"):

@@ -15,7 +15,7 @@ var timerInvul:Timer = Timer.new()
 
 
 var estadisticasBase:Dictionary
-@export var estadisticas:Dictionary = {
+var estadisticas:Dictionary = {
 	"salud":10,
 	"saludMaxima":10,
 	"energia":10,
@@ -30,7 +30,7 @@ var estadisticasBase:Dictionary
 func _init() -> void:
 	estadisticasBase = estadisticas.duplicate()
 
-@export var multiplicadorElemental:Dictionary = {
+var multiplicadorElemental:Dictionary = {
 	Const.elementos.NINGUNO:1.0,
 	Const.elementos.FUEGO:1.0,
 	Const.elementos.TIERRA:1.0,
@@ -65,7 +65,7 @@ func hurt(cantidad:int,elemento:int=0):
 		die()
 		
 func die():
-	queue_free()
+	get_parent().remove_child(self)
 
 # Declare member variables here. Examples:
 # var a = 2
