@@ -1,9 +1,11 @@
-res://Objetos/General/Interfaz.tscn
-res://Objetos/General/new_shader.gdshader
-res://Objetos/General/Interfaz.gd
-res://Clases/Entidades/Jugador.gd
 res://Objetos/Armas/Partes/Blade.tscn
+res://Clases/Armas/Armado/Arma.gd
 res://Test4.tscn
 res://test.tscn
+res://Objetos/General/Interfaz.tscn
 res://Objetos/Jugador/Jugador.tscn
-res://Clases/Entidades/Entidad.gd
+res://Objetos/Armas/Partes/BasicHilt.tscn
+res://Clases/Armas/Armado/ArmaCreador.tscn
+res://Objetos/Jefes/JefePrueba.tscn
+res://Clases/Armas/Armado/ArmaCreador.gd
+res://Clases/Armas/Armado/ParteArma.gd
