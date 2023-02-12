@@ -7,5 +7,12 @@ res://Objetos/Jugador/Jugador.tscn
 res://Objetos/Armas/Partes/BasicHilt.tscn
 res://Clases/Armas/Armado/ArmaCreador.tscn
 res://Objetos/Jefes/JefePrueba.tscn
+res://Objetos/Armas/Guardadas/EspadaSimple.tscn
 res://Clases/Armas/Armado/ArmaCreador.gd
-res://Clases/Armas/Armado/ParteArma.gd
+res://Assets/Armas/Partes/SwordBlade1.tres
+res://Singleton/Constantes.gd
+res://Clases/Misc/ArchivoGuardado.gd
+res://Clases/Armas/Armado/ArmaParte.gd
+res://Clases/Armas/Armado/Encastre.gd
+res://Clases/Armas/Armado/ArmaGuardada.gd
+res://Objetos/Armas/Partes/BladeTest.tscn
