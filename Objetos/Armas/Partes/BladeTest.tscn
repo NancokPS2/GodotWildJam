@@ -1,23 +1,9 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=2 format=3 uid="uid://cahidl76vxnpg"]
 
-[ext_resource path="res://Clases/Armas/Armado/ParteArma.gd" type="Script" id=1]
-[ext_resource path="res://icon.png" type="Texture" id=3]
+[ext_resource type="Script" path="res://Clases/Armas/Armado/ArmaParte.gd" id="1"]
 
-[node name="HojaEspada" type="KinematicBody2D"]
-script = ExtResource( 1 )
-origen = Vector2( 0, -9 )
-tipoDePieza = 2
-encastres = [ {
-"piezasCompatibles": [ 2 ],
-"posicion": Vector2( 0, 0 ),
-"usado": false
-} ]
-
-[node name="Sprite" type="Sprite" parent="."]
-scale = Vector2( 0.09375, 0.28125 )
-texture = ExtResource( 3 )
-
-[node name="Area2D" type="Area2D" parent="."]
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
-polygon = PoolVector2Array( -3, -9, -3, 9, 3, 9, 3, -9 )
+[node name="HojaEspada" type="CharacterBody2D"]
+script = ExtResource("1")
+slots = [Vector3(10, 0, 1)]
+origen = Vector2(0, -9)
+tipoDePieza = 4

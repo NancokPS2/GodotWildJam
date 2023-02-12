@@ -1,15 +1,13 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=4 format=3 uid="uid://bcfxxdp5drtq0"]
 
-[ext_resource path="res://Clases/Armas/Armado/Arma.gd" type="Script" id=1]
-[ext_resource path="res://Objetos/Armas/Partes/Blade.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Objetos/Armas/Partes/BasicHilt.tscn" type="PackedScene" id=4]
+[ext_resource type="Script" path="res://Clases/Armas/Armado/Arma.gd" id="1"]
+[ext_resource type="PackedScene" uid="uid://dlnp234rgjibi" path="res://Objetos/Armas/Partes/Blade.tscn" id="3"]
+[ext_resource type="PackedScene" uid="uid://c6w1wrnmx6852" path="res://Objetos/Armas/Partes/BasicHilt.tscn" id="4"]
 
 [node name="ArmaMarco" type="Node2D"]
-script = ExtResource( 1 )
-partesGuardadas = [ {
-} ]
+script = ExtResource("1")
 
-[node name="ParteArma" parent="." instance=ExtResource( 4 )]
+[node name="ParteArma" parent="." instance=ExtResource("4")]
 
-[node name="HojaEspada" parent="." instance=ExtResource( 3 )]
-position = Vector2( 0, -9 )
+[node name="HojaEspada" parent="." instance=ExtResource("3")]
+position = Vector2(0, -9)

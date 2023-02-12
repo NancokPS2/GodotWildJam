@@ -1,16 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://ctanjist6algp"]
+[gd_scene load_steps=2 format=3 uid="uid://dlnp234rgjibi"]
 
-[ext_resource type="Script" path="res://Clases/Armas/Armado/ParteArma.gd" id="1"]
-[ext_resource type="Texture2D" uid="uid://dbl1ids8t3dao" path="res://icon.png" id="3"]
+[ext_resource type="Script" path="res://Clases/Armas/Armado/ArmaParte.gd" id="1"]
 
 [node name="HojaEspada" type="CharacterBody2D"]
 script = ExtResource("1")
-
-[node name="Sprite" type="Sprite2D" parent="."]
-scale = Vector2(0.09375, 0.28125)
-texture = ExtResource("3")
-
-[node name="Area2D" type="Area2D" parent="."]
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
-polygon = PackedVector2Array(-3, -9, -3, 9, 3, 9, 3, -9)
+slots = [Vector3(-4, 0, 1)]
+texturaSprite = "res://Assets/Armas/Partes/CurvedBlade.tres"

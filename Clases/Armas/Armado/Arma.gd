@@ -30,7 +30,7 @@ func get_save_dict()->Dictionary:
 	var dictReturn:Dictionary = {
 		"identificador":identificador,
 		"nombre":nombre,
-		"conexiones":conexiones,
+		"slots":slots,
 		"script":get_script().resource_path
 	}
 	return dictReturn
@@ -52,7 +52,7 @@ func _ready() -> void:
 	cooldownTimer.stop()
 	add_child(cooldownTimer)
 	
-	refresh_partes_from_conexiones()
+	refresh_partes_from_slots()
 	refresh_animations()
 	
 	
@@ -115,22 +115,34 @@ static func report_weapon_status(arma:ArmaMarco):#Revisa el estado del arma y av
 #CONNECTION SECTION
 #----------------------------------------------
 
-#Formate encastresRegistrados = {}
-var conexiones:Dictionary = {
-	#Vector3.ZERO:{}#Key=posicion, value=diccionario del arma
-}#Registro de todas las conexiones con armas
+const SlotDefault = Vector3(0.0,0.0,ArmaParte.Tipos.MANGO)
+var slots:Dictionary
 
-var encastresDePartes:Array:
-	get: 
-		var disponibles:Array
-		for parte in conexiones.values():
-			disponibles.append(parte["encastres"])
-					
-#					if encastre["usado"] == false:
-#						disponibles.append(encastre)
-		return disponibles
+	#{}:{}#Key=slot, value=arma en formato Dict
+#Registro de todas las conexiones con armas
 
+var slotsLibres:Array[Vector3]
+
+
+
+var encastresDePartes:Array
+func refresh_slots(): 
+	var newSlots:Dictionary
+	newSlots[SlotDefault] = null
+	
+	for parte in slots.values():#Array de Dictionary
+		for slot in parte.slots:#Array de Vector3
+			newSlots[slot] = null
+			
+	for slot in slots:#Colocar las armas que ya estaban
+		var parte:Dictionary = slots[slot]
+		
+		newSlots[slot] = parte
+	slots = newSlots
+			
+	
 var nodosPartes:Array
+
 
 #SETUP
 			
@@ -146,34 +158,38 @@ func get_stat_boosts_from_partes() -> Dictionary:
 			
 #CONNECTIONS		
 
-func refresh_partes_from_conexiones():
+func refresh_partes_from_slots():
 	while not nodosPartes.is_empty():
 		nodosPartes.pop_back().queue_free()
 		
-	for posicionEncastre in conexiones:
-		var parteNueva:ArmaParte = ArmaParte.generate_from_dict(conexiones[posicionEncastre])
+	await get_tree().process_frame
+	
+	for slot in slots:
+		var parte = slots[slot]
+		if parte == null:
+			continue
+			
+		var parteNueva:ArmaParte = ArmaParte.generate_from_dict(parte)
 		nodosPartes.append(parteNueva)
 		parteNueva.set("arma", self)
-		parteNueva.set( "position", Vector2(posicionEncastre.x, posicionEncastre.y) )
-
+		parteNueva.set( "position", Vector2(slot.x,slot.y) )
 		add_child(parteNueva)
 		parteNueva.connection_setup()
 	
 	refresh_animations()
 		
-func add_conexion(parte:Dictionary,encastre:Dictionary,forzar:bool = false):
-	if encastre["piezasCompatibles"] && parte["tipoDePieza"] or forzar:
-		conexiones[encastre["posicion"]] = parte
+func add_conexion(parte:Dictionary,slot:Vector3,forzar:bool = false):
+	if int(slot.z) && parte["tipoDePieza"] or forzar:
+		slots[slot] = parte
+		var a = 1
 	else:
 		push_error("Se intento encastrar 2 piezas incompatibles")
+	refresh_slots()
 		
-func remove_conexion(posicionEncastre:Vector2):
-	conexiones.erase(posicionEncastre)
+#func remove_conexion(encastre:Dictionary):
+#	conexiones[encastre] = {}
+#	refresh_partes_from_conexiones()
 
-	for nodo in get_children():#Encontrar la parte en esa posicion y borrarlo
-		if nodo.get("position") == Vector2(posicionEncastre.x, posicionEncastre.y):
-			nodo.queue_free()
-			return
 			
 
 #func add_initial_piece(pieza:ArmaParte):#Usado cuando no hay encastres, para empezar con el arma
@@ -187,38 +203,8 @@ func remove_conexion(posicionEncastre:Vector2):
 #
 #
 #
-#func add_piece(piezaAEncastrar:ArmaParte,encastre:Vector3) -> bool:#Añade una pieza a un encastre
-#	var seLogro:bool
-#	var encastreActual = piezaAEncastrar.encastres[encastre]
-#	if encastreActual.piezasCompatibles && piezaAEncastrar.tipoDePieza != -1 and not encastreActual.usado:
-#		add_child(piezaAEncastrar.duplicate())
-#		piezaAEncastrar.position = encastreActual.posicion - piezaAEncastrar.origen
-#		piezaAEncastrar.arma = self#Añadir referencia al arma de la cual forma parte
-#
-#		encastreActual.usado = true
-#		encastresEnUso[piezaAEncastrar] = encastre#Añadir encastre a la lista
-#
-#		nodosPartes.append(piezaAEncastrar)
-#		piezaAEncastrar.connection_setup()
-#		seLogro = true
-#	else:
-#		remove_child(piezaAEncastrar)
-#		push_error("Could not join parts!")
-#		seLogro = false
-#
-#	refresh_animations()
-#	return seLogro
+
 		
-		
-#func remove_piece(pieza:ArmaParte):
-#	pieza.arma = null#Quitar la referencia
-#	encastresEnUso[pieza].usado = false#Reactivar el encastre que estaba usando
-#	encastresEnUso.erase(pieza)#Remover la pieza del registro de encastres
-#	pieza.disconnection_setup()#Desconectar todas las señales
-#	remove_child(pieza)#Remover la pieza
-#
-#	nodosPartes.erase(pieza)#Remover la pieza de la lista
-#	refresh_animations()
 	
 func refresh_animations():#Obtiene un nodo de animacion de la primera pieza que contenga uno
 	if animationPlayer:

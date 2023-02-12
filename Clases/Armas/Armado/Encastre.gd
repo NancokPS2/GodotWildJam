@@ -11,8 +11,6 @@ extends Marker2D
 var usado:bool
 var piezaPadre:Node
 var piezaConectada:Node
-	
-#export (Const.piezas,FLAGS) var piezasCompatibles
 
 func _ready() -> void:
 	piezaPadre = get_parent()

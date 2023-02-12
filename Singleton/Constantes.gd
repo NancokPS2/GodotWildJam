@@ -2,8 +2,9 @@ extends Node
 
 const Directorios:Dictionary = {
 	"PartidasGuardadas":"user://Saves/",
-	"PiezasGeneradas":"GeneratedPieces/",
-	"BlueprintsArmas":"Blueprints/"
+	"PartesGeneradas":"user://GeneratedParts/",
+	"ArmasGeneradas":"user://GeneratedWeap/",
+	"BlueprintsArmas":"user://Blueprints/"
 	
 }
 

@@ -1,16 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://cudhfg6kf8agg"]
+[gd_scene load_steps=2 format=3 uid="uid://c6w1wrnmx6852"]
 
-[ext_resource type="Script" path="res://Clases/Armas/Armado/ParteArma.gd" id="1"]
+[ext_resource type="Script" path="res://Clases/Armas/Armado/ArmaParte.gd" id="1"]
 
 [node name="ArmaParte" type="CharacterBody2D"]
 script = ExtResource("1")
-encastres = [{
-"piezasCompatibles": 0,
-"posicion": Vector2(0, 0),
-"usado": false
-}]
-
-[node name="ParteArma" type="CharacterBody2D" parent="."]
-script = ExtResource("1")
-encastres = [{}]
-colisiones = PackedVector2Array()
+slots = [Vector3(8, 0, 1)]

@@ -51,5 +51,11 @@ anchor_bottom = 1.0
 placeholder_text = "Ingrese el nombre del arma"
 
 [node name="FileDialog" type="FileDialog" parent="Viewport/UI"]
+title = "Open a File"
+size = Vector2i(320, 260)
+min_size = Vector2i(320, 260)
+max_size = Vector2i(600, 600)
+ok_button_text = "Open"
 dialog_hide_on_ok = true
+file_mode = 0
 access = 1
