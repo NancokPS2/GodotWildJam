@@ -1,9 +1,11 @@
 extends Area2D
 class_name Hitbox
 
+signal TARGET_HIT
+
 enum TiposObjetivos { ESTRUCTURA=1<<1,JUGADOR=1<<2,ENEMIGO=1<<3,ENTIDAD=1<<4}
 
-@export var immunes:Array[NodePath]
+var immunes:Array[Node]
 @export var activa:bool = true
 @export var poder:int = 1
 @export var objetivoValido:TiposObjetivos
@@ -28,7 +30,7 @@ func force_trigger():
 		trigger(body)
 
 func trigger(target:Node):
-	if not activa:#Si no esta activa, terminar aqui
+	if not activa or immunes.has(target):#Si no esta activa, terminar aqui
 		return 
 	var tiempoExtra:float = 0.0
 	var lastimar:bool = false
@@ -47,6 +49,7 @@ func trigger(target:Node):
 	
 	while lastimar and get_overlapping_bodies().has(target) and target:#Chekear si el objetivo sigue ahi y es valido
 		target.hurt(poder)#Dañar quien sea que entro
+		emit_signal("TARGET_HIT",target)
 		if cooldown == 0:#Si no hay cooldown, terminar aqui
 			return
 		else:#Sino, ejecutar
