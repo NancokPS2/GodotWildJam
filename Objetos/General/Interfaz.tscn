@@ -18,6 +18,7 @@ grow_vertical = 2
 
 [node name="Vida" type="HBoxContainer" parent="Control"]
 visible = false
+layout_mode = 1
 anchors_preset = -1
 anchor_right = 0.42
 anchor_bottom = 0.11
@@ -27,6 +28,7 @@ max_value = 5
 value = 2
 
 [node name="VidaJefe" type="TextureProgressBar" parent="Control"]
+layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.1
 anchor_top = 0.9

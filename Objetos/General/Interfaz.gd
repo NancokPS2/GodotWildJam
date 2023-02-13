@@ -17,10 +17,14 @@ func track_entity_health(entidad:Node):
 		if jefes.size() > 1:#Si ya hay un jefe
 			add_child( $Control/VidaJefe.duplicate() ) #Añadir otra barra de vida
 			entidad.VIDA_CAMBIO.connect(update_boss_health)
+		update_boss_health(entidad)
 		
 	elif Ref.jugador == entidad:
 		jugador = entidad
 		entidad.VIDA_CAMBIO.connect(update_player_health)
+		update_player_health(jugador)
+		
+
 		
 		
 var tweenJugador
@@ -34,6 +38,8 @@ func update_player_health(quien:Entidad):#El quien es proveido por la señal
 		tweenJugador.tween_property(quien,"modulate",Color(1,0.4,0.4,1),0.9) 
 		tweenJugador.chain().tween_property(quien,"modulate",Color(1,1,1,1),0.9) 
 		tweenJugador.play()
+	else:
+		tweenJugador.kill()
 			
 
 
