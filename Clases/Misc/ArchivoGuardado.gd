@@ -2,8 +2,11 @@ extends Resource
 class_name ArchivoGuardado
 
 
-@export var nombre:String
-@export var datosJugador:Dictionary
+@export var nombreArchivo:String
+@export var armasAdquiridas:Array[String]
+@export var armasEquipadas:Array[String]
+
+@export var partesAdquiridas:Array[String]
 
 
 var dir := Directory.new()
@@ -12,8 +15,11 @@ var dirPathActivo:String
 
 
 func prepare_folders():
-	var dirActivo = Const.Directorios.PartidasGuardadas + nombre + "/"
-	dir.make_dir_recursive(dirActivo + Const.Directorios.PartesGeneradas)
-	dir.make_dir_recursive(dirActivo + Const.Directorios.ArmasGeneradas)
-	dir.make_dir_recursive(dirActivo + Const.Directorios.BlueprintsArmas)
+	for directorio in Const.DirectoriosUser:
+		dir.make_dir_recursive(directorio)
+		
+		
+func save_self():
+	ResourceSaver.save(self, Const.DirectoriosUser.PartidasGuardadas + nombreArchivo + ".tres")
 	
+
