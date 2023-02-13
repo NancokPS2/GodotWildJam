@@ -5,5 +5,6 @@
 [node name="HojaEspada" type="CharacterBody2D"]
 script = ExtResource("1")
 slots = [Vector3(10, 0, 1)]
+nombre = "BladeTest"
 origen = Vector2(0, -9)
-tipoDePieza = 4
+tipoDePieza = 8

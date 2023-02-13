@@ -1,7 +1,16 @@
-[gd_scene load_steps=2 format=3 uid="uid://c6w1wrnmx6852"]
+[gd_scene load_steps=3 format=3 uid="uid://c6w1wrnmx6852"]
 
 [ext_resource type="Script" path="res://Clases/Armas/Armado/ArmaParte.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://dfe58q25gc4m0" path="res://Assets/Armas/Partes/BasicHilt.tres" id="2_8vmso"]
 
 [node name="ArmaParte" type="CharacterBody2D"]
 script = ExtResource("1")
-slots = [Vector3(8, 0, 1)]
+slots = [Vector3(8, -7, 1)]
+nombre = "BasicHilt"
+texturaSprite = "res://Assets/Armas/Partes/BasicHilt.tres"
+
+[node name="Sprite2d" type="Sprite2D" parent="."]
+texture = ExtResource("2_8vmso")
+
+[node name="Marker2d" type="Marker2D" parent="Sprite2d"]
+position = Vector2(8, -7)

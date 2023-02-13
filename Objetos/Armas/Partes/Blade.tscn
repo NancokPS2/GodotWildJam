@@ -1,8 +1,18 @@
-[gd_scene load_steps=2 format=3 uid="uid://dlnp234rgjibi"]
+[gd_scene load_steps=3 format=3 uid="uid://dlnp234rgjibi"]
 
 [ext_resource type="Script" path="res://Clases/Armas/Armado/ArmaParte.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://bivb253amnj2c" path="res://Assets/Armas/Partes/CurvedBlade.tres" id="2_se7f0"]
 
 [node name="HojaEspada" type="CharacterBody2D"]
 script = ExtResource("1")
 slots = [Vector3(-4, 0, 1)]
+nombre = "Blade"
+origen = Vector2(-52, 25)
+tipoDePieza = 4
 texturaSprite = "res://Assets/Armas/Partes/CurvedBlade.tres"
+
+[node name="Sprite2d" type="Sprite2D" parent="."]
+texture = ExtResource("2_se7f0")
+
+[node name="Marker2d" type="Marker2D" parent="Sprite2d"]
+position = Vector2(-52, 25)
