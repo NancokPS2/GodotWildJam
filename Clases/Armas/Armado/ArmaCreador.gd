@@ -3,8 +3,10 @@ class_name ArmaCreador
 
 @onready var valoresDefault:Dictionary = {
 	"partes":[ ],
-	"arma":load("res://Objetos/Armas/Guardadas/EspadaSimple.tscn")
+	"armas":[ ]
 }
+
+@export var autoConversion:bool
 
 var arma:ArmaMarco
 var camara:Camera2D
@@ -19,7 +21,15 @@ var parteSeleccionada:Dictionary
 func _ready():
 	#TEMP
 #	arma = load("res://Objetos/Armas/Guardadas/EspadaSimple.tscn").instantiate()
-	
+	if autoConversion:#Convierte escenas de partes a diccionarios
+		for parteFile in Utility.FileManipulation.get_file_paths_in_folder("res://Objetos/Armas/Partes/"):
+			var parteScene:Resource = load(parteFile)
+			var parte:ArmaParte = parteScene.instantiate()
+			var config:=ConfigFile.new()
+			config.set_value("Main","Main",parte.get_save_dict())
+			print ( str(config.save(Const.Directorios.PartesGeneradas+parte.nombre+".ini") ) )
+			
+		
 	
 	listaPiezas.anchor_right = 0.2
 	listaPiezas.anchor_bottom = 1.0
@@ -31,16 +41,25 @@ func _ready():
 	$Viewport/UI/Abrir.pressed.connect( Callable($Viewport/UI/FileDialog, "popup") )
 	$Viewport/UI/Guardar.pressed.connect(save_arma)
 	$Viewport/UI/LineEdit.text_submitted.connect(rename_arma)
+	
+	if self.is_editor_hint():
+		$Viewport/UI/FileDialog.file_mode = FileDialog.ACCESS_RESOURCES
+	else:
+		$Viewport/UI/FileDialog.file_mode = FileDialog.ACCESS_USERDATA
 #	camara.current = true
 #	camara.zoom *= 0.3
 	
 	if partes.is_empty():
 		partes = valoresDefault.partes
 		for partePath in Utility.FileManipulation.get_file_paths_in_folder(Const.Directorios.PartesGeneradas):
-			var config:=ConfigFile.new()
-			config.open(partePath)
-			var parteDict = config.get_value("Main","Main")
-			partes.append(parteDict)
+			var armaAUsar:ArmaGuardada = load(partePath)
+			var armaDict:Dictionary = armaAUsar.datos
+			partes.append(armaDict.duplicate())
+			
+		for partePathUser in Utility.FileManipulation.get_file_paths_in_folder(Const.DirectoriosUser.PartesGeneradas):
+			var armaAUsar:ArmaGuardada = load(partePathUser)
+			var armaDict:Dictionary = armaAUsar.datos
+			partes.append(armaDict.duplicate())
 			
 	if arma == null:
 		arma = valoresDefault.arma.instantiate()
@@ -57,22 +76,24 @@ func setup_new_arma(armaDict:Dictionary = ArmaMarco.new().get_save_dict()  ):
 		arma.queue_free()
 		await get_tree().process_frame
 	
-	var nuevaArma:ArmaMarco = ArmaMarco.new()
-	nuevaArma = nuevaArma.generate_from_dict(armaDict)
+	var nuevaArma:ArmaMarco = ArmaMarco.generate_from_dict(armaDict)
+	var thing = 1
 	viewport.add_child( nuevaArma )
 	
 	arma = nuevaArma
 	
-	refresh_visual_encastres()
+	arma.refresh_partes_from_slots()
 	reset_view()
+	
+	refresh_visual_encastres()
 	
 func select_pieza(representacion:RepresentacionParte):
 	parteSeleccionada = representacion.parteDict
 	if arma.get("nodosPartes").is_empty():#Si no hay piezas aun, añadir la seleccionada
-		add_parte( parteSeleccionada, arma.SlotDefault, true )
+		add_parte(arma.SlotDefault, parteSeleccionada, true )
 		
 	
-func add_parte(parte:Dictionary,slot:Vector3,forzar=false):
+func add_parte(slot:Vector3,parte:Dictionary=parteSeleccionada,forzar=false):
 	var valido:bool
 	arma.add_conexion(parte,slot,forzar)#TEMP true
 	arma.refresh_partes_from_slots()
@@ -109,7 +130,7 @@ func refresh_visual_encastres():
 			button.modulate = Color(1,0,0,0.5)
 			button.icon = load("res://icon.png")
 			
-			button.pressed.connect(add_parte.bind(parteSeleccionada,slot))
+			button.pressed.connect(add_parte.bind(slot))
 		else:
 			print(str(slot) + " ya esta en uso.")
 			
@@ -117,10 +138,13 @@ func refresh_visual_encastres():
 		
 
 func load_arma(armaFile:String):
-	var armaAUsar:= ConfigFile.new()
-	armaAUsar.load(armaFile)
-	var armaDict:Dictionary = armaAUsar.get_value("Main","Main")
-	setup_new_arma( armaDict ) 
+#	var armaAUsar:= ConfigFile.new()
+#	armaAUsar.load(armaFile)
+#	var armaDict:Dictionary = armaAUsar.get_value("Main","Main")
+#	setup_new_arma( armaDict ) 
+	var armaAUsar:ArmaGuardada = load(armaFile)
+	var armaDict:Dictionary = armaAUsar.datos
+	setup_new_arma( armaDict.duplicate() ) 
 
 func rename_arma(nombreNuevo:String):
 	if arma:
@@ -132,9 +156,13 @@ func save_arma():
 	var dir:Directory = Directory.new()
 	dir.make_dir_recursive(Const.Directorios.ArmasGeneradas)
 	
-	var armaFile:ConfigFile = ConfigFile.new()
-	armaFile.set_value( "Main","Main",arma.get_save_dict() )
-	print( "Creado archivo con codigo de error: " + str(armaFile.save(Const.Directorios.ArmasGeneradas + arma.nombre + ".ini")) )
+#	var armaFile:ConfigFile = ConfigFile.new()
+#	armaFile.set_value( "Main","Main",arma.get_save_dict() )
+#	print( "Creado archivo con codigo de error: " + str(armaFile.save(Const.Directorios.ArmasGeneradas + arma.nombre + ".ini")) )
+	var armaFile:=ArmaGuardada.new()
+	var armaDict = arma.get_save_dict()
+	armaFile.datos = arma.get_save_dict().duplicate()
+	print( "Creado archivo con codigo de error: " + str(ResourceSaver.save(armaFile, Const.Directorios.ArmasGeneradas + arma.nombre + ".tres")) )
 
 	
 	
@@ -159,7 +187,7 @@ class RepresentacionParte extends Button:
 		custom_minimum_size = Vector2(64,128)
 		anchor_right = 1.0
 		anchor_bottom = 1.0
-		self.set("icon", parteDict["texturaSprite"] )
+		icon = load( parteDict["texturaSprite"] )
 		
 
 	func _toggled(presionado):

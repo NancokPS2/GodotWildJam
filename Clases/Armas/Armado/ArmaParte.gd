@@ -13,7 +13,7 @@ const SlotDefault:= Vector3(0.0, 0.0,Tipos.MANGO)
 @export var identificador:String
 
 @export var origen:Vector2
-@export var tipoDePieza:Tipos
+@export var tipoDePieza:Tipos = 1
 @export_file("") var animationPlayerPath:String = "res://Objetos/Armas/Animaciones/SwordSwing.tscn"
 @export_file("") var texturaSprite:String = "res://icon.png"
 

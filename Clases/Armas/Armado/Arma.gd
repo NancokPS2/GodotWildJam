@@ -43,8 +43,10 @@ static func generate_from_dict(saveDict:Dictionary)->ArmaMarco:
 		if key != "script":
 			nuevaArma.set(key,saveDict[key])
 		assert(nuevaArma is ArmaMarco)
+		
+#	assert(not nuevaArma.slots.is_empty())
 	
-	return nuevaArma.duplicate()
+	return nuevaArma
 
 func _ready() -> void:
 	cooldownTimer.one_shot = true
@@ -172,7 +174,7 @@ func refresh_partes_from_slots():
 		var parteNueva:ArmaParte = ArmaParte.generate_from_dict(parte)
 		nodosPartes.append(parteNueva)
 		parteNueva.set("arma", self)
-		parteNueva.set( "position", Vector2(slot.x,slot.y) )
+		parteNueva.set( "position", Vector2(slot.x,slot.y) - parteNueva.origen )
 		add_child(parteNueva)
 		parteNueva.connection_setup()
 	
@@ -186,21 +188,6 @@ func add_conexion(parte:Dictionary,slot:Vector3,forzar:bool = false):
 		push_error("Se intento encastrar 2 piezas incompatibles")
 	refresh_slots()
 		
-#func remove_conexion(encastre:Dictionary):
-#	conexiones[encastre] = {}
-#	refresh_partes_from_conexiones()
-
-			
-
-#func add_initial_piece(pieza:ArmaParte):#Usado cuando no hay encastres, para empezar con el arma
-#	pieza.position -= pieza.origen
-#	pieza.arma = self
-#	add_child(pieza.duplicate())
-#	nodosPartes.append(pieza)
-#	pieza.connection_setup()
-#	add_saved_partes()
-#	refresh_animations()
-#
 #
 #
 

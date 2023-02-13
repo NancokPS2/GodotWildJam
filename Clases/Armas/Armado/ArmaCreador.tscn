@@ -10,6 +10,7 @@ grow_horizontal = 2
 grow_vertical = 2
 stretch = true
 script = ExtResource("1")
+autoConversion = true
 
 [node name="Viewport" type="SubViewport" parent="."]
 handle_input_locally = false
