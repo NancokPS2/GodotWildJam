@@ -287,8 +287,6 @@ libraries = {
 
 [node name="Hitbox" type="Area2D" parent="."]
 script = ExtResource("5")
-immunes = [NodePath("..")]
-poder = 12
 objetivoValido = 2
 cooldown = 0.0
 

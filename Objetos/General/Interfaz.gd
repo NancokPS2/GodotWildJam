@@ -38,7 +38,7 @@ func update_player_health(quien:Entidad):#El quien es proveido por la señal
 		tweenJugador.tween_property(quien,"modulate",Color(1,0.4,0.4,1),0.9) 
 		tweenJugador.chain().tween_property(quien,"modulate",Color(1,1,1,1),0.9) 
 		tweenJugador.play()
-	else:
+	elif tweenJugador:
 		tweenJugador.kill()
 			
 

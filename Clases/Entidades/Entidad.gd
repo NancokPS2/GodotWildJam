@@ -4,6 +4,8 @@ class_name Entidad
 signal VIDA_CAMBIO
 signal MUERTO
 
+enum EfectosEstado {POISON, SLOWDOWN}
+
 var controlando:bool = false: 
 	set = set_controlando #Solo deberia aceptar input si esto es true
 	
@@ -27,6 +29,7 @@ var estadisticas:Dictionary = {
 	"dashCooldown":0.4,
 	"dashDistance":2500
 }
+
 
 func _init() -> void:
 	estadisticasBase = estadisticas.duplicate()
