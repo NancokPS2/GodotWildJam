@@ -1,6 +1,15 @@
 extends Node
 
+var debugMode:bool = true
+
 const Directorios:Dictionary = {
+	"PartidasGuardadas":"res://SaveData/Saves/",
+	"PartesGeneradas":"res://SaveData/GeneratedParts/",
+	"ArmasGeneradas":"res://SaveData/GeneratedWeap/",
+	"BlueprintsArmas":"res://SaveData/Blueprints/"
+	
+}
+const DirectoriosUser:Dictionary = {
 	"PartidasGuardadas":"user://Saves/",
 	"PartesGeneradas":"user://GeneratedParts/",
 	"ArmasGeneradas":"user://GeneratedWeap/",
@@ -25,6 +34,5 @@ enum tipoArma {ESPADA,LANZA,MAZO,HACHA,RANGO}
 
 const tamanoEncastres = 1.0
 
-var debugMode = true
 
 enum elementos {NINGUNO,FUEGO,TIERRA,AGUA,AIRE}
