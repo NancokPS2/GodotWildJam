@@ -1,20 +1,22 @@
 extends Node
 class_name EfectoEstado
 
-
+#Uso:
+#var estado = EfectoEstadoSangrado.new()
+#estado.add_instance($Jugador, 10)
 var entidadAfectada:Entidad
 var temporizador:Timer = Timer.new()
 
-export (Color) var colorizado
-export (String) var nombre = "Efecto de Estado"
-export (float) var intervalo:float = 1.0
-export (int) var stacks = 1
+@export var colorizado:Color
+@export var nombre:String = "Efecto de Estado"
+@export var intervalo:float = 1.0
+@export var stacks:int = 1
 
 func _ready() -> void:
 	temporizador.one_shot = false
 	add_child(temporizador)
 	temporizador.start(intervalo)
-	temporizador.connect("timeout",self,"proc")
+	temporizador.tiemout.connect(proc)
 	
 func add_instance(entidad:Entidad = entidadAfectada , cantidad:int = 1):
 	entidadAfectada = entidad
@@ -37,7 +39,7 @@ func proc():
 func _proc():
 	print("Esta habilidad no hace nada")
 	
-class Medidor extends TextureProgress:
+class Medidor extends TextureProgressBar:
 	const texturaProgreso:Texture = preload("res://icon.png")
 	const texturaOver:Texture = preload("res://icon.png")
 	const texturaUnder:Texture = preload("res://icon.png")
