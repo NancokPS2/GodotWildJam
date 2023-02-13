@@ -32,7 +32,5 @@ const gravedad = 800
 enum tipoArma {ESPADA,LANZA,MAZO,HACHA,RANGO}
 
 
-const tamanoEncastres = 1.0
-
 
 enum elementos {NINGUNO,FUEGO,TIERRA,AGUA,AIRE}

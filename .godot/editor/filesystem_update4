@@ -21,3 +21,9 @@ res://Singleton/Constantes.gd
 res://Clases/Entidades/Jugador.gd
 res://Clases/Misc/ArchivoGuardado.gd
 res://Objetos/General/Interfaz.gd
+res://Clases/Entidades/BossPrueba.gd
+res://test.gd
+res://Clases/Areas/HitBox.gd
+res://Clases/Entidades/Entidad.gd
+res://Clases/Entidades/Misc/EfectoEstado.gd
+res://Clases/Entidades/Misc/EfectoVeneno.gd
