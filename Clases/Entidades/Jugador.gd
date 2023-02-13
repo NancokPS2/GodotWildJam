@@ -232,10 +232,9 @@ func update_stats(diccionario:Dictionary, resetearAntes:bool=false):
 
 
 var equipado:ArmaMarco
+var armas:Array
 
-var armas:Dictionary = {
-	1:load("res://Objetos/Armas/Guardadas/EspadaSimple.tscn").instantiate()
-}
+
 func cambiar_arma(slot:int):
 	
 	if armas.has(slot):#Asegurarse que el slot seleccionado tengo una herramienta

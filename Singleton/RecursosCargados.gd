@@ -1,12 +1,12 @@
 extends Node
 
-const Directorios:Dictionary = {
-	"Armas":"res://Objetos/Armas/Guardadas/",
-	"ArmasGeneradas":"user://ArmasGuardadas/",
-	
-	"Partes":"res://Objetos/Armas/Partes/",
-	"PartesGeneradas":"user://PartesGeneradas"
-}
+#const Directorios:Dictionary = {
+#	"Armas":"res://Objetos/Armas/Guardadas/",
+#	"ArmasGeneradas":"user://ArmasGuardadas/",
+#
+#	"Partes":"res://Objetos/Armas/Partes/",
+#	"PartesGeneradas":"user://PartesGeneradas"
+#}
 
 var armas:Array[Dictionary]
 var partes:Array[Dictionary]
@@ -16,11 +16,11 @@ func _init() -> void:
 
 func load_res():
 	var dir:=Directory.new()#Preparar todas las carpetas si no existen
-	for directorio in Directorios:
-		dir.make_dir_recursive(Directorios[directorio])
+	for directorio in Const.Directorios:
+		dir.make_dir_recursive(Const.Directorios[directorio])
 		
-	armas.append_array( Utility.FileManipulation.get_files_in_folder(Directorios.Armas) )
-	partes.append_array( Utility.FileManipulation.get_files_in_folder(Directorios.Partes) )
+#	armas.append_array( Utility.FileManipulation.get_files_in_folder(Const.Directorios.Armas) )
+#	partes.append_array( Utility.FileManipulation.get_files_in_folder(Directorios.Partes) )
 
 
 func get_arma(identif:String,generada:bool):

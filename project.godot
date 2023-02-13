@@ -191,6 +191,7 @@ config/icon="res://icon.png"
 Eventos="*res://Singleton/Eventos.gd"
 Ref="*res://Singleton/Referencias.gd"
 Const="*res://Singleton/Constantes.gd"
+LoadedRes="*res://Singleton/RecursosCargados.gd"
 
 [gui]
 
