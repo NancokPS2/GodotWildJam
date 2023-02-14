@@ -3,7 +3,7 @@ class_name ArmaCreador
 
 @onready var valoresDefault:Dictionary = {
 	"partes":[ ],
-	"armas":[ ]
+	"arma":[ ]
 }
 
 @export var autoConversion:bool
@@ -12,7 +12,7 @@ var arma:ArmaMarco
 var camara:Camera2D
 var buttonGroup:ButtonGroup = ButtonGroup.new()
 @onready var viewport = $Viewport
-@onready var listaPiezas = $Viewport/UI/ListaPiezas
+@onready var listaPiezas = $Viewport/UI/ScrollContainer/ListaPiezas
 
 var partes:Array
 
@@ -23,11 +23,11 @@ func _ready():
 #	arma = load("res://Objetos/Armas/Guardadas/EspadaSimple.tscn").instantiate()
 	if autoConversion:#Convierte escenas de partes a diccionarios
 		for parteFile in Utility.FileManipulation.get_file_paths_in_folder("res://Objetos/Armas/Partes/"):
-			var parteScene:Resource = load(parteFile)
+			var parteScene:PackedScene = load(parteFile)
 			var parte:ArmaParte = parteScene.instantiate()
 			var config:=ConfigFile.new()
 			config.set_value("Main","Main",parte.get_save_dict())
-			print ( str(config.save(Const.Directorios.PartesGeneradas+parte.nombre+".ini") ) )
+			print ( str(config.save(Const.Directorios.PartesGeneradas+parte.nombre+".cfg") ) )
 			
 		
 	
@@ -42,7 +42,7 @@ func _ready():
 	$Viewport/UI/Guardar.pressed.connect(save_arma)
 	$Viewport/UI/LineEdit.text_submitted.connect(rename_arma)
 	
-	if self.is_editor_hint():
+	if Engine.is_editor_hint():
 		$Viewport/UI/FileDialog.file_mode = FileDialog.ACCESS_RESOURCES
 	else:
 		$Viewport/UI/FileDialog.file_mode = FileDialog.ACCESS_USERDATA
@@ -51,18 +51,21 @@ func _ready():
 	
 	if partes.is_empty():
 		partes = valoresDefault.partes
+		
 		for partePath in Utility.FileManipulation.get_file_paths_in_folder(Const.Directorios.PartesGeneradas):
-			var armaAUsar:ArmaGuardada = load(partePath)
-			var armaDict:Dictionary = armaAUsar.datos
+			var armaAUsar:=ConfigFile.new()
+			armaAUsar.load(partePath)
+			var armaDict:Dictionary = armaAUsar.get_value("Main","Main")
 			partes.append(armaDict.duplicate())
 			
 		for partePathUser in Utility.FileManipulation.get_file_paths_in_folder(Const.DirectoriosUser.PartesGeneradas):
-			var armaAUsar:ArmaGuardada = load(partePathUser)
-			var armaDict:Dictionary = armaAUsar.datos
+			var armaAUsar:=ConfigFile.new()
+			armaAUsar.load(partePathUser)
+			var armaDict:Dictionary = armaAUsar.get_value("Main","Main")
 			partes.append(armaDict.duplicate())
 			
 	if arma == null:
-		arma = valoresDefault.arma.instantiate()
+		arma = ArmaMarco.new()
 		
 	setup_new_arma()
 	fill_lista()
@@ -162,7 +165,9 @@ func save_arma():
 	var armaFile:=ArmaGuardada.new()
 	var armaDict = arma.get_save_dict()
 	armaFile.datos = arma.get_save_dict().duplicate()
-	print( "Creado archivo con codigo de error: " + str(ResourceSaver.save(armaFile, Const.Directorios.ArmasGeneradas + arma.nombre + ".tres")) )
+	print( "Creado archivo (res) con codigo de error: " + str(ResourceSaver.save(armaFile, Const.DirectoriosUser.ArmasGeneradas + arma.nombre + ".tres")) )
+	print( "Creado archivo (user) con codigo de error: " + str(ResourceSaver.save(armaFile, Const.Directorios.ArmasGeneradas + arma.nombre + ".tres")) )
+	
 
 	
 	

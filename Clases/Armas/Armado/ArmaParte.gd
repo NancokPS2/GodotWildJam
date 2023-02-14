@@ -17,9 +17,9 @@ const SlotDefault:= Vector3(0.0, 0.0,Tipos.MANGO)
 @export_file("") var animationPlayerPath:String = "res://Objetos/Armas/Animaciones/SwordSwing.tscn"
 @export_file("") var texturaSprite:String = "res://icon.png"
 
-@export var colisiones:PackedVector2Array
+@export var colisiones:Array
 @export var statBoosts:Dictionary = {
-	"poder":5,
+	"poder":1,
 	"critico":15,
 }
 var miscValues:Dictionary

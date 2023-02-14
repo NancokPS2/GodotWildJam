@@ -22,11 +22,6 @@ render_target_update_mode = 4
 [node name="UI" type="CanvasLayer" parent="Viewport"]
 layer = 2
 
-[node name="ListaPiezas" type="GridContainer" parent="Viewport/UI"]
-anchors_preset = -1
-anchor_right = 0.11
-anchor_bottom = 1.0
-
 [node name="Guardar" type="Button" parent="Viewport/UI"]
 anchors_preset = -1
 anchor_left = 0.9
@@ -60,3 +55,17 @@ ok_button_text = "Open"
 dialog_hide_on_ok = true
 file_mode = 0
 access = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Viewport/UI"]
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 90.0
+grow_vertical = 2
+
+[node name="ListaPiezas" type="GridContainer" parent="Viewport/UI/ScrollContainer"]
+custom_minimum_size = Vector2i(86, 480)
+anchors_preset = -1
+offset_right = 90.0
+offset_bottom = 648.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
