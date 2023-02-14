@@ -58,6 +58,35 @@ class NodeManipulation extends Node:
 		for nodePath in nodePaths:#Transformar todos los NodePaths a referencias directas
 			nodeList.append( ownerNode.get_node(nodePath) )
 		return nodeList
+		
+	enum FileFormats {CONFIG_FILE,RESOURCE,JSONIFIED}
+	static func save_vars_to_file(object:Object, varNames:Array[String], savePath:String, fileType:int):
+		var dictToSave:Dictionary
+		
+		for variant in varNames:
+			assert( object.get(variant) != null )
+			dictToSave[variant] = object.get(variant)
+		
+		match fileType:
+			FileFormats.CONFIG_FILE:
+				var configFile:=ConfigFile.new()
+				configFile.set_value("Main","Main",dictToSave)
+				configFile.save(savePath + ".cfg")
+
+			FileFormats.RESOURCE:
+				var res:=GenericResource.new()
+				res.data = dictToSave
+				ResourceSaver.save(res,savePath + ".tres")
+			
+			FileFormats.JSONIFIED:
+				var newFile:=File.new()
+				newFile.open(savePath+ ".txt",File.WRITE)
+				newFile.store_string( JSON.stringify(dictToSave) )
+				newFile.close()
+				
+		
+	class GenericResource extends Resource:
+		@export var data:Dictionary
 	
 class FileManipulation extends Node:
 	static func get_files_in_folder(path:String) -> Array:#Obtiene todos los archivos en una carpeta
