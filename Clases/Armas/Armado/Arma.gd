@@ -35,6 +35,12 @@ func get_save_dict()->Dictionary:
 	}
 	return dictReturn
 	
+static func generate_from_tres(armaRes:ArmaGuardada)->ArmaMarco:
+	var armaDict:Dictionary = armaRes.datos.duplicate()
+	var armaNueva:ArmaMarco = ArmaMarco.generate_from_dict(armaDict)
+	return armaNueva
+	
+	
 static func generate_from_dict(saveDict:Dictionary)->ArmaMarco:
 	var nuevaArma:ArmaMarco = ArmaMarco.new()
 	nuevaArma.set_script( load(saveDict.script) )
