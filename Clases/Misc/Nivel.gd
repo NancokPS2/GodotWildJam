@@ -1,11 +1,11 @@
 extends TileMap
 class_name Nivel
 
-export (PackedScene) var escenaJefe:PackedScene
-export (PackedScene) var escenaEstructura:PackedScene
+@export var escenaJefe:PackedScene
+@export var escenaEstructura:PackedScene
 
-export (Vector2) var spawnJefe:Vector2
-export (Vector2) var spawnJugador:Vector2
+@export var spawnJefe:Vector2
+@export var spawnJugador:Vector2
 
 @onready var jefe:EntidadJefe = escenaJefe.instantiate()
 
