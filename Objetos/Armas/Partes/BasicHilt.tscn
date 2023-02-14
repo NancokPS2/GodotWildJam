@@ -8,6 +8,7 @@ script = ExtResource("1")
 slots = [Vector3(8, -7, 1)]
 nombre = "BasicHilt"
 texturaSprite = "res://Assets/Armas/Partes/BasicHilt.tres"
+colisiones = [Vector2(0, 0), Vector2(3, 0), Vector2(3, 3)]
 
 [node name="Sprite2d" type="Sprite2D" parent="."]
 texture = ExtResource("2_8vmso")

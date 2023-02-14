@@ -10,9 +10,13 @@ nombre = "Blade"
 origen = Vector2(-52, 25)
 tipoDePieza = 4
 texturaSprite = "res://Assets/Armas/Partes/CurvedBlade.tres"
+colisiones = [Vector2(-47, 25), Vector2(-16, -3), Vector2(22, -16), Vector2(51, -16), Vector2(39, -27), Vector2(-11, -19), Vector2(-52, 11)]
 
 [node name="Sprite2d" type="Sprite2D" parent="."]
 texture = ExtResource("2_se7f0")
 
 [node name="Marker2d" type="Marker2D" parent="Sprite2d"]
-position = Vector2(-52, 25)
+position = Vector2(-45, 24)
+
+[node name="CollisionPolygon2d" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-47, 25, -16, -3, 22, -16, 51, -16, 39, -27, -11, -19, -52, 11)
