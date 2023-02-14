@@ -1,6 +1,9 @@
+Button
+CollisionPolygon2D
+AnimatedSprite2D
+ScrollContainer
 Marker2D
 Sprite2D
 ArmaParte (ParteArma.gd)
 AnimationPlayer
-AnimatedSprite2D
 TextureRect
