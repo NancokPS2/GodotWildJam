@@ -1,0 +1,817 @@
+{ "frames": {
+   "Protagonist_TheMaker_halfBudgetB 0.aseprite": {
+	"frame": { "x": 0, "y": 0, "w": 256, "h": 128 },
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": { "x": 0, "y": 0, "w": 256, "h": 128 },
+	"sourceSize": { "w": 256, "h": 128 },
+	"duration": 83
+   },
+   "Protagonist_TheMaker_halfBudgetB 1.aseprite": {
+	"frame": { "x": 256, "y": 0, "w": 256, "h": 128 },
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": { "x": 0, "y": 0, "w": 256, "h": 128 },
+	"sourceSize": { "w": 256, "h": 128 },
+	"duration": 83
+   },
+   "Protagonist_TheMaker_halfBudgetB 2.aseprite": {
+	"frame": { "x": 512, "y": 0, "w": 256, "h": 128 },
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": { "x": 0, "y": 0, "w": 256, "h": 128 },
+	"sourceSize": { "w": 256, "h": 128 },
+	"duration": 83
+   },
+   "Protagonist_TheMaker_halfBudgetB 3.aseprite": {
+	"frame": { "x": 768, "y": 0, "w": 256, "h": 128 },
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": { "x": 0, "y": 0, "w": 256, "h": 128 },
+	"sourceSize": { "w": 256, "h": 128 },
+	"duration": 83
+   },
+   "Protagonist_TheMaker_halfBudgetB 4.aseprite": {
+	"frame": { "x": 1024, "y": 0, "w": 256, "h": 128 },
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": { "x": 0, "y": 0, "w": 256, "h": 128 },
+	"sourceSize": { "w": 256, "h": 128 },
+	"duration": 83
+   },
+   "Protagonist_TheMaker_halfBudgetB 5.aseprite": {
+	"frame": { "x": 1280, "y": 0, "w": 256, "h": 128 },
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": { "x": 0, "y": 0, "w": 256, "h": 128 },
+	"sourceSize": { "w": 256, "h": 128 },
+	"duration": 83
+   },
+   "Protagonist_TheMaker_halfBudgetB 6.aseprite": {
+	"frame": { "x": 0, "y": 128, "w": 256, "h": 128 },
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": { "x": 0, "y": 0, "w": 256, "h": 128 },
+	"sourceSize": { "w": 256, "h": 128 },
+	"duration": 83
+   },
+   "Protagonist_TheMaker_halfBudgetB 7.aseprite": {
+	"frame": { "x": 256, "y": 128, "w": 256, "h": 128 },
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": { "x": 0, "y": 0, "w": 256, "h": 128 },
+	"sourceSize": { "w": 256, "h": 128 },
+	"duration": 83
+   },
+   "Protagonist_TheMaker_halfBudgetB 8.aseprite": {
+	"frame": { "x": 512, "y": 128, "w": 256, "h": 128 },
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": { "x": 0, "y": 0, "w": 256, "h": 128 },
+	"sourceSize": { "w": 256, "h": 128 },
+	"duration": 83
+   },
+   "Protagonist_TheMaker_halfBudgetB 9.aseprite": {
+	"frame": { "x": 768, "y": 128, "w": 256, "h": 128 },
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": { "x": 0, "y": 0, "w": 256, "h": 128 },
+	"sourceSize": { "w": 256, "h": 128 },
+	"duration": 83
+   },
+   "Protagonist_TheMaker_halfBudgetB 10.aseprite": {
+	"frame": { "x": 1024, "y": 128, "w": 256, "h": 128 },
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": { "x": 0, "y": 0, "w": 256, "h": 128 },
+	"sourceSize": { "w": 256, "h": 128 },
+	"duration": 83
+   },
+   "Protagonist_TheMaker_halfBudgetB 11.aseprite": {
+	"frame": { "x": 1280, "y": 128, "w": 256, "h": 128 },
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": { "x": 0, "y": 0, "w": 256, "h": 128 },
+	"sourceSize": { "w": 256, "h": 128 },
+	"duration": 83
+   },
+   "Protagonist_TheMaker_halfBudgetB 12.aseprite": {
+	"frame": { "x": 0, "y": 256, "w": 256, "h": 128 },
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": { "x": 0, "y": 0, "w": 256, "h": 128 },
+	"sourceSize": { "w": 256, "h": 128 },
+	"duration": 83
+   },
+   "Protagonist_TheMaker_halfBudgetB 13.aseprite": {
+	"frame": { "x": 256, "y": 256, "w": 256, "h": 128 },
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": { "x": 0, "y": 0, "w": 256, "h": 128 },
+	"sourceSize": { "w": 256, "h": 128 },
+	"duration": 83
+   },
+   "Protagonist_TheMaker_halfBudgetB 14.aseprite": {
+	"frame": { "x": 512, "y": 256, "w": 256, "h": 128 },
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": { "x": 0, "y": 0, "w": 256, "h": 128 },
+	"sourceSize": { "w": 256, "h": 128 },
+	"duration": 83
+   },
+   "Protagonist_TheMaker_halfBudgetB 15.aseprite": {
+	"frame": { "x": 768, "y": 256, "w": 256, "h": 128 },
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": { "x": 0, "y": 0, "w": 256, "h": 128 },
+	"sourceSize": { "w": 256, "h": 128 },
+	"duration": 83
+   },
+   "Protagonist_TheMaker_halfBudgetB 16.aseprite": {
+	"frame": { "x": 1024, "y": 256, "w": 256, "h": 128 },
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": { "x": 0, "y": 0, "w": 256, "h": 128 },
+	"sourceSize": { "w": 256, "h": 128 },
+	"duration": 83
+   },
+   "Protagonist_TheMaker_halfBudgetB 17.aseprite": {
+	"frame": { "x": 1280, "y": 256, "w": 256, "h": 128 },
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": { "x": 0, "y": 0, "w": 256, "h": 128 },
+	"sourceSize": { "w": 256, "h": 128 },
+	"duration": 83
+   },
+   "Protagonist_TheMaker_halfBudgetB 18.aseprite": {
+	"frame": { "x": 0, "y": 384, "w": 256, "h": 128 },
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": { "x": 0, "y": 0, "w": 256, "h": 128 },
+	"sourceSize": { "w": 256, "h": 128 },
+	"duration": 83
+   },
+   "Protagonist_TheMaker_halfBudgetB 19.aseprite": {
+	"frame": { "x": 256, "y": 384, "w": 256, "h": 128 },
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": { "x": 0, "y": 0, "w": 256, "h": 128 },
+	"sourceSize": { "w": 256, "h": 128 },
+	"duration": 83
+   },
+   "Protagonist_TheMaker_halfBudgetB 20.aseprite": {
+	"frame": { "x": 512, "y": 384, "w": 256, "h": 128 },
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": { "x": 0, "y": 0, "w": 256, "h": 128 },
+	"sourceSize": { "w": 256, "h": 128 },
+	"duration": 83
+   },
+   "Protagonist_TheMaker_halfBudgetB 21.aseprite": {
+	"frame": { "x": 768, "y": 384, "w": 256, "h": 128 },
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": { "x": 0, "y": 0, "w": 256, "h": 128 },
+	"sourceSize": { "w": 256, "h": 128 },
+	"duration": 83
+   },
+   "Protagonist_TheMaker_halfBudgetB 22.aseprite": {
+	"frame": { "x": 1024, "y": 384, "w": 256, "h": 128 },
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": { "x": 0, "y": 0, "w": 256, "h": 128 },
+	"sourceSize": { "w": 256, "h": 128 },
+	"duration": 83
+   },
+   "Protagonist_TheMaker_halfBudgetB 23.aseprite": {
+	"frame": { "x": 1280, "y": 384, "w": 256, "h": 128 },
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": { "x": 0, "y": 0, "w": 256, "h": 128 },
+	"sourceSize": { "w": 256, "h": 128 },
+	"duration": 83
+   },
+   "Protagonist_TheMaker_halfBudgetB 24.aseprite": {
+	"frame": { "x": 0, "y": 512, "w": 256, "h": 128 },
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": { "x": 0, "y": 0, "w": 256, "h": 128 },
+	"sourceSize": { "w": 256, "h": 128 },
+	"duration": 83
+   },
+   "Protagonist_TheMaker_halfBudgetB 25.aseprite": {
+	"frame": { "x": 256, "y": 512, "w": 256, "h": 128 },
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": { "x": 0, "y": 0, "w": 256, "h": 128 },
+	"sourceSize": { "w": 256, "h": 128 },
+	"duration": 83
+   },
+   "Protagonist_TheMaker_halfBudgetB 26.aseprite": {
+	"frame": { "x": 512, "y": 512, "w": 256, "h": 128 },
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": { "x": 0, "y": 0, "w": 256, "h": 128 },
+	"sourceSize": { "w": 256, "h": 128 },
+	"duration": 83
+   },
+   "Protagonist_TheMaker_halfBudgetB 27.aseprite": {
+	"frame": { "x": 768, "y": 512, "w": 256, "h": 128 },
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": { "x": 0, "y": 0, "w": 256, "h": 128 },
+	"sourceSize": { "w": 256, "h": 128 },
+	"duration": 83
+   },
+   "Protagonist_TheMaker_halfBudgetB 28.aseprite": {
+	"frame": { "x": 1024, "y": 512, "w": 256, "h": 128 },
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": { "x": 0, "y": 0, "w": 256, "h": 128 },
+	"sourceSize": { "w": 256, "h": 128 },
+	"duration": 83
+   },
+   "Protagonist_TheMaker_halfBudgetB 29.aseprite": {
+	"frame": { "x": 1280, "y": 512, "w": 256, "h": 128 },
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": { "x": 0, "y": 0, "w": 256, "h": 128 },
+	"sourceSize": { "w": 256, "h": 128 },
+	"duration": 83
+   },
+   "Protagonist_TheMaker_halfBudgetB 30.aseprite": {
+	"frame": { "x": 0, "y": 640, "w": 256, "h": 128 },
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": { "x": 0, "y": 0, "w": 256, "h": 128 },
+	"sourceSize": { "w": 256, "h": 128 },
+	"duration": 83
+   },
+   "Protagonist_TheMaker_halfBudgetB 31.aseprite": {
+	"frame": { "x": 256, "y": 640, "w": 256, "h": 128 },
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": { "x": 0, "y": 0, "w": 256, "h": 128 },
+	"sourceSize": { "w": 256, "h": 128 },
+	"duration": 83
+   },
+   "Protagonist_TheMaker_halfBudgetB 32.aseprite": {
+	"frame": { "x": 512, "y": 640, "w": 256, "h": 128 },
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": { "x": 0, "y": 0, "w": 256, "h": 128 },
+	"sourceSize": { "w": 256, "h": 128 },
+	"duration": 83
+   },
+   "Protagonist_TheMaker_halfBudgetB 33.aseprite": {
+	"frame": { "x": 768, "y": 640, "w": 256, "h": 128 },
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": { "x": 0, "y": 0, "w": 256, "h": 128 },
+	"sourceSize": { "w": 256, "h": 128 },
+	"duration": 83
+   },
+   "Protagonist_TheMaker_halfBudgetB 34.aseprite": {
+	"frame": { "x": 1024, "y": 640, "w": 256, "h": 128 },
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": { "x": 0, "y": 0, "w": 256, "h": 128 },
+	"sourceSize": { "w": 256, "h": 128 },
+	"duration": 83
+   },
+   "Protagonist_TheMaker_halfBudgetB 35.aseprite": {
+	"frame": { "x": 1280, "y": 640, "w": 256, "h": 128 },
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": { "x": 0, "y": 0, "w": 256, "h": 128 },
+	"sourceSize": { "w": 256, "h": 128 },
+	"duration": 83
+   },
+   "Protagonist_TheMaker_halfBudgetB 36.aseprite": {
+	"frame": { "x": 0, "y": 768, "w": 256, "h": 128 },
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": { "x": 0, "y": 0, "w": 256, "h": 128 },
+	"sourceSize": { "w": 256, "h": 128 },
+	"duration": 83
+   },
+   "Protagonist_TheMaker_halfBudgetB 37.aseprite": {
+	"frame": { "x": 256, "y": 768, "w": 256, "h": 128 },
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": { "x": 0, "y": 0, "w": 256, "h": 128 },
+	"sourceSize": { "w": 256, "h": 128 },
+	"duration": 83
+   },
+   "Protagonist_TheMaker_halfBudgetB 38.aseprite": {
+	"frame": { "x": 512, "y": 768, "w": 256, "h": 128 },
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": { "x": 0, "y": 0, "w": 256, "h": 128 },
+	"sourceSize": { "w": 256, "h": 128 },
+	"duration": 83
+   },
+   "Protagonist_TheMaker_halfBudgetB 39.aseprite": {
+	"frame": { "x": 768, "y": 768, "w": 256, "h": 128 },
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": { "x": 0, "y": 0, "w": 256, "h": 128 },
+	"sourceSize": { "w": 256, "h": 128 },
+	"duration": 83
+   },
+   "Protagonist_TheMaker_halfBudgetB 40.aseprite": {
+	"frame": { "x": 1024, "y": 768, "w": 256, "h": 128 },
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": { "x": 0, "y": 0, "w": 256, "h": 128 },
+	"sourceSize": { "w": 256, "h": 128 },
+	"duration": 83
+   },
+   "Protagonist_TheMaker_halfBudgetB 41.aseprite": {
+	"frame": { "x": 1280, "y": 768, "w": 256, "h": 128 },
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": { "x": 0, "y": 0, "w": 256, "h": 128 },
+	"sourceSize": { "w": 256, "h": 128 },
+	"duration": 83
+   },
+   "Protagonist_TheMaker_halfBudgetB 42.aseprite": {
+	"frame": { "x": 0, "y": 896, "w": 256, "h": 128 },
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": { "x": 0, "y": 0, "w": 256, "h": 128 },
+	"sourceSize": { "w": 256, "h": 128 },
+	"duration": 83
+   },
+   "Protagonist_TheMaker_halfBudgetB 43.aseprite": {
+	"frame": { "x": 256, "y": 896, "w": 256, "h": 128 },
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": { "x": 0, "y": 0, "w": 256, "h": 128 },
+	"sourceSize": { "w": 256, "h": 128 },
+	"duration": 83
+   },
+   "Protagonist_TheMaker_halfBudgetB 44.aseprite": {
+	"frame": { "x": 512, "y": 896, "w": 256, "h": 128 },
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": { "x": 0, "y": 0, "w": 256, "h": 128 },
+	"sourceSize": { "w": 256, "h": 128 },
+	"duration": 83
+   },
+   "Protagonist_TheMaker_halfBudgetB 45.aseprite": {
+	"frame": { "x": 768, "y": 896, "w": 256, "h": 128 },
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": { "x": 0, "y": 0, "w": 256, "h": 128 },
+	"sourceSize": { "w": 256, "h": 128 },
+	"duration": 83
+   },
+   "Protagonist_TheMaker_halfBudgetB 46.aseprite": {
+	"frame": { "x": 1024, "y": 896, "w": 256, "h": 128 },
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": { "x": 0, "y": 0, "w": 256, "h": 128 },
+	"sourceSize": { "w": 256, "h": 128 },
+	"duration": 83
+   },
+   "Protagonist_TheMaker_halfBudgetB 47.aseprite": {
+	"frame": { "x": 1280, "y": 896, "w": 256, "h": 128 },
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": { "x": 0, "y": 0, "w": 256, "h": 128 },
+	"sourceSize": { "w": 256, "h": 128 },
+	"duration": 83
+   },
+   "Protagonist_TheMaker_halfBudgetB 48.aseprite": {
+	"frame": { "x": 0, "y": 1024, "w": 256, "h": 128 },
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": { "x": 0, "y": 0, "w": 256, "h": 128 },
+	"sourceSize": { "w": 256, "h": 128 },
+	"duration": 83
+   },
+   "Protagonist_TheMaker_halfBudgetB 49.aseprite": {
+	"frame": { "x": 256, "y": 1024, "w": 256, "h": 128 },
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": { "x": 0, "y": 0, "w": 256, "h": 128 },
+	"sourceSize": { "w": 256, "h": 128 },
+	"duration": 83
+   },
+   "Protagonist_TheMaker_halfBudgetB 50.aseprite": {
+	"frame": { "x": 512, "y": 1024, "w": 256, "h": 128 },
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": { "x": 0, "y": 0, "w": 256, "h": 128 },
+	"sourceSize": { "w": 256, "h": 128 },
+	"duration": 83
+   },
+   "Protagonist_TheMaker_halfBudgetB 51.aseprite": {
+	"frame": { "x": 768, "y": 1024, "w": 256, "h": 128 },
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": { "x": 0, "y": 0, "w": 256, "h": 128 },
+	"sourceSize": { "w": 256, "h": 128 },
+	"duration": 83
+   },
+   "Protagonist_TheMaker_halfBudgetB 52.aseprite": {
+	"frame": { "x": 1024, "y": 1024, "w": 256, "h": 128 },
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": { "x": 0, "y": 0, "w": 256, "h": 128 },
+	"sourceSize": { "w": 256, "h": 128 },
+	"duration": 83
+   },
+   "Protagonist_TheMaker_halfBudgetB 53.aseprite": {
+	"frame": { "x": 1280, "y": 1024, "w": 256, "h": 128 },
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": { "x": 0, "y": 0, "w": 256, "h": 128 },
+	"sourceSize": { "w": 256, "h": 128 },
+	"duration": 83
+   },
+   "Protagonist_TheMaker_halfBudgetB 54.aseprite": {
+	"frame": { "x": 0, "y": 1152, "w": 256, "h": 128 },
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": { "x": 0, "y": 0, "w": 256, "h": 128 },
+	"sourceSize": { "w": 256, "h": 128 },
+	"duration": 83
+   },
+   "Protagonist_TheMaker_halfBudgetB 55.aseprite": {
+	"frame": { "x": 256, "y": 1152, "w": 256, "h": 128 },
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": { "x": 0, "y": 0, "w": 256, "h": 128 },
+	"sourceSize": { "w": 256, "h": 128 },
+	"duration": 83
+   },
+   "Protagonist_TheMaker_halfBudgetB 56.aseprite": {
+	"frame": { "x": 512, "y": 1152, "w": 256, "h": 128 },
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": { "x": 0, "y": 0, "w": 256, "h": 128 },
+	"sourceSize": { "w": 256, "h": 128 },
+	"duration": 83
+   },
+   "Protagonist_TheMaker_halfBudgetB 57.aseprite": {
+	"frame": { "x": 768, "y": 1152, "w": 256, "h": 128 },
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": { "x": 0, "y": 0, "w": 256, "h": 128 },
+	"sourceSize": { "w": 256, "h": 128 },
+	"duration": 83
+   },
+   "Protagonist_TheMaker_halfBudgetB 58.aseprite": {
+	"frame": { "x": 1024, "y": 1152, "w": 256, "h": 128 },
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": { "x": 0, "y": 0, "w": 256, "h": 128 },
+	"sourceSize": { "w": 256, "h": 128 },
+	"duration": 83
+   },
+   "Protagonist_TheMaker_halfBudgetB 59.aseprite": {
+	"frame": { "x": 1280, "y": 1152, "w": 256, "h": 128 },
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": { "x": 0, "y": 0, "w": 256, "h": 128 },
+	"sourceSize": { "w": 256, "h": 128 },
+	"duration": 83
+   },
+   "Protagonist_TheMaker_halfBudgetB 60.aseprite": {
+	"frame": { "x": 0, "y": 1280, "w": 256, "h": 128 },
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": { "x": 0, "y": 0, "w": 256, "h": 128 },
+	"sourceSize": { "w": 256, "h": 128 },
+	"duration": 83
+   },
+   "Protagonist_TheMaker_halfBudgetB 61.aseprite": {
+	"frame": { "x": 256, "y": 1280, "w": 256, "h": 128 },
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": { "x": 0, "y": 0, "w": 256, "h": 128 },
+	"sourceSize": { "w": 256, "h": 128 },
+	"duration": 83
+   },
+   "Protagonist_TheMaker_halfBudgetB 62.aseprite": {
+	"frame": { "x": 512, "y": 1280, "w": 256, "h": 128 },
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": { "x": 0, "y": 0, "w": 256, "h": 128 },
+	"sourceSize": { "w": 256, "h": 128 },
+	"duration": 83
+   },
+   "Protagonist_TheMaker_halfBudgetB 63.aseprite": {
+	"frame": { "x": 768, "y": 1280, "w": 256, "h": 128 },
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": { "x": 0, "y": 0, "w": 256, "h": 128 },
+	"sourceSize": { "w": 256, "h": 128 },
+	"duration": 83
+   },
+   "Protagonist_TheMaker_halfBudgetB 64.aseprite": {
+	"frame": { "x": 1024, "y": 1280, "w": 256, "h": 128 },
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": { "x": 0, "y": 0, "w": 256, "h": 128 },
+	"sourceSize": { "w": 256, "h": 128 },
+	"duration": 83
+   },
+   "Protagonist_TheMaker_halfBudgetB 65.aseprite": {
+	"frame": { "x": 1280, "y": 1280, "w": 256, "h": 128 },
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": { "x": 0, "y": 0, "w": 256, "h": 128 },
+	"sourceSize": { "w": 256, "h": 128 },
+	"duration": 83
+   },
+   "Protagonist_TheMaker_halfBudgetB 66.aseprite": {
+	"frame": { "x": 0, "y": 1408, "w": 256, "h": 128 },
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": { "x": 0, "y": 0, "w": 256, "h": 128 },
+	"sourceSize": { "w": 256, "h": 128 },
+	"duration": 83
+   },
+   "Protagonist_TheMaker_halfBudgetB 67.aseprite": {
+	"frame": { "x": 256, "y": 1408, "w": 256, "h": 128 },
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": { "x": 0, "y": 0, "w": 256, "h": 128 },
+	"sourceSize": { "w": 256, "h": 128 },
+	"duration": 83
+   },
+   "Protagonist_TheMaker_halfBudgetB 68.aseprite": {
+	"frame": { "x": 512, "y": 1408, "w": 256, "h": 128 },
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": { "x": 0, "y": 0, "w": 256, "h": 128 },
+	"sourceSize": { "w": 256, "h": 128 },
+	"duration": 83
+   },
+   "Protagonist_TheMaker_halfBudgetB 69.aseprite": {
+	"frame": { "x": 768, "y": 1408, "w": 256, "h": 128 },
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": { "x": 0, "y": 0, "w": 256, "h": 128 },
+	"sourceSize": { "w": 256, "h": 128 },
+	"duration": 83
+   },
+   "Protagonist_TheMaker_halfBudgetB 70.aseprite": {
+	"frame": { "x": 1024, "y": 1408, "w": 256, "h": 128 },
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": { "x": 0, "y": 0, "w": 256, "h": 128 },
+	"sourceSize": { "w": 256, "h": 128 },
+	"duration": 83
+   },
+   "Protagonist_TheMaker_halfBudgetB 71.aseprite": {
+	"frame": { "x": 1280, "y": 1408, "w": 256, "h": 128 },
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": { "x": 0, "y": 0, "w": 256, "h": 128 },
+	"sourceSize": { "w": 256, "h": 128 },
+	"duration": 83
+   },
+   "Protagonist_TheMaker_halfBudgetB 72.aseprite": {
+	"frame": { "x": 0, "y": 1536, "w": 256, "h": 128 },
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": { "x": 0, "y": 0, "w": 256, "h": 128 },
+	"sourceSize": { "w": 256, "h": 128 },
+	"duration": 83
+   },
+   "Protagonist_TheMaker_halfBudgetB 73.aseprite": {
+	"frame": { "x": 256, "y": 1536, "w": 256, "h": 128 },
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": { "x": 0, "y": 0, "w": 256, "h": 128 },
+	"sourceSize": { "w": 256, "h": 128 },
+	"duration": 83
+   },
+   "Protagonist_TheMaker_halfBudgetB 74.aseprite": {
+	"frame": { "x": 512, "y": 1536, "w": 256, "h": 128 },
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": { "x": 0, "y": 0, "w": 256, "h": 128 },
+	"sourceSize": { "w": 256, "h": 128 },
+	"duration": 83
+   },
+   "Protagonist_TheMaker_halfBudgetB 75.aseprite": {
+	"frame": { "x": 768, "y": 1536, "w": 256, "h": 128 },
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": { "x": 0, "y": 0, "w": 256, "h": 128 },
+	"sourceSize": { "w": 256, "h": 128 },
+	"duration": 83
+   },
+   "Protagonist_TheMaker_halfBudgetB 76.aseprite": {
+	"frame": { "x": 1024, "y": 1536, "w": 256, "h": 128 },
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": { "x": 0, "y": 0, "w": 256, "h": 128 },
+	"sourceSize": { "w": 256, "h": 128 },
+	"duration": 83
+   },
+   "Protagonist_TheMaker_halfBudgetB 77.aseprite": {
+	"frame": { "x": 1280, "y": 1536, "w": 256, "h": 128 },
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": { "x": 0, "y": 0, "w": 256, "h": 128 },
+	"sourceSize": { "w": 256, "h": 128 },
+	"duration": 83
+   },
+   "Protagonist_TheMaker_halfBudgetB 78.aseprite": {
+	"frame": { "x": 0, "y": 1664, "w": 256, "h": 128 },
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": { "x": 0, "y": 0, "w": 256, "h": 128 },
+	"sourceSize": { "w": 256, "h": 128 },
+	"duration": 83
+   },
+   "Protagonist_TheMaker_halfBudgetB 79.aseprite": {
+	"frame": { "x": 256, "y": 1664, "w": 256, "h": 128 },
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": { "x": 0, "y": 0, "w": 256, "h": 128 },
+	"sourceSize": { "w": 256, "h": 128 },
+	"duration": 83
+   },
+   "Protagonist_TheMaker_halfBudgetB 80.aseprite": {
+	"frame": { "x": 512, "y": 1664, "w": 256, "h": 128 },
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": { "x": 0, "y": 0, "w": 256, "h": 128 },
+	"sourceSize": { "w": 256, "h": 128 },
+	"duration": 83
+   },
+   "Protagonist_TheMaker_halfBudgetB 81.aseprite": {
+	"frame": { "x": 768, "y": 1664, "w": 256, "h": 128 },
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": { "x": 0, "y": 0, "w": 256, "h": 128 },
+	"sourceSize": { "w": 256, "h": 128 },
+	"duration": 83
+   },
+   "Protagonist_TheMaker_halfBudgetB 82.aseprite": {
+	"frame": { "x": 1024, "y": 1664, "w": 256, "h": 128 },
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": { "x": 0, "y": 0, "w": 256, "h": 128 },
+	"sourceSize": { "w": 256, "h": 128 },
+	"duration": 83
+   },
+   "Protagonist_TheMaker_halfBudgetB 83.aseprite": {
+	"frame": { "x": 1280, "y": 1664, "w": 256, "h": 128 },
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": { "x": 0, "y": 0, "w": 256, "h": 128 },
+	"sourceSize": { "w": 256, "h": 128 },
+	"duration": 83
+   },
+   "Protagonist_TheMaker_halfBudgetB 84.aseprite": {
+	"frame": { "x": 0, "y": 1792, "w": 256, "h": 128 },
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": { "x": 0, "y": 0, "w": 256, "h": 128 },
+	"sourceSize": { "w": 256, "h": 128 },
+	"duration": 83
+   },
+   "Protagonist_TheMaker_halfBudgetB 85.aseprite": {
+	"frame": { "x": 256, "y": 1792, "w": 256, "h": 128 },
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": { "x": 0, "y": 0, "w": 256, "h": 128 },
+	"sourceSize": { "w": 256, "h": 128 },
+	"duration": 83
+   },
+   "Protagonist_TheMaker_halfBudgetB 86.aseprite": {
+	"frame": { "x": 512, "y": 1792, "w": 256, "h": 128 },
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": { "x": 0, "y": 0, "w": 256, "h": 128 },
+	"sourceSize": { "w": 256, "h": 128 },
+	"duration": 83
+   },
+   "Protagonist_TheMaker_halfBudgetB 87.aseprite": {
+	"frame": { "x": 768, "y": 1792, "w": 256, "h": 128 },
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": { "x": 0, "y": 0, "w": 256, "h": 128 },
+	"sourceSize": { "w": 256, "h": 128 },
+	"duration": 83
+   },
+   "Protagonist_TheMaker_halfBudgetB 88.aseprite": {
+	"frame": { "x": 1024, "y": 1792, "w": 256, "h": 128 },
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": { "x": 0, "y": 0, "w": 256, "h": 128 },
+	"sourceSize": { "w": 256, "h": 128 },
+	"duration": 83
+   },
+   "Protagonist_TheMaker_halfBudgetB 89.aseprite": {
+	"frame": { "x": 1280, "y": 1792, "w": 256, "h": 128 },
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": { "x": 0, "y": 0, "w": 256, "h": 128 },
+	"sourceSize": { "w": 256, "h": 128 },
+	"duration": 83
+   },
+   "Protagonist_TheMaker_halfBudgetB 90.aseprite": {
+	"frame": { "x": 0, "y": 1920, "w": 256, "h": 128 },
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": { "x": 0, "y": 0, "w": 256, "h": 128 },
+	"sourceSize": { "w": 256, "h": 128 },
+	"duration": 83
+   },
+   "Protagonist_TheMaker_halfBudgetB 91.aseprite": {
+	"frame": { "x": 256, "y": 1920, "w": 256, "h": 128 },
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": { "x": 0, "y": 0, "w": 256, "h": 128 },
+	"sourceSize": { "w": 256, "h": 128 },
+	"duration": 83
+   },
+   "Protagonist_TheMaker_halfBudgetB 92.aseprite": {
+	"frame": { "x": 512, "y": 1920, "w": 256, "h": 128 },
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": { "x": 0, "y": 0, "w": 256, "h": 128 },
+	"sourceSize": { "w": 256, "h": 128 },
+	"duration": 83
+   },
+   "Protagonist_TheMaker_halfBudgetB 93.aseprite": {
+	"frame": { "x": 768, "y": 1920, "w": 256, "h": 128 },
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": { "x": 0, "y": 0, "w": 256, "h": 128 },
+	"sourceSize": { "w": 256, "h": 128 },
+	"duration": 83
+   },
+   "Protagonist_TheMaker_halfBudgetB 94.aseprite": {
+	"frame": { "x": 1024, "y": 1920, "w": 256, "h": 128 },
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": { "x": 0, "y": 0, "w": 256, "h": 128 },
+	"sourceSize": { "w": 256, "h": 128 },
+	"duration": 83
+   },
+   "Protagonist_TheMaker_halfBudgetB 95.aseprite": {
+	"frame": { "x": 1280, "y": 1920, "w": 256, "h": 128 },
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": { "x": 0, "y": 0, "w": 256, "h": 128 },
+	"sourceSize": { "w": 256, "h": 128 },
+	"duration": 83
+   },
+   "Protagonist_TheMaker_halfBudgetB 96.aseprite": {
+	"frame": { "x": 0, "y": 2048, "w": 256, "h": 128 },
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": { "x": 0, "y": 0, "w": 256, "h": 128 },
+	"sourceSize": { "w": 256, "h": 128 },
+	"duration": 83
+   },
+   "Protagonist_TheMaker_halfBudgetB 97.aseprite": {
+	"frame": { "x": 256, "y": 2048, "w": 256, "h": 128 },
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": { "x": 0, "y": 0, "w": 256, "h": 128 },
+	"sourceSize": { "w": 256, "h": 128 },
+	"duration": 83
+   }
+ },
+ "meta": {
+  "app": "https://www.aseprite.org/",
+  "version": "1.3-beta21-x64",
+  "image": "Protagonist_TheMaker_halfBudgetB.png",
+  "format": "RGBA8888",
+  "size": { "w": 1536, "h": 2176 },
+  "scale": "1",
+  "frameTags": [
+   { "name": "Idle", "from": 0, "to": 5, "direction": "forward", "color": "#000000ff" },
+   { "name": "Run", "from": 6, "to": 12, "direction": "forward", "color": "#000000ff" },
+   { "name": "Walk", "from": 13, "to": 18, "direction": "forward", "color": "#000000ff" },
+   { "name": "Jump", "from": 19, "to": 20, "direction": "forward", "color": "#000000ff" },
+   { "name": "JumpAttack", "from": 21, "to": 28, "direction": "forward", "color": "#000000ff" },
+   { "name": "Death/Fall", "from": 29, "to": 40, "direction": "forward", "color": "#000000ff" },
+   { "name": "Block", "from": 41, "to": 46, "direction": "forward", "color": "#000000ff" },
+   { "name": "Swords", "from": 47, "to": 76, "direction": "forward", "color": "#000000ff" },
+   { "name": "Thrust", "from": 47, "to": 50, "direction": "forward", "color": "#000000ff" },
+   { "name": "Up_Down", "from": 51, "to": 56, "direction": "forward", "color": "#000000ff" },
+   { "name": "Me_fui_alm", "from": 57, "to": 70, "direction": "forward", "color": "#000000ff" },
+   { "name": "Estoque", "from": 71, "to": 76, "direction": "forward", "color": "#000000ff" },
+   { "name": "BigWepAtks", "from": 77, "to": 97, "direction": "forward", "color": "#000000ff" },
+   { "name": "AttackSpear", "from": 77, "to": 86, "direction": "forward", "color": "#000000ff" },
+   { "name": "BigAxeAttack", "from": 87, "to": 97, "direction": "forward", "color": "#000000ff" }
+  ],
+  "layers": [
+   { "name": "Layer 11", "opacity": 255, "blendMode": "normal" }
+  ],
+  "slices": [
+  ]
+ }
+}

@@ -5,6 +5,8 @@ class_name Jugador
 func _ready() -> void:
 #	assert(anim is AnimationPlayer, "anim no se inicio correctamente!")
 #	assert(spritePlayer is Sprite or spritePlayer is AnimatedSprite, "spritePlayer no se inicio correctamente!")
+	collision_layer = Const.CollisionLayers.JUGADOR
+	collision_mask = Const.CollisionMasks.JUGADOR
 
 	add_child(equipado)
 	Ref.jugador = self#Crear una referencia a si mismo
@@ -33,6 +35,7 @@ var speed:float = 200
 var gravity = 9.8
 var acceleration = 0.25
 var friction = 0.25
+var airTime:float
 
 var estadoSalto:bool = false
 var estadoAire:bool = false
@@ -41,7 +44,7 @@ var jump_velocity = 340
 var saltoRestantes:int
 var saltoCooldown:float
 
-@onready var anim = $Anims
+@onready var anim:AnimationPlayer = $Anims
 @onready var spritePlayer = $Sprite
 @onready var colision = $Colision
 
@@ -82,7 +85,8 @@ func _physics_process(delta):
 	$PlayerPoint.move_and_slide()
 	
 #	$Debug.text = str(velocity)
-	$Debug.text = str(global_position / get_viewport_rect().size)
+#	$Debug.text = str(global_position / get_viewport_rect().size)
+	$Debug.text = str(airTime)
 	
 
 func dash():
@@ -156,28 +160,35 @@ func surface_procs():
 #	if(Input.is_action_just_pressed("Attack3")):
 #
 #		anim.play("Attack3")
-		
+
 func Animations():
 		
 	if not is_on_floor():
-		anim.play("aire")
+		airTime += get_process_delta_time() * 1
+		if airTime < 0.012:
+			anim.play("air")
+		else:
+			anim.play("air_hold")
+			
+	else:#If on the floot
+		airTime = 0.0
 		
-	if velocity.x > 3:#Yendo a la derecha
-		anim.play("correr")
-#		spritePlayer.flip_h = false
-		
-	elif velocity.x < -3:#Izquierda
-		anim.play("correr")
-#		spritePlayer.flip_h = true
-		
-	else:#Si ninguna otra animacion califica
-		anim.play("idle")
+		if velocity.x > 3:#Yendo a la derecha
+			anim.play("run")
+	#		spritePlayer.flip_h = false
+			
+		elif velocity.x < -3:#Izquierda
+			anim.play("run")
+	#		spritePlayer.flip_h = true
+			
+		else:#Si ninguna otra animacion califica
+			anim.play("idle")
 
 
 
 var afterimageTimer:Timer = Timer.new()
 func afterimage(duration:float = 0.15):
-	var afterimage:Sprite2D = $Sprite.duplicate()
+	var afterimage:AnimatedSprite2D = $Sprite.duplicate()
 	
 	await get_tree().create_timer(0.07).timeout#Esperar un poco para crear la siguiente
 	
@@ -187,6 +198,8 @@ func afterimage(duration:float = 0.15):
 	afterimage.top_level = true#Colocar donde esta el personaje pero desconectado de el
 	afterimage.position = position
 	afterimage.z_index = spritePlayer.z_index - 1
+#	afterimage.rotation = rotation
+#	afterimage.scale = scale
 	
 	afterimage.modulate = Color(1,1,1,0.7)
 	var tween:Tween = get_tree().create_tween().bind_node(afterimage)#Hacer transparente
@@ -194,6 +207,7 @@ func afterimage(duration:float = 0.15):
 	
 	
 	add_child(afterimage)#Añadir a la escena
+	var ass = 1
 
 #Jugabilidad
 func _unhandled_input(event: InputEvent) -> void:
@@ -202,13 +216,13 @@ func _unhandled_input(event: InputEvent) -> void:
 		equipado.attack( {} )
 		
 	elif event.is_action_released("herramienta1"):
-		cambiar_arma(1)
+		cambiar_arma(0)
 		
 	elif event.is_action_released("herramienta2"):
-		cambiar_arma(2)
+		cambiar_arma(1)
 		
 	elif event.is_action_released("herramienta3"):
-		cambiar_arma(3)
+		cambiar_arma(2)
 	
 	elif event.is_action_released("debug1"):
 		hurt(1)
@@ -232,12 +246,12 @@ func update_stats(diccionario:Dictionary, resetearAntes:bool=false):
 
 
 var equipado:ArmaMarco
-var armas:Array
+@onready var armas:Array = [ArmaMarco.generate_from_tres( load("res://SaveData/GeneratedWeap/ArmaDefault.tres") )]
 
 
 func cambiar_arma(slot:int):
 	
-	if armas.has(slot):#Asegurarse que el slot seleccionado tengo una herramienta
+	if armas.size() > slot:#Asegurarse que el slot seleccionado tengo una herramienta
 		remove_child(equipado)#Remover la herramienta actualmente equipada de la escena
 		equipado = armas[slot]#Cambiar la herramienta equipada
 		
@@ -249,6 +263,8 @@ func cambiar_arma(slot:int):
 		
 		var boosts:Dictionary = equipado.get_stat_boosts_from_partes()#Aplicar los boosts de las partes combinadas
 		update_stats(boosts,true)
+	else:
+		print("No hay arma en ese slot.")
 		
 	
 

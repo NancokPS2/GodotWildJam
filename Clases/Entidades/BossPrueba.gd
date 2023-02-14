@@ -17,14 +17,18 @@ var subEstados = {
 
 
 func _ready() -> void:
+	collision_layer = Const.CollisionLayers.ENEMIGO
+	collision_mask = Const.CollisionMasks.ENEMIGO
+	
 	animationPlayer.animation_finished.connect(animation_ended)
 	add_to_group("ENEMIGO",true)
 	Ref.jefes.append(self)
 	jugador = Ref.jugador
-	decide_state()
+	
 	$Hitbox.immunes.append(self)
 	
 	timerDecision.timeout.connect(decide_state)
+	decide_state()
 
 func animation_ended(nombreAnimacion:String):
 	decide_state()
