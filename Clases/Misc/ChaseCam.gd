@@ -19,7 +19,7 @@ func _physics_process(delta: float) -> void:
 
 		
 		
-		var porcentajeZoom = clamp( (posicionJugador.distance_to(posicionJefes) ) / (1024), 0, 2 )
+		var porcentajeZoom = clamp( (posicionJugador.distance_to(posicionJefes) ) / (1024), 0.1, 2 )
 		zoom = Vector2(2.0-porcentajeZoom, 2.0-porcentajeZoom) 
 
 func get_average_position(nodos:Array):
