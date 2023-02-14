@@ -27,7 +27,8 @@ var estadisticas:Dictionary = {
 	"agilidad":10,
 	"resistencia":10,
 	"dashCooldown":0.4,
-	"dashDistance":2500
+	"dashDistance":2500,
+	"poder":1
 }
 
 

@@ -8,3 +8,4 @@ slots = [Vector3(10, 0, 1)]
 nombre = "BladeTest"
 origen = Vector2(0, -9)
 tipoDePieza = 8
+colisiones = [Vector2(0, 0), Vector2(5, 0), Vector2(0, 5)]
