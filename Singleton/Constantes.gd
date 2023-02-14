@@ -2,6 +2,9 @@ extends Node
 
 var debugMode:bool = true
 
+enum CollisionLayers {PAREDES=7, JUGADOR=2, ENEMIGO=4}
+enum CollisionMasks {PAREDES=7, JUGADOR=1, ENEMIGO=1}
+
 const Directorios:Dictionary = {
 	"PartidasGuardadas":"res://SaveData/Saves/",
 	"PartesGeneradas":"res://SaveData/GeneratedParts/",
