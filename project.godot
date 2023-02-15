@@ -94,10 +94,10 @@ _global_script_classes=[{
 "language": &"GDScript",
 "path": "res://Clases/Entidades/Entidad.gd"
 }, {
-"base": "Entidad",
-"class": &"EntidadJefe",
+"base": "Area2D",
+"class": &"Escudo",
 "language": &"GDScript",
-"path": "res://Clases/Entidades/BossPrueba.gd"
+"path": "res://Clases/Areas/Escudo.gd"
 }, {
 "base": "StaticBody2D",
 "class": &"Estructura",
@@ -133,6 +133,16 @@ _global_script_classes=[{
 "class": &"Hitbox",
 "language": &"GDScript",
 "path": "res://Clases/Areas/HitBox.gd"
+}, {
+"base": "Entidad",
+"class": &"JefePrueba",
+"language": &"GDScript",
+"path": "res://Clases/Entidades/BossPrueba.gd"
+}, {
+"base": "Entidad",
+"class": &"JefeSamurai",
+"language": &"GDScript",
+"path": "res://Objetos/Jefes/JefeSamurai.gd"
 }, {
 "base": "Entidad",
 "class": &"Jugador",
@@ -182,7 +192,7 @@ _global_script_class_icons={
 "EfectoEstadoSangrado": "",
 "EfectoEstadoVeneno": "",
 "Entidad": "",
-"EntidadJefe": "",
+"Escudo": "",
 "Estructura": "",
 "GarraGrua": "",
 "Generador": "",
@@ -190,6 +200,8 @@ _global_script_class_icons={
 "Herramienta": "",
 "HerramientaTaladro": "",
 "Hitbox": "",
+"JefePrueba": "",
+"JefeSamurai": "",
 "Jugador": "",
 "Nivel": "",
 "ParedDestruible": "",
@@ -325,6 +337,8 @@ dash={
 2d_physics/layer_1="Paredes"
 2d_physics/layer_2="Jugador"
 2d_physics/layer_3="Jefes"
+2d_physics/layer_5="AtaquesJefes"
+2d_physics/layer_6="AtaquesJugador"
 2d_physics/layer_8="Puertas"
 
 [physics]

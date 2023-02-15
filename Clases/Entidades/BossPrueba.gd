@@ -1,5 +1,5 @@
 extends Entidad
-class_name EntidadJefe
+class_name JefePrueba
 
 @onready var animationPlayer: AnimationPlayer = $AnimationPlayer
 @onready var jugador:Jugador = Ref.jugador

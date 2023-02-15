@@ -1,17 +1,15 @@
-[gd_scene load_steps=14 format=3 uid="uid://tl3m838kx0ip"]
+[gd_scene load_steps=12 format=3 uid="uid://tl3m838kx0ip"]
 
-[ext_resource type="Script" path="res://Clases/Herramientas/Taladro.gd" id="1"]
 [ext_resource type="PackedScene" uid="uid://h1dsnpm1t1jt" path="res://Objetos/Jugador/Jugador.tscn" id="2"]
 [ext_resource type="Texture2D" uid="uid://dbl1ids8t3dao" path="res://icon.png" id="3"]
 [ext_resource type="Script" path="res://Clases/Obstaculos/Estructura.gd" id="4"]
 [ext_resource type="PackedScene" uid="uid://d01ctwrkclp4j" path="res://Objetos/General/Interfaz.tscn" id="5"]
 [ext_resource type="Script" path="res://Clases/Entidades/Entidad.gd" id="6"]
 [ext_resource type="PackedScene" path="res://Objetos/Obstaculos/CompuertaDoble.tscn" id="7"]
-[ext_resource type="PackedScene" path="res://Objetos/Grua/GruaDobleBrazo.tscn" id="8"]
 [ext_resource type="PackedScene" path="res://Objetos/Misc/Caja.tscn" id="9"]
 [ext_resource type="Script" path="res://test.gd" id="10"]
-[ext_resource type="PackedScene" uid="uid://bls7rwvn2vwwa" path="res://Objetos/Jefes/JefePrueba.tscn" id="11"]
 [ext_resource type="Script" path="res://Clases/Misc/ChaseCam.gd" id="12"]
+[ext_resource type="PackedScene" uid="uid://6tghopupwq3" path="res://Objetos/Jefes/Samurai.tscn" id="12_urey6"]
 
 [sub_resource type="CircleShape2D" id="2"]
 radius = 50.0
@@ -26,15 +24,7 @@ script = ExtResource("12")
 
 [node name="Interfaz" parent="." instance=ExtResource("5")]
 
-[node name="HerramientaTalado" type="Node2D" parent="."]
-position = Vector2(145, 88)
-script = ExtResource("1")
-
-[node name="EntidadJefe" parent="." instance=ExtResource("11")]
-position = Vector2(18, 287)
-collision_mask = 1
-
-[node name="Jugador" parent="." instance=ExtResource("2")]
+[node name="Jugador" parent="." groups=["JUGADOR"] instance=ExtResource("2")]
 position = Vector2(313, 250)
 
 [node name="Pared" type="StaticBody2D" parent="."]
@@ -61,11 +51,6 @@ texture = ExtResource("3")
 [node name="CompuertaDoble" parent="." instance=ExtResource("7")]
 position = Vector2(297, 99)
 
-[node name="GruaDobleBrazo" parent="." instance=ExtResource("8")]
-position = Vector2(43, -3)
-rotation = 3.14159
-collision_mask = 0
-
 [node name="Entidad" parent="." instance=ExtResource("9")]
 position = Vector2(134, 151)
 
@@ -76,3 +61,5 @@ position = Vector2(546, 179)
 shape = SubResource("2")
 
 [node name="Polygon2D" type="Polygon2D" parent="."]
+
+[node name="Samurai" parent="." instance=ExtResource("12_urey6")]
