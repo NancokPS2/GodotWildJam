@@ -1,10 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://bls7rwvn2vwwa"]
+[gd_scene load_steps=12 format=3 uid="uid://lkj1vylpia1d"]
 
 [ext_resource type="Script" path="res://Clases/Entidades/BossPrueba.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://clh172b1l7d5r" path="res://Assets/Placeholder/_Idle.png" id="2"]
 [ext_resource type="Texture2D" uid="uid://5bqi4fqu1dxb" path="res://Assets/Placeholder/_Attack.png" id="3"]
 [ext_resource type="Texture2D" uid="uid://ynahv7y8wmq" path="res://Assets/Placeholder/_Run.png" id="4"]
 [ext_resource type="Script" path="res://Clases/Areas/HitBox.gd" id="5"]
+[ext_resource type="Script" path="res://Clases/Areas/Escudo.gd" id="6_wpgl1"]
 
 [sub_resource type="Animation" id="17"]
 length = 0.001
@@ -293,3 +294,9 @@ objetivoValido = 2
 cooldown = 0.0
 
 [node name="Colision" type="CollisionPolygon2D" parent="Hitbox"]
+
+[node name="HurtboxEscudo" type="Area2D" parent="." node_paths=PackedStringArray("usuario")]
+script = ExtResource("6_wpgl1")
+usuario = NodePath("..")
+
+[node name="ColisionEscudo" type="CollisionPolygon2D" parent="HurtboxEscudo"]

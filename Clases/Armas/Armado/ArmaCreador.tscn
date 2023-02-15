@@ -69,7 +69,6 @@ grow_vertical = 2
 
 [node name="ListaPiezas" type="GridContainer" parent="Viewport/UI/ScrollContainer"]
 custom_minimum_size = Vector2i(86, 480)
-layout_mode = 2
 anchors_preset = -1
 offset_right = 90.0
 offset_bottom = 648.0
