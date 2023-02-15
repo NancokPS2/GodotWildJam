@@ -56,6 +56,8 @@ func _physics_process(delta):
 	super._physics_process(delta)#Proceso base de Entidad
 	
 	surface_procs()#Checkear el estado actual antes de proseguir
+	add_to_group("JUGADOR",true)
+	assert(self.is_in_group("JUGADOR"))
 	
 	if controlando:
 		
@@ -71,7 +73,6 @@ func _physics_process(delta):
 #		Attack()
 	
 
-	velocity += Vector2.DOWN * gravedad * delta
 	move_and_slide()
 	
 	

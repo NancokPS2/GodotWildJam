@@ -56,6 +56,7 @@ func set_controlando(valor):
 
 func _physics_process(delta: float) -> void:
 	check_temperatura(delta)
+	velocity += Vector2.DOWN * gravedad * delta
 
 func hurt(cantidad:int,elemento:int=0):
 	
@@ -72,6 +73,7 @@ func hurt(cantidad:int,elemento:int=0):
 func die():
 	emit_signal("MUERTO",self)
 	get_parent().remove_child(self)
+	process_mode = Node.PROCESS_MODE_DISABLED
 
 # Declare member variables here. Examples:
 # var a = 2
