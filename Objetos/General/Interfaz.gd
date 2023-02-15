@@ -31,14 +31,15 @@ var tweenJugador
 func update_player_health(quien:Entidad):#El quien es proveido por la señal
 #	$Control/Vida.value = quien.estadisticas.salud
 #	$Control/Vida.max_value = quien.estadisticas.saludMaxima
-	$Control/VidaJugador.frame = clamp( 10 - (quien.estadisticas["salud"]-1) ,0,9)
+	$Control/VidaJugador.frame = clamp( (quien.estadisticas["salud"]-1) ,0,9)
 	if quien.estadisticas.salud <= 1:
 		tweenJugador = get_tree().create_tween()
-		tweenJugador.bind_node(quien).set_loops()
-		tweenJugador.tween_property(quien,"modulate",Color(1,0.4,0.4,1),0.9) 
-		tweenJugador.chain().tween_property(quien,"modulate",Color(1,1,1,1),0.9) 
+		tweenJugador.bind_node($Control/VidaJugador).set_loops()
+		tweenJugador.tween_property($Control/VidaJugador,"modulate",Color(1,0.4,0.4,1),0.9) 
+		tweenJugador.chain().tween_property($Control/VidaJugador,"modulate",Color(1,1,1,1),0.9) 
 		tweenJugador.play()
 	elif tweenJugador:
+		$Control/VidaJugador.modulate = Color(1.0,1.0,1.0,1.0)
 		tweenJugador.kill()
 			
 

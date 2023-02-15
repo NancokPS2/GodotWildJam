@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://cyxvimff2iv45"]
+[gd_scene load_steps=3 format=3 uid="uid://cyxvimff2iv45"]
 
 [ext_resource type="Script" path="res://Clases/Armas/Armado/ArmaCreador.gd" id="1"]
+[ext_resource type="Theme" uid="uid://bugjubll6upol" path="res://Assets/Interfaz/TemaPrincipal.tres" id="1_aij8g"]
 
 [node name="ArmaCreador" type="SubViewportContainer"]
 anchors_preset = 15
@@ -8,6 +9,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_aij8g")
 stretch = true
 script = ExtResource("1")
 autoConversion = true
@@ -28,6 +30,7 @@ anchor_left = 0.9
 anchor_top = 0.9
 anchor_right = 1.0
 anchor_bottom = 1.0
+theme = ExtResource("1_aij8g")
 text = "Guardar"
 
 [node name="Abrir" type="Button" parent="Viewport/UI"]
@@ -36,6 +39,7 @@ anchor_left = 0.78
 anchor_top = 0.9
 anchor_right = 0.87
 anchor_bottom = 1.0
+theme = ExtResource("1_aij8g")
 text = "Abrir"
 
 [node name="LineEdit" type="LineEdit" parent="Viewport/UI"]
@@ -44,6 +48,7 @@ anchor_left = 0.4
 anchor_top = 0.9
 anchor_right = 0.7
 anchor_bottom = 1.0
+theme = ExtResource("1_aij8g")
 placeholder_text = "Ingrese el nombre del arma"
 
 [node name="FileDialog" type="FileDialog" parent="Viewport/UI"]
@@ -64,6 +69,7 @@ grow_vertical = 2
 
 [node name="ListaPiezas" type="GridContainer" parent="Viewport/UI/ScrollContainer"]
 custom_minimum_size = Vector2i(86, 480)
+layout_mode = 2
 anchors_preset = -1
 offset_right = 90.0
 offset_bottom = 648.0
