@@ -3,7 +3,7 @@ class_name Hitbox
 
 signal TARGET_HIT
 
-enum TiposObjetivos { ESTRUCTURA=1<<1,JUGADOR=1<<2,ENEMIGO=1<<3,ENTIDAD=1<<4}
+enum TiposObjetivos { JUGADOR=1<<1,ESTRUCTURA=1<<2,ENEMIGO=1<<3,ENTIDAD=1<<4}
 
 var immunes:Array[Node]
 @export var activa:bool = true
@@ -19,6 +19,7 @@ var immunes:Array[Node]
 
 func _ready() -> void:
 	body_entered.connect(trigger)
+	add_child(temporizador)
 	
 func _physics_process(delta: float) -> void:
 	if autoActivar:
@@ -32,18 +33,24 @@ func force_trigger():
 func trigger(target:Node):
 	if not activa or immunes.has(target):#Si no esta activa, terminar aqui
 		return 
+	
+	for area in get_overlapping_areas():
+		if area is Escudo and area.usuario == target:
+			return
+			
+		
 	var tiempoExtra:float = 0.0
 	var lastimar:bool = false
-	if target.is_in_group("JUGADOR") and objetivoValido && TiposObjetivos.JUGADOR:#Si es un jugador y tiene permitido dañarlo
+	if target is Jugador and self.objetivoValido && TiposObjetivos.JUGADOR:#Si es un jugador y tiene permitido dañarlo
 		lastimar = true
 	
-	elif target.is_in_group("ENEMIGO") and objetivoValido && TiposObjetivos.ENEMIGO:
+	elif target.is_in_group("ENEMIGO") and self.objetivoValido && TiposObjetivos.ENEMIGO:
 		lastimar = true
 		
-	elif target is Entidad and objetivoValido && TiposObjetivos.ENTIDAD:
+	elif target is Entidad and self.objetivoValido && TiposObjetivos.ENTIDAD:
 		lastimar = true
 		
-	elif target is Estructura and objetivoValido && TiposObjetivos.ESTRUCTURA:
+	elif target is Estructura and self.objetivoValido && TiposObjetivos.ESTRUCTURA:
 		lastimar = true
 	
 	
