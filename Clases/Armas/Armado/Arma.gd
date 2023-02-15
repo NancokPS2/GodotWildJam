@@ -62,6 +62,7 @@ func _ready() -> void:
 	
 	refresh_partes_from_slots()
 	refresh_animations()
+	get_stat_boosts_from_partes()
 	
 	
 	
