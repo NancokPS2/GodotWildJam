@@ -6,8 +6,9 @@ signal TARGET_HIT
 enum TiposObjetivos { JUGADOR=1<<1,ESTRUCTURA=1<<2,ENEMIGO=1<<3,ENTIDAD=1<<4}
 
 var immunes:Array[Node]
-@export var activa:bool = true
-@export var poder:int = 1
+@export var activa:bool = true#
+@export var poder:int = 1 #Daño inflinjido
+@export var unToque:bool = true#Sin usar
 @export var objetivoValido:TiposObjetivos
 @export var autoActivar:bool = true
 
@@ -24,7 +25,7 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	if autoActivar:
 		pass
-		
+
 	
 func force_trigger():
 	for body in get_overlapping_bodies():
@@ -36,6 +37,7 @@ func trigger(target:Node):
 	
 	for area in get_overlapping_areas():
 		if area is Escudo and area.usuario == target:
+			area.emit_signal("SHIELD_HIT")
 			return
 			
 		
@@ -64,7 +66,7 @@ func trigger(target:Node):
 			await temporizador.timeout#Esperar a que termine
 			
 			var timerInvul = target.get("timerInvul")#Adquirir el temporizador de imunidad del objetivo
-			if timerInvul is Timer and not timerInvul.is_stoped():#Si este existe y no se a detenido
+			if timerInvul is Timer and not timerInvul.is_stopped():#Si este existe y no se a detenido
 				await timerInvul.timeout#Esperar por el
 				
 		#Una vez termine el temporizador, siempre y cuando el objetivo sigua en su zona, continua dañandolo
