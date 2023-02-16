@@ -61,7 +61,7 @@ static func generate_from_dict(saveDict:Dictionary)->ArmaParte:
 
 var sprite:=Sprite2D.new()
 #var encastres:Array#Todos los encastres en esta arma se guardan aqui
-var hitbox:=Area2D.new()
+var hitbox:=Hitbox.new()
 var colision:=CollisionPolygon2D.new()
 var animationPlayer:AnimationPlayer
 var arma:Node #ArmaMarco, referencia a el arma del cual esta parte es parte, parte
@@ -77,6 +77,10 @@ func _ready() -> void:
 	
 	colision.polygon = colisiones
 	hitbox.add_child(colision)
+	hitbox.poder = statBoosts["poder"]
+	hitbox.collision_layer = 7#Existe en todas las capas
+	hitbox.collision_mask = 4#Solo detecta enemigos
+	hitbox.objetivoValido = Hitbox.TiposObjetivos.ENEMIGO + Hitbox.TiposObjetivos.ENTIDAD
 		
 	assert(hitbox != null, "Esta parte no tiene forma de tocar otros objetos.")
 
