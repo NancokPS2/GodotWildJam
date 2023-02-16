@@ -336,7 +336,7 @@ dash={
 
 2d_physics/layer_1="Paredes"
 2d_physics/layer_2="Jugador"
-2d_physics/layer_3="Jefes"
+2d_physics/layer_3="Enemigo"
 2d_physics/layer_5="AtaquesJefes"
 2d_physics/layer_6="AtaquesJugador"
 2d_physics/layer_8="Puertas"
