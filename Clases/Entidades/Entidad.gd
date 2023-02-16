@@ -45,6 +45,9 @@ var multiplicadorElemental:Dictionary = {
 
 var temperaturaFusion = 50
 
+func _ready():
+	add_child(timerInvul)
+
 func check_temperatura(delta):
 	if temperatura > temperaturaFusion:
 		hurt( (temperaturaFusion - temperatura) * delta )
