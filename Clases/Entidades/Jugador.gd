@@ -3,6 +3,7 @@ class_name Jugador
 
 
 func _ready() -> void:
+	super._ready()
 #	assert(anim is AnimationPlayer, "anim no se inicio correctamente!")
 #	assert(spritePlayer is Sprite or spritePlayer is AnimatedSprite, "spritePlayer no se inicio correctamente!")
 	collision_layer = Const.CollisionLayers.JUGADOR
@@ -139,7 +140,7 @@ func _jump():
 func surface_procs():
 	if is_on_floor():
 		estadoAire = false
-		saltoRestantes = 2
+		saltoRestantes = 1
 		estadoSalto = false
 	else:
 		estadoAire = true
