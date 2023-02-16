@@ -6,18 +6,23 @@ class_name JefeSamurai
 
 #Usar timerDecision.start(tiempoHastaLaSiguienteDecision) para retrasar la siguiente accion del jefe
 @onready var timerDecision := Timer.new()
+@onready var timerDuele := Timer.new()
 @export var velocidad:float = 50
 
-enum Estados {IDLE,CHASE,ATTACK_DOUBLESLASH,SHIELD}
+enum Estados {IDLE,CHASE,ATTACK_DOUBLESLASH,SHIELD_STARTUP,SHIELD_HOLD}
 var estadoActual:int
 
-var subEstados = {
-	"atacando":false
-}
+var subEstAtacando := false
+var	subEstDuele := false
+
 
 
 func _ready() -> void:
+	super._ready()
+	
 	add_child(timerDecision)
+	add_child(timerDuele)
+	
 	collision_layer = Const.CollisionLayers.ENEMIGO
 	collision_mask = Const.CollisionMasks.ENEMIGO
 	
@@ -29,7 +34,10 @@ func _ready() -> void:
 	$Hitbox.immunes.append(self)
 	
 	timerDecision.timeout.connect(decide_state)
+#	timerDuele.timeout.connect( set.bind("subEstDuele",false) )#Cuando este temporizador final
 	decide_state()
+#	VIDA_CAMBIO.connect( set.bind("subEstDuele",true) )#Recordar que sufrio daño
+	VIDA_CAMBIO.connect( Callable(timerDuele,"start").bind(2.5) )#Automaticamente olvidarse del daño luego de un tiempo
 
 
 func decide_on_animation_end(offset:float=0.0):
@@ -45,6 +53,9 @@ func decide_state():
 
 	if not is_instance_valid(jugador):
 		estadoActual = Estados.IDLE
+		
+	elif subEstDuele:
+		estadoActual = Estados.SHIELD_STARTUP
 	
 	elif position.distance_to(jugador.position) > chaseDistance:
 		estadoActual = Estados.CHASE
@@ -76,6 +87,11 @@ func _physics_process(delta: float) -> void:
 			decide_state()
 		Estados.ATTACK_DOUBLESLASH:
 			pass
+			
+		Estados.SHIELD_HOLD:
+			if timerDuele.is_stopped():#Si termino el temporizador, cambiar de estado
+				decide_state()
+			
 		Estados.IDLE:
 			animationPlayer.play("idle")
 			jugador = Ref.jugador
@@ -92,6 +108,10 @@ func entered_state():#Llamado UNA vez cuando se cambia de estado
 		Estados.ATTACK_DOUBLESLASH:
 			animationPlayer.play("attack_doubleslash")
 			decide_on_animation_end()
+			
+		Estados.SHIELD_STARTUP:
+			animationPlayer.play("attack_shield_startup")
+			animationPlayer.animation_finished.connect(set.bind("estadoActual",Estados.SHIELD_HOLD) )
 			
 			
 
