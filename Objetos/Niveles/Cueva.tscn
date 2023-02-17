@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://cv6wxfae36ft8"]
+
+[node name="Cueva" type="Node2D"]
+show_behind_parent = true
+
+[node name="StaticBody2d" type="StaticBody2D" parent="."]
+
+[node name="Floor" type="CollisionPolygon2D" parent="StaticBody2d"]
+position = Vector2(194, 131.115)
+scale = Vector2(1, 1.06655)
+polygon = PackedVector2Array(-195, -118.246, -120, 382.433, 897, 375.87, 961, -116.37, 956, 479, -194, 478)
+
+[node name="ColorRect" type="ColorRect" parent="."]
+show_behind_parent = true
+offset_left = -1627.0
+offset_top = -1309.0
+offset_right = 6373.0
+offset_bottom = 6691.0
+color = Color(0.105882, 0.105882, 0.105882, 1)
