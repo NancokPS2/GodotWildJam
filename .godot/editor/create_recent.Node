@@ -1,6 +1,12 @@
+Node2D
+ColorRect
 CollisionPolygon2D
-AnimatedSprite2D
+StaticBody2D
+Nivel (Nivel.gd)
+Panel
 Button
+GridContainer
+AnimatedSprite2D
 ScrollContainer
 Marker2D
 Sprite2D

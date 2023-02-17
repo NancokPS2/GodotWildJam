@@ -149,7 +149,7 @@ _global_script_classes=[{
 "language": &"GDScript",
 "path": "res://Clases/Entidades/Jugador.gd"
 }, {
-"base": "TileMap",
+"base": "Node2D",
 "class": &"Nivel",
 "language": &"GDScript",
 "path": "res://Clases/Misc/Nivel.gd"
@@ -213,6 +213,7 @@ _global_script_class_icons={
 [application]
 
 config/name="GodotWildJam"
+run/main_scene="res://Objetos/General/MenuPrincipal.tscn"
 config/features=PackedStringArray("4.0")
 config/icon="res://icon.png"
 

@@ -63,3 +63,4 @@ shape = SubResource("2")
 [node name="Polygon2D" type="Polygon2D" parent="."]
 
 [node name="Samurai" parent="." instance=ExtResource("12_urey6")]
+position = Vector2(28, 323)

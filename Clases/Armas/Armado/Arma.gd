@@ -8,7 +8,9 @@ signal POST_ATTACK
 @export var identificador:String
 @export var nombre:String = "Arma Sin Nombre"
 
-var estadisticas:Dictionary
+var estadisticas:Dictionary = {
+	"poder":1
+}
 var type:int
 var cooldown:float = 0
 

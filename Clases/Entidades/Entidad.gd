@@ -47,6 +47,7 @@ var temperaturaFusion = 50
 
 func _ready():
 	add_child(timerInvul)
+	timerInvul.one_shot = true
 
 func check_temperatura(delta):
 	if temperatura > temperaturaFusion:
@@ -63,10 +64,10 @@ func _physics_process(delta: float) -> void:
 
 func hurt(cantidad:int,elemento:int=0):
 	
-	var cantidadFinal = cantidad * multiplicadorElemental[elemento]#Aplicar elemento
+	var cantidadFinal:int = cantidad * multiplicadorElemental[elemento]#Aplicar elemento
 	
 	if not inmortal and timerInvul.is_stopped():	
-		estadisticas.salud = min(estadisticas.salud - cantidadFinal, estadisticas.saludMaxima)
+		estadisticas.salud -= cantidadFinal
 		timerInvul.start(tiempoInvul)
 		emit_signal("VIDA_CAMBIO",self)
 		
