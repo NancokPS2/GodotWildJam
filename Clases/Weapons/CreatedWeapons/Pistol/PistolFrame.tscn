@@ -1,0 +1,23 @@
+[gd_scene load_steps=7 format=3 uid="uid://wa241xydx50x"]
+
+[ext_resource type="Script" path="res://Clases/Weapons/Scripts/WeaponFrame.gd" id="1_5fyyu"]
+[ext_resource type="Script" path="res://Clases/Weapons/Scripts/WeaponSlot.gd" id="2_akurn"]
+[ext_resource type="Resource" uid="uid://7oo30jqr01hw" path="res://Clases/Weapons/CreatedWeapons/Pistol/GripPistol.tres" id="2_cgb2e"]
+[ext_resource type="Resource" uid="uid://dedsoplmmci5o" path="res://Clases/Weapons/CreatedWeapons/Pistol/BarrelPistol.tres" id="4_2ubnf"]
+
+[sub_resource type="Resource" id="Resource_gpbr5"]
+script = ExtResource("2_akurn")
+position = Vector2(0, -3)
+compatibleParts = Array[int]([0])
+partHere = ExtResource("2_cgb2e")
+
+[sub_resource type="Resource" id="Resource_flgtq"]
+script = ExtResource("2_akurn")
+position = Vector2(6, 0)
+compatibleParts = Array[int]([1])
+partHere = ExtResource("4_2ubnf")
+
+[node name="PistolFrame" type="Node2D"]
+script = ExtResource("1_5fyyu")
+nombre = "Pistol"
+weaponBaseSlotsExported = Array[ExtResource("2_akurn")]([SubResource("Resource_gpbr5"), SubResource("Resource_flgtq")])

@@ -8,6 +8,8 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 theme = ExtResource("1_ft2nc")
 script = ExtResource("2_w2bw0")
 
@@ -56,9 +58,7 @@ offset_right = -16.0
 offset_bottom = -16.0
 
 [node name="Samurai" type="Button" parent="Panel/GridContainer"]
-custom_minimum_size = Vector2i(256, 50)
+custom_minimum_size = Vector2(256, 50)
 layout_mode = 2
-offset_right = 659.0
-offset_bottom = 50.0
 size_flags_horizontal = 3
 text = "Samurai"

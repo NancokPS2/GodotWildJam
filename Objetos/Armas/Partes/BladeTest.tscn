@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://cahidl76vxnpg"]
 
-[ext_resource type="Script" path="res://Clases/Armas/Armado/ArmaParte.gd" id="1"]
+[ext_resource type="Script" path="res://Clases/Weapons/Scripts/WeaponPart.gd" id="1"]
 
 [node name="HojaEspada" type="CharacterBody2D"]
 script = ExtResource("1")

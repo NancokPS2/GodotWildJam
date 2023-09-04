@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://wa241xydx50x"]
+
+[ext_resource type="Script" path="res://Clases/Weapons/Scripts/WeaponFrame.gd" id="1_5fyyu"]
+
+[node name="PistolFrame" type="Node2D" node_paths=PackedStringArray("weaponBaseSlots")]
+script = ExtResource("1_5fyyu")
+nombre = "Pistol"
+weaponBaseSlots = [NodePath("Node")]
+
+[node name="Node" type="Node" parent="."]

@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="WeaponPart" load_steps=3 format=3 uid="uid://dedsoplmmci5o"]
+
+[ext_resource type="Script" path="res://Clases/Weapons/Scripts/WeaponPart.gd" id="1_fbsbo"]
+[ext_resource type="Texture2D" uid="uid://bivb253amnj2c" path="res://Assets/Armas/Partes/CurvedBlade.tres" id="2_igp23"]
+
+[resource]
+script = ExtResource("1_fbsbo")
+slots = Array[Resource("res://Clases/Weapons/Scripts/WeaponSlot.gd")]([])
+partName = "Pistol Barrel"
+origin = Vector2(0, 0)
+partType = 1
+texture = ExtResource("2_igp23")
+animations = {}
+statBoosts = {
+0: 1,
+2: 15
+}

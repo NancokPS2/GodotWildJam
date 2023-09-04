@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://dlnp234rgjibi"]
 
-[ext_resource type="Script" path="res://Clases/Armas/Armado/ArmaParte.gd" id="1"]
+[ext_resource type="Script" path="res://Clases/Weapons/Scripts/WeaponPart.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://bivb253amnj2c" path="res://Assets/Armas/Partes/CurvedBlade.tres" id="2_se7f0"]
 
 [node name="HojaEspada" type="CharacterBody2D"]

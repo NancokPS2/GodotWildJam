@@ -1,3 +1,5 @@
+Node
+WeaponFrame
 Node2D
 ColorRect
 CollisionPolygon2D
@@ -10,6 +12,5 @@ AnimatedSprite2D
 ScrollContainer
 Marker2D
 Sprite2D
-ArmaParte (ParteArma.gd)
 AnimationPlayer
 TextureRect

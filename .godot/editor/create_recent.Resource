@@ -1,1 +1,3 @@
+WeaponPart
+WeaponSlot
 AtlasTexture

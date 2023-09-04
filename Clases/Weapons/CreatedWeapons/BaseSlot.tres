@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="WeaponSlot" load_steps=2 format=3 uid="uid://be2w7b5264ex7"]
+
+[ext_resource type="Script" path="res://Clases/Weapons/Scripts/WeaponSlot.gd" id="1_wi0bd"]
+
+[resource]
+script = ExtResource("1_wi0bd")
+position = Vector2(0, 0)
+used = false
+compatibleParts = 0
